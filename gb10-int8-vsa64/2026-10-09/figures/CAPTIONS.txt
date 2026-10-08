@@ -1,0 +1,11 @@
+int8-tail-memory-and-reference:
+Matched production-CMake flags at sm_121a: memcheck reports 84 → 0 errors for 129×129 tail quantization. Separately, fixed BF16 GEMM and Int8Linear agree with an independent integer-dot/block-scale quantized reference at relative L2 1.486e−8 and 2.317e−4. Both outputs are finite; their comparison is numerical, not byte equality. Unquantized Int8Linear error 0.0136449 is a different reference and is not a before/after fix metric. Installed wheel unchanged; the historical aligned-512 crash was not reproduced.
+
+vsa64-full-model-latency:
+Pooled route medians, with scopes shown separately. Formal single full-DiT forwards use synthetic conditioning (5 warmups, 30 samples, 5 rounds/route): 8192 tokens 2.607784 → 2.521559 s (3.306% latency reduction); 31200 tokens 6.485170 → 6.236700 s (3.831%). Actual-prompt, three-step 31200-token pipeline uses three prompts/seeds × three repeats/route: DiT 17.467208 → 16.845215 s (3.561%); instrumented generation including T5/VAE 37.821364 → 37.197883 s (1.648%). No MP4 encoding. Full-model peak allocation is equal between routes. Dynamic clocks and two adverse paired samples are retained; paused production route-validation timing is excluded.
+
+vsa64-all-paired-pipeline-samples:
+Every one of nine actual-prompt timing pairs is shown; positive values mean lower fused-route latency. Seed 11 repeat 2 and seed 42 repeat 0 are slower on both metrics and remain visible. Three-step DiT adverse reductions are −0.796% and −2.300%; instrumented generation adverse reductions are −0.631% and −2.617%. Dynamic clock transitions occurred. No pair is discarded and no fixed-clock or every-sample improvement is claimed. No MP4 encoding; the separately paused production diagnostic is not performance evidence.
+
+vsa64-five-round-full-dit:
+Five serial rounds, 30 timed samples per route after five untimed warmups. All rounds are shown. The 8192-token first round samples a different dynamic clock regime (round-median reduction 11.221%) and is not removed; subsequent rounds show 3.248–3.377%. The 31200-token round reductions are 3.784–3.857%. Round-median reduction is distinct from the pooled-route-median summary. No fixed-clock claim or confidence interval inferred from independent rounds.

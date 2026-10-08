@@ -1,0 +1,60 @@
+[
+  {
+    "fused_median_ms": 22.590591430664062,
+    "legacy_median_ms": 29.788223266601562,
+    "reduction_percent": 24.162675872002936,
+    "scope": "layout+attention",
+    "tokens": 31200
+  },
+  {
+    "fused_median_ms": 3.600912094116211,
+    "legacy_median_ms": 10.021807670593262,
+    "reduction_percent": 64.06923568607013,
+    "scope": "layout",
+    "tokens": 31200
+  },
+  {
+    "fused_median_ms": 2.8256640434265137,
+    "legacy_median_ms": 4.6183037757873535,
+    "reduction_percent": 38.815977020810436,
+    "scope": "layout+attention",
+    "tokens": 8192
+  },
+  {
+    "fused_median_ms": 0.9327040016651154,
+    "legacy_median_ms": 2.7182079553604126,
+    "reduction_percent": 65.68680479998645,
+    "scope": "layout",
+    "tokens": 8192
+  },
+  {
+    "fused_median_ms": 6236.700439453125,
+    "legacy_median_ms": 6485.169677734375,
+    "reduction_percent": 3.8313452172935913,
+    "scope": "trained full DiT, synthetic conditioning",
+    "tokens": 31200
+  },
+  {
+    "fused_median_ms": 2521.5587158203125,
+    "legacy_median_ms": 2607.7835693359375,
+    "reduction_percent": 3.306442088581063,
+    "scope": "trained full DiT, synthetic conditioning",
+    "tokens": 8192
+  },
+  {
+    "fused_median": 16845.21484375,
+    "legacy_median": 17467.2080078125,
+    "reduction_percent": 3.560919202337909,
+    "scope": "3-step trained DiT with real prompts",
+    "tokens": 31200,
+    "unit": "ms"
+  },
+  {
+    "fused_median": 37.19788280499961,
+    "legacy_median": 37.82136410200019,
+    "reduction_percent": 1.6484897142237331,
+    "scope": "instrumented prompt pipeline including T5/VAE",
+    "tokens": 31200,
+    "unit": "s"
+  }
+]

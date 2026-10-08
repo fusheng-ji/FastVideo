@@ -1,0 +1,9 @@
+{
+  "publication_scope": "numerical results and visualizations only",
+  "timing_rows_retained": 1818,
+  "recomputed_statistics_rows": 16,
+  "statistics_exactly_recomputed": true,
+  "same_eight_image_bytes_as_original": true,
+  "original_raw_logs_telemetry_source_snapshots_internal_paths_uploaded": false,
+  "gpu_measurements_during_publication": 0
+}

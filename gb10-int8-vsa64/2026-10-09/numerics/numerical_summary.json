@@ -1,0 +1,121 @@
+{
+  "baseline_commit": "2b164405c3d15ed2d222d0582d6db09ffc5ee6b2",
+  "hardware": {
+    "architecture": "aarch64",
+    "cuda_capability": [
+      12,
+      1
+    ],
+    "device": "DGX Spark GB10",
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0"
+  },
+  "int8": {
+    "regression_passed": 63,
+    "separate_cpu_reference_passed": 6,
+    "new_quantization_cases": 36,
+    "quantization": {
+      "initcheck_q_exact": true,
+      "initcheck_scales_exact": true,
+      "initcheck_tail_shape": [
+        129,
+        241
+      ],
+      "memcheck_tail_shape": [
+        129,
+        129
+      ],
+      "q_exact": true,
+      "scales_exact": true
+    },
+    "gemm_quantized_reference": {
+      "bitwise_equal": false,
+      "changed_elements": 2,
+      "finite": true,
+      "max_abs": 6.103515625e-05,
+      "relative_l2": 1.486012343060579e-08
+    },
+    "linear_quantized_reference": {
+      "bitwise_equal": false,
+      "changed_elements": 139,
+      "finite": true,
+      "max_abs": 0.25,
+      "relative_l2": 0.0002316898312400706
+    },
+    "linear_unquantized_reference": {
+      "bitwise_equal": false,
+      "changed_elements": 28465,
+      "finite": true,
+      "max_abs": 1.25,
+      "relative_l2": 0.013644901892791224
+    },
+    "quantized_reference_acceptance_relative_l2": 0.001,
+    "bounds": [
+      "Historical aligned-512 installation segfault not reproduced; this is a separate tail-store fix.",
+      "INT8 initcheck probe transfers outputs to CPU; zero log errors do not certify complete GPU output initialization.",
+      "Private quant/GEMM artifacts are not a replacement installed wheel; unchanged norm regressions use installed extension.",
+      "Unsupported GEMM-shape can_implement rejection handling remains out of scope."
+    ],
+    "memcheck": {
+      "shape": [
+        129,
+        129
+      ],
+      "baseline_reported_errors": 84,
+      "fixed_reported_errors": 0
+    },
+    "initcheck": {
+      "shape": [
+        129,
+        241
+      ],
+      "reported_errors": 0,
+      "independent_gpu_reader": false,
+      "full_gpu_output_initialization_certified": false
+    }
+  },
+  "vsa64": {
+    "functional_cases": 30,
+    "additional_heads40_cases": 8,
+    "trained_dit_numerical_cases": 6,
+    "trained_parameter_tensors": 885,
+    "trained_vsa_gate_tensors": 60,
+    "actual_vsa_blocks": 30,
+    "prompt_pipeline_measured_generations": 18,
+    "actual_prompt_dit_steps": 54,
+    "actual_prompt_ordered_vsa_events": 1620,
+    "functional_differences": {
+      "bitwise_equal": true,
+      "changed_elements": 0,
+      "max_absolute_error": 0,
+      "relative_l2": 0
+    },
+    "pipeline_allocated_GiB": 31.95136785507202,
+    "pipeline_reserved_GiB": 34.09765625,
+    "pipeline_peak_memory_equal": true,
+    "paired_samples": 9,
+    "negative_dit_pairs": 2,
+    "negative_generation_pairs": 2,
+    "timing_scope": "instrumented generation including T5, denoise, VAE, observer metadata, final CUDA synchronization and five atomic progress JSON writes; excludes model loading, initial compilation, RNG seeding/sampling-generator creation, deferred finite/lifecycle/RNG checks, hashing and tensor artifact writes; no MP4 encode",
+    "bounds": [
+      "No MP4 encoding, video-quality, training-convergence, 14B-performance or other-device certification.",
+      "No fixed-clock claim; all nine paired samples including two adverse cases remain disclosed.",
+      "Production-route validation has 366.503 s existing-pacer pauses and is diagnostic, excluded from performance tables.",
+      "H40 allocation peaks and performance were not instrumented.",
+      "L2 read/write pressure is not proof that every hardware cache is cold."
+    ],
+    "production_route": {
+      "byte_equal": true,
+      "gpu_regression_passed": 11,
+      "gpu_regression_skipped": 0,
+      "diagnostic_cpu_passed": [
+        120,
+        54
+      ],
+      "private_eligibility_or_sparse_backend_override": false,
+      "diagnostic_paused_seconds": 366.503346,
+      "timing_used_for_performance": false
+    }
+  },
+  "statistics_method": "Median and arithmetic mean from all raw samples; p10/p90 use linear interpolation. Latency reduction = 100*(1-fused/legacy). No sample exclusion."
+}

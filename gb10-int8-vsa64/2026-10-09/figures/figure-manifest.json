@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "script_sha256": "5c56a62984ea227c0409aade4c3a1fa2d6b5a397299a7d0b4e8f6836fdf2db0c",
+  "matplotlib_version": "3.11.2",
+  "sources_relative_to_source_root": {
+    "int8/metrics.json": {
+      "sha256": "dc511e5463fce0aa0e2d7a0ca5065fa5a40e2a8baad1ab036e66026eaf2db0fa"
+    },
+    "vsa64/trained-wan-8192-benchmark.csv": {
+      "sha256": "1395164f0ed975d669b57147acab2c775d19cf25fe572347817c6eabfd76c5e9"
+    },
+    "vsa64/trained-wan-31200-benchmark.csv": {
+      "sha256": "abb9f702757b1db7d2a185ecadb16bf5581ffb5f641545f7b51294c91a9e2e50"
+    },
+    "vsa64/pipeline-full-v3/report.csv": {
+      "sha256": "40ac180bc1dedbc90c5e49deb55e6527913c06de1591186806fb1e238f214a51"
+    }
+  },
+  "figures": [
+    {
+      "name": "int8-tail-memory-and-reference",
+      "caption": "Matched production-CMake flags at sm_121a: memcheck reports 84 \u2192 0 errors for 129\u00d7129 tail quantization. Separately, fixed BF16 GEMM and Int8Linear agree with an independent integer-dot/block-scale quantized reference at relative L2 1.486e\u22128 and 2.317e\u22124. Both outputs are finite; their comparison is numerical, not byte equality. Unquantized Int8Linear error 0.0136449 is a different reference and is not a before/after fix metric. Installed wheel unchanged; the historical aligned-512 crash was not reproduced.",
+      "files": [
+        {
+          "file": "int8-tail-memory-and-reference.png",
+          "sha256": "6a638768235ad09a544ded30259ffcc3a9c4a8a8664919528c42af53f5d89427"
+        },
+        {
+          "file": "int8-tail-memory-and-reference.svg",
+          "sha256": "2e99f94d7a6343da324e6db431873f57068ab58b7899891ebd630e8b39ef52e2"
+        }
+      ]
+    },
+    {
+      "name": "vsa64-full-model-latency",
+      "caption": "Pooled route medians, with scopes shown separately. Formal single full-DiT forwards use synthetic conditioning (5 warmups, 30 samples, 5 rounds/route): 8192 tokens 2.607784 \u2192 2.521559 s (3.306% latency reduction); 31200 tokens 6.485170 \u2192 6.236700 s (3.831%). Actual-prompt, three-step 31200-token pipeline uses three prompts/seeds \u00d7 three repeats/route: DiT 17.467208 \u2192 16.845215 s (3.561%); instrumented generation including T5/VAE 37.821364 \u2192 37.197883 s (1.648%). No MP4 encoding. Full-model peak allocation is equal between routes. Dynamic clocks and two adverse paired samples are retained; paused production route-validation timing is excluded.",
+      "files": [
+        {
+          "file": "vsa64-full-model-latency.png",
+          "sha256": "873082c8db767e540ac35b4582d32a3529a08802ebab3c94f149e2d31583a747"
+        },
+        {
+          "file": "vsa64-full-model-latency.svg",
+          "sha256": "a580a0b1cc073113357843558df639c5bf69fb57f0c64e3b22ef08da0bd6fb8b"
+        }
+      ]
+    },
+    {
+      "name": "vsa64-all-paired-pipeline-samples",
+      "caption": "Every one of nine actual-prompt timing pairs is shown; positive values mean lower fused-route latency. Seed 11 repeat 2 and seed 42 repeat 0 are slower on both metrics and remain visible. Three-step DiT adverse reductions are \u22120.796% and \u22122.300%; instrumented generation adverse reductions are \u22120.631% and \u22122.617%. Dynamic clock transitions occurred. No pair is discarded and no fixed-clock or every-sample improvement is claimed. No MP4 encoding; the separately paused production diagnostic is not performance evidence.",
+      "files": [
+        {
+          "file": "vsa64-all-paired-pipeline-samples.png",
+          "sha256": "15924c8ea0b2c5c552fbd7926ee6fe7d9414f75b12337ea3795ed548e34e1592"
+        },
+        {
+          "file": "vsa64-all-paired-pipeline-samples.svg",
+          "sha256": "27b4682f1208ecd3e5731a770e2adf0f2d20c9785b11ea4b5b8279d3dbde1a9d"
+        }
+      ]
+    },
+    {
+      "name": "vsa64-five-round-full-dit",
+      "caption": "Five serial rounds, 30 timed samples per route after five untimed warmups. All rounds are shown. The 8192-token first round samples a different dynamic clock regime (round-median reduction 11.221%) and is not removed; subsequent rounds show 3.248\u20133.377%. The 31200-token round reductions are 3.784\u20133.857%. Round-median reduction is distinct from the pooled-route-median summary. No fixed-clock claim or confidence interval inferred from independent rounds.",
+      "files": [
+        {
+          "file": "vsa64-five-round-full-dit.png",
+          "sha256": "c4320470491886eddfc0b7345478a3319ad6b5af432946df7c1d9bbc67af9dd8"
+        },
+        {
+          "file": "vsa64-five-round-full-dit.svg",
+          "sha256": "b0f52f0b6e14f651bc0006ba5f943f6419de3c704f7095403ff54c27135b7a51"
+        }
+      ]
+    }
+  ],
+  "reproduction": "python scripts/generate_figures.py --source-root data --output-dir figures",
+  "scope": "Static plots from selected numerical JSON and all timing CSV rows; no GPU execution; no sample filtering"
+}
