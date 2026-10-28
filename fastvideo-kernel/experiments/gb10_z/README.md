@@ -1,5 +1,7 @@
 # GB10 Z experimental handoff
 
+Spark agent: start with [SPARK_HANDOFF.md](SPARK_HANDOFF.md).
+
 Z uses P64 packed event slots and bypasses spill-map lookup when there is no spill.
 The kernel defaults remain dense and TMA. This is a research handoff, not a new public attention API.
 The source kernel previously validated on GB10 has SHA256
