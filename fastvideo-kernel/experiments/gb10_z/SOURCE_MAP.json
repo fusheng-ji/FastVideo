@@ -1,0 +1,176 @@
+{
+  "historical_kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "handoff_kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "framework_matches_frozen_snapshot": true,
+  "portable_tools_gpu_revalidated": false,
+  "files": [
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/local_policy.py",
+      "original_sha256": "b3e9787bce843337c703d721c52f10e9f813a9f3e7e69636dc62d95d865648dd",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/local_policy.py",
+      "handoff_sha256": "10f6861278550add62f18cf15301b2d3bc5679b38d9ccba2d474fd89cf07e44e",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/flash_control.py",
+      "original_sha256": "67c12259360149799bee3ed1fbc299f7330f3d0dc9dc9c757e54aeb868478113",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/flash_control.py",
+      "handoff_sha256": "67c12259360149799bee3ed1fbc299f7330f3d0dc9dc9c757e54aeb868478113",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/probe_helpers.py",
+      "original_sha256": "d6d676b10bf534252f7a844b21c7d712e49f344aa100b2a45aec4f514db88109",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/probe_helpers.py",
+      "handoff_sha256": "d6d676b10bf534252f7a844b21c7d712e49f344aa100b2a45aec4f514db88109",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/parameter_hooks.py",
+      "original_sha256": "4a97ab080045706b7d2f8fd2c204a4f1100a438e1be7082f2cddc9403fc651e9",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/parameter_hooks.py",
+      "handoff_sha256": "4a97ab080045706b7d2f8fd2c204a4f1100a438e1be7082f2cddc9403fc651e9",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/compare_probes_v2.py",
+      "original_sha256": "7040d7696e66b44fa7cc75cd5e81942de0ec99575b704574457d46ca2ea3ce74",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/compare_probes_v2.py",
+      "handoff_sha256": "7040d7696e66b44fa7cc75cd5e81942de0ec99575b704574457d46ca2ea3ce74",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/tensor_evidence.py",
+      "original_sha256": "8180ef47b6eb97c67b0b7fcde920ab1d38cf02a464889915a23d9bbb71ac8e3c",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/tensor_evidence.py",
+      "handoff_sha256": "8180ef47b6eb97c67b0b7fcde920ab1d38cf02a464889915a23d9bbb71ac8e3c",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/common.py",
+      "original_sha256": "72b62020ebe246e3e38f492988595ccfb8ae96be78b04383a2b3f199e843e9eb",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/common.py",
+      "handoff_sha256": "72b62020ebe246e3e38f492988595ccfb8ae96be78b04383a2b3f199e843e9eb",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/control_train.py",
+      "original_sha256": "8ba6cdfa33f6076f77138994c4997d98ecd1a0501441d7addecadf6821516a65",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/control_train.py",
+      "handoff_sha256": "3e30fa156d8d09c6e93d72f06a27a706952ea0a0ef0b428ad9a67bc4be6a5df8",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/model_trace.py",
+      "original_sha256": "9cc67d97ab88137b1762fbda6c7a7493a0ac2a6eedd59017b9d63df4beb3d174",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/model_trace.py",
+      "handoff_sha256": "9cc67d97ab88137b1762fbda6c7a7493a0ac2a6eedd59017b9d63df4beb3d174",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/train_policy.py",
+      "original_sha256": "a23c8e6f91e047acd866ae14dbd000612ae8a54cbaa90b099512bd63f6928069",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/train_policy.py",
+      "handoff_sha256": "a23c8e6f91e047acd866ae14dbd000612ae8a54cbaa90b099512bd63f6928069",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/train_entry.py",
+      "original_sha256": "5b87ae966e0290f775b3bac2c390c84cf626f9788ce9f4f139da92ac465815f6",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/train_entry.py",
+      "handoff_sha256": "e3e89cb084e865b53e78f2738388f8e0d98a57edcf9dd2f89643440e1107e0ef",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/calibration_runtime.py",
+      "original_sha256": "d91100fb50a0b866b88760f744a19795cff24fab92f7e26aca2d2300bdf669ba",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/calibration_runtime.py",
+      "handoff_sha256": "03da225aa0745d796a07c4cb1df88c0524bac34d712a01d80f0d6b71be6f54f7",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/compare_calibration.py",
+      "original_sha256": "29ce6dc3e94194378f676bfede95f826962faaa4fced43d8975ea5125fee85ad",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/compare_calibration.py",
+      "handoff_sha256": "29ce6dc3e94194378f676bfede95f826962faaa4fced43d8975ea5125fee85ad",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/code/report_calibration.py",
+      "original_sha256": "d12674f08360170cd5e94ae66db66877884476397242d63d154c5e5fd7fa3f3c",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/report_calibration.py",
+      "handoff_sha256": "fdaf416a58c07753366d428cc25acbc5d8fa8ccba31095b6815398ea5674b5c8",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/code/probe_model.py",
+      "original_sha256": "22b3503b3d361ce8831202adf128548e94ac4317c33f0f68a414c60e95b9823e",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/probe_model.py",
+      "handoff_sha256": "25ce079291896e39c242fc4ae6127b079d98c4d419762b54c84d476d12278926",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/code/upstream_capture.py",
+      "original_sha256": "e9de4340c2e1dc140eb5b4850ca6dffbb7a4df1c9feb942cf1881c568db48e11",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/upstream_capture.py",
+      "handoff_sha256": "e9de4340c2e1dc140eb5b4850ca6dffbb7a4df1c9feb942cf1881c568db48e11",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/code/compare_nonstrict.py",
+      "original_sha256": "5d8e14fe2d488edd34bf67d150809aa278b46069bfc6063642151446a066a197",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/compare_nonstrict.py",
+      "handoff_sha256": "2249579a1ea4ecfb720dd4d4198ac1b2a09ce12ba5f18e5983713147fd53b882",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/code/causal_evidence.py",
+      "original_sha256": "2770d42d0655952ef3b6359e5a4dcacc8d5cdb3d594c0806502d9399c987529b",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/causal_evidence.py",
+      "handoff_sha256": "2770d42d0655952ef3b6359e5a4dcacc8d5cdb3d594c0806502d9399c987529b",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/code/extract.py",
+      "original_sha256": "e997d48ddacc4d558ae33a70a1665f8c1ab60f81b4e47d0c231f7509406933e1",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/fa2_extract.py",
+      "handoff_sha256": "e997d48ddacc4d558ae33a70a1665f8c1ab60f81b4e47d0c231f7509406933e1",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/code/replay.py",
+      "original_sha256": "cd378ed6bc4b26176155d9fb6504476817dafaa186ce12bbb2c5988cc77d8b2a",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/fa2_replay.py",
+      "handoff_sha256": "cd378ed6bc4b26176155d9fb6504476817dafaa186ce12bbb2c5988cc77d8b2a",
+      "byte_identical": true
+    },
+    {
+      "source": "worktrees/stats-overflow/fastvideo-kernel/experiments/gb10_qat/accumulation.py",
+      "original_sha256": "328081c9b052a64cb280d4ff8bb236c4fe092e038bd9d78a617f0bc8dd934055",
+      "destination": "fastvideo-kernel/experiments/gb10_z/code/accumulation.py",
+      "handoff_sha256": "328081c9b052a64cb280d4ff8bb236c4fe092e038bd9d78a617f0bc8dd934055",
+      "byte_identical": true
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/tests/test_calibration.py",
+      "original_sha256": "ba15652ec8106a9fa24a8c59747162d82624869e5c504c4e594818a57e61ec78",
+      "destination": "fastvideo-kernel/experiments/gb10_z/tests/test_calibration.py",
+      "handoff_sha256": "7c5e77abcf8519eb80b105659718eed32318af7cd4153da3db38396e984f9ace",
+      "byte_identical": false
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/tests/test_kernel_tuning.py",
+      "original_sha256": "a45f1eb3eb797d27e1745e91bf81e971bea84e430c2ee9d1817bc95d54170497",
+      "destination": "fastvideo-kernel/experiments/gb10_z/tests/test_kernel_tuning.py",
+      "handoff_sha256": "6ec33fc908a207366410a55337d7977913b72dd48ba264211ef6f28a3b6254f1",
+      "byte_identical": false
+    },
+    {
+      "source": "worktrees/stats-overflow/fastvideo-kernel/experiments/gb10_qat/tests/test_accumulation.py",
+      "original_sha256": "8cfa9774be706bee1a9dbb4a61361e17b30af185ccbf83e445af4de9e66c678b",
+      "destination": "fastvideo-kernel/experiments/gb10_z/tests/test_accumulation.py",
+      "handoff_sha256": "ee7c2a7b1b9bf0331fae030754a01010126d32fb701e8c8e6d0cccf29e6237f1",
+      "byte_identical": false
+    }
+  ]
+}

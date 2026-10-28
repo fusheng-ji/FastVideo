@@ -137,6 +137,115 @@ def _sm121_dv_stats_shape(batch: int, heads: int, n_ctx_q: int, n_ctx_kv: int):
     return (batch, heads, triton.cdiv(n_ctx_kv, SM121_BLOCK), n_ctx_q)
 
 
+def _sm121_dv_stats_format():
+    """Private experiment policy: the installed/default path keeps dense statistics."""
+    return "dense", 0, False
+
+
+_sm121_fused_spill_builder = None  # Private F experiment; default overflow path stays unchanged.
+
+
+def _sm121_packed_tuning() -> tuple[bool, bool]:
+    """Private experiment hook: zero-spill specialization and tiled event values.
+
+    Both switches default off. The hook does not select compressed statistics;
+    dense and the original P64 path remain unchanged unless explicitly selected.
+    """
+    return False, False
+
+
+def _sm121_effective_packed_tuning(packed: bool) -> tuple[bool, bool]:
+    """Validate private switches and isolate them from other statistics formats."""
+    zero_spill, tiled_values = _sm121_packed_tuning()
+    if type(zero_spill) is not bool or type(tiled_values) is not bool:
+        raise TypeError("private packed tuning switches must be booleans")
+    return packed and zero_spill, packed and tiled_values
+
+
+def _sm121_event_value_shape(batch: int, heads: int, nq: int,
+                            capacity: int, tiled: bool) -> tuple[int, ...]:
+    """Tiled allocation pads only the last query tile; padded rows are never read."""
+    if tiled:
+        return batch, heads, triton.cdiv(nq, SM121_BLOCK), capacity, SM121_BLOCK
+    return batch, heads, capacity, nq
+
+
+def _sm121_has_spill_launch(local_replay: bool, spill_tile_count: int,
+                            zero_spill_fastpath: bool) -> bool:
+    """Use already materialized host metadata; this dispatch adds no GPU work."""
+    return local_replay and (spill_tile_count > 0 or not zero_spill_fastpath)
+
+
+def _sm121_use_change_points(save_dv_stats, stats_format, n_ctx_q, n_ctx_kv, force_short):
+    """Keep short query or KV sequences and unrepresentable tile indices on dense history."""
+    return (save_dv_stats and stats_format in ("change_points", "packed_slots")
+            and (min(n_ctx_q, n_ctx_kv) >= 8192 or force_short)
+            and triton.cdiv(n_ctx_kv, SM121_BLOCK) <= 65535)
+
+
+# An experiment may inspect event counts before an overflowing cache is freed.
+# The default performs no count transfer or extra synchronization.
+_sm121_dv_stats_observer = None
+
+
+def _sm121_local_replay_enabled() -> bool:
+    """Private opt-in; ordinary training retains the existing statistics policy."""
+    return False
+
+
+def _sm121_local_cache_bytes(batch: int,
+                             heads: int,
+                             n_ctx_q: int,
+                             n_ctx_kv: int,
+                             spill_tile_count: int,
+                             capacity: int = 64,
+                             packed_slots: bool = False,
+                             tiled_values: bool = False) -> int:
+    """Physical tensor payload retained by C64 plus query-tile replay, without allocator rounding."""
+    rows = batch * heads * n_ctx_q
+    query_tiles = batch * heads * triton.cdiv(n_ctx_q, SM121_BLOCK)
+    kv_tiles = triton.cdiv(n_ctx_kv, SM121_BLOCK)
+    # FP32 values, uint16 indices, int32 counts, FP32 final/denominator, bool overflow.
+    if packed_slots:
+        value_rows = query_tiles * SM121_BLOCK if tiled_values else rows
+        compressed = value_rows * 4 * capacity + rows * (4 * triton.cdiv(kv_tiles, 5) + 13)
+    else:
+        compressed = rows * (6 * capacity + 13)
+    return compressed + 4 * query_tiles + 4 * spill_tile_count + 4 * spill_tile_count * kv_tiles * SM121_BLOCK
+
+
+def _sm121_build_spill_map(overflow: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+    """Return stable flattened batch/head/query-tile IDs and their int32 inverse map.
+
+    A tile spills whenever any valid row overflowed. Padding is initialized false;
+    it cannot create a spill or cause an invalid query row to be read.
+    """
+    if overflow.ndim != 3 or overflow.dtype != torch.bool:
+        raise ValueError("overflow must be a rank-three boolean tensor")
+    batch, heads, nq = overflow.shape
+    tiles = triton.cdiv(nq, SM121_BLOCK)
+    padded = torch.zeros((batch, heads, tiles * SM121_BLOCK),
+                         dtype=torch.bool,
+                         device=overflow.device)
+    padded[..., :nq].copy_(overflow)
+    tile_flags = padded.reshape(batch, heads, tiles, SM121_BLOCK).any(dim=-1)
+    # torch.nonzero uses lexicographic order, so flattened IDs are strictly ascending.
+    spill_tiles = torch.nonzero(tile_flags.reshape(-1),
+                                as_tuple=False).flatten().to(torch.int32)
+    spill_map = torch.full((batch * heads * tiles, ),
+                           -1,
+                           dtype=torch.int32,
+                           device=overflow.device)
+    spill_map[spill_tiles.to(torch.int64)] = torch.arange(
+        spill_tiles.numel(), dtype=torch.int32, device=overflow.device)
+    return spill_map.reshape(batch, heads, tiles), spill_tiles
+
+
+# Separate from the historical pre-fallback observer: this optional observer sees
+# the actual saved representation after spill detection and any safe fallback.
+_sm121_local_replay_observer = None
+
+
 def _select_sm100_forward_config(n_ctx_q: int, n_ctx_kv: int, mode: str):
     n_ctx = max(n_ctx_q, n_ctx_kv)
     if mode == "reference":
@@ -186,7 +295,15 @@ def _attn_fwd_inner(acc,
                     JOIN_QAT_PV: tl.constexpr = False,
                     DV_MAXIMA=None,
                     N_CTX_Q=0,
-                    SAVE_DV_STATS: tl.constexpr = False):
+                    SAVE_DV_STATS: tl.constexpr = False,
+                    DV_EVENT_INDICES=None,
+                    DV_EVENT_COUNTS=None,
+                    DV_EVENT_FINAL=None,
+                    DV_EVENT_OVERFLOW=None,
+                    DV_EVENT_CAPACITY: tl.constexpr = 0,
+                    DV_SPILL_HISTORY: tl.constexpr = False,
+                    DV_PACKED_SLOTS: tl.constexpr = False,
+                    DV_TILED_VALUES: tl.constexpr = False):
     # range of values handled by this stage (kv blocks)
     if STAGE == 1:
         lo, hi = 0, start_m * BLOCK_M
@@ -201,6 +318,11 @@ def _attn_fwd_inner(acc,
         offsetv_y = offset_y * HEAD_DIM + lo
     else:
         offsetv_y = offset_y + lo
+    if DV_EVENT_CAPACITY:
+        event_count = tl.zeros([BLOCK_M], tl.int32)
+        if DV_PACKED_SLOTS:
+            tl.static_assert(DV_EVENT_CAPACITY == 64)
+            packed_word = tl.zeros([BLOCK_M], tl.uint32)
     # loop over k, v and update accumulator
     for start_n in tl.range(lo, hi, BLOCK_N, warp_specialize=warp_specialize):
         start_n = tl.multiple_of(start_n, BLOCK_N)
@@ -220,11 +342,56 @@ def _attn_fwd_inner(acc,
             qk = qk * qk_scale - m_ij[:, None]
         p = tl.math.exp2(qk)
         if SAVE_DV_STATS:
-            stat_offsets = (start_n // BLOCK_N) * N_CTX_Q + offs_m
-            tl.store(DV_MAXIMA + stat_offsets, m_ij, mask=q_valid)
+            if DV_EVENT_CAPACITY:
+                # Preserve raw FP32 bits, including a signed-zero transition. The first
+                # KV tile is an event even if it matches the initial sentinel.
+                changed = (start_n == 0) | (m_ij.to(tl.uint32, bitcast=True)
+                                            != m_i.to(tl.uint32, bitcast=True))
+                if DV_TILED_VALUES:
+                    # [query_tile, slot, row_in_tile], with the BH base applied
+                    # by the outer kernel. Only valid rows and written slots exist.
+                    slot_offsets = ((offs_m // BLOCK_M) * DV_EVENT_CAPACITY +
+                                    event_count) * BLOCK_M + offs_m % BLOCK_M
+                else:
+                    slot_offsets = event_count * N_CTX_Q + offs_m
+                write_event = q_valid & changed & (event_count
+                                                   < DV_EVENT_CAPACITY)
+                tl.store(DV_MAXIMA + slot_offsets, m_ij, mask=write_event)
+                if not DV_PACKED_SLOTS:
+                    tl.store(DV_EVENT_INDICES + slot_offsets,
+                             start_n // BLOCK_N,
+                             mask=write_event)
+                event_count += changed.to(tl.int32)
+                if DV_PACKED_SLOTS:
+                    kv_tile = start_n // BLOCK_N
+                    # Slots after overflow are deliberately truncated, but an
+                    # overflowing query tile always reads exact spill history.
+                    slot = tl.minimum(event_count - 1, 63).to(tl.uint32)
+                    packed_word = packed_word | (slot << ((kv_tile % 5) * 6))
+                    if (kv_tile % 5 == 4) | (start_n + BLOCK_N >= hi):
+                        word_offsets = (kv_tile // 5) * N_CTX_Q + offs_m
+                        tl.store(DV_EVENT_INDICES + word_offsets,
+                                 packed_word, mask=q_valid)
+                        # Also initializes the unused fields in the final word.
+                        packed_word = tl.zeros([BLOCK_M], tl.uint32)
+            else:
+                # One fp32 running maximum per valid row and KV tile, not a P matrix.
+                if DV_SPILL_HISTORY:
+                    stat_offsets = (start_n // BLOCK_N) * BLOCK_M + tl.arange(
+                        0, BLOCK_M)
+                    # The entire physical spill tile is initialized, including a
+                    # final partial query tile. Backward still masks invalid rows.
+                    tl.store(DV_MAXIMA + stat_offsets,
+                             tl.where(q_valid, m_ij, 0.0))
+                else:
+                    stat_offsets = (start_n // BLOCK_N) * N_CTX_Q + offs_m
+                    tl.store(DV_MAXIMA + stat_offsets, m_ij, mask=q_valid)
         if IS_QAT:
             p, high_prec_p = fake_quantize(src_tensor=p,
-                                           valid_src_mask=tl.full(shape=p.shape, value=1.0, dtype=p.dtype) == 1.0,
+                                           valid_src_mask=tl.full(
+                                               shape=p.shape,
+                                               value=1.0,
+                                               dtype=p.dtype) == 1.0,
                                            BLOCK_SIZE_OUT_DIM=BLOCK_M,
                                            BLOCK_SIZE_QUANT_DIM=BLOCK_N,
                                            dst_dtype=dtype,
@@ -257,10 +424,14 @@ def _attn_fwd_inner(acc,
         # share V, so joining along M avoids issuing two small, independent
         # dot operations for every KV tile.
         if IS_QAT and JOIN_QAT_PV:
-            joined_p = tl.join(p, high_prec_p).permute(2, 0, 1).reshape([2 * BLOCK_M, BLOCK_N])
-            joined_acc = tl.join(acc, high_prec_acc).permute(2, 0, 1).reshape([2 * BLOCK_M, HEAD_DIM])
+            joined_p = tl.join(p, high_prec_p).permute(2, 0, 1).reshape(
+                [2 * BLOCK_M, BLOCK_N])
+            joined_acc = tl.join(acc, high_prec_acc).permute(2, 0, 1).reshape(
+                [2 * BLOCK_M, HEAD_DIM])
             joined_acc = tl.dot(joined_p, v.to(dtype), joined_acc)
-            acc, high_prec_acc = joined_acc.reshape([2, BLOCK_M, HEAD_DIM]).permute(1, 2, 0).split()
+            acc, high_prec_acc = joined_acc.reshape([2, BLOCK_M, HEAD_DIM
+                                                     ]).permute(1, 2,
+                                                                0).split()
         else:
             # note that this non transposed v for FP8 is only supported on Blackwell
             acc = tl.dot(p, v.to(dtype), acc)
@@ -272,6 +443,14 @@ def _attn_fwd_inner(acc,
         m_i = m_ij
         offsetk_y += BLOCK_N
         offsetv_y += BLOCK_N
+    if DV_EVENT_CAPACITY:
+        # These metadata stores initialize every valid row. Unused event slots are
+        # intentionally left uninitialized and must never be read by backward.
+        tl.store(DV_EVENT_COUNTS + offs_m, event_count, mask=q_valid)
+        tl.store(DV_EVENT_FINAL + offs_m, m_i, mask=q_valid)
+        tl.store(DV_EVENT_OVERFLOW + offs_m,
+                 event_count > DV_EVENT_CAPACITY,
+                 mask=q_valid)
     if IS_QAT:
         return acc, high_prec_acc, l_i, m_i
     else:
@@ -349,13 +528,19 @@ configs = [
     triton.Config({
         'BLOCK_M': BM,
         'BLOCK_N': BN
-    }, num_stages=s, num_warps=w, pre_hook=_host_descriptor_pre_hook) for BM in [64, 128] for BN in [32, 64, 128]
-    for s in NUM_STAGES_OPTIONS for w in [4, 8]
+    },
+                  num_stages=s,
+                  num_warps=w,
+                  pre_hook=_host_descriptor_pre_hook) for BM in [64, 128]
+    for BN in [32, 64, 128] for s in NUM_STAGES_OPTIONS for w in [4, 8]
 ]
 if "PYTEST_VERSION" in os.environ:
     # Use a single config in testing for reproducibility
     configs = [
-        triton.Config(dict(BLOCK_M=128, BLOCK_N=64), num_stages=2, num_warps=4, pre_hook=_host_descriptor_pre_hook),
+        triton.Config(dict(BLOCK_M=128, BLOCK_N=64),
+                      num_stages=2,
+                      num_warps=4,
+                      pre_hook=_host_descriptor_pre_hook),
     ]
 
 
@@ -415,11 +600,28 @@ def _attn_fwd(
     DV_MAXIMA=None,
     DV_DENOMINATOR=None,
     SAVE_DV_STATS: tl.constexpr = False,
+    DV_EVENT_INDICES=None,
+    DV_EVENT_COUNTS=None,
+    DV_EVENT_FINAL=None,
+    DV_EVENT_OVERFLOW=None,
+    DV_EVENT_CAPACITY: tl.constexpr = 0,
+    DV_REPLAY_TILE_LIST=None,
+    DV_SPILL_HISTORY: tl.constexpr = False,
+    DV_PACKED_SLOTS: tl.constexpr = False,
+    DV_TILED_VALUES: tl.constexpr = False,
 ):
     dtype = tl.float8e5 if FP8_OUTPUT else tl.bfloat16
     tl.static_assert(BLOCK_N <= HEAD_DIM)
     start_m = tl.program_id(0)
     off_hz = tl.program_id(1)
+    if DV_SPILL_HISTORY:
+        tl.static_assert(SAVE_DV_STATS and DV_EVENT_CAPACITY == 0)
+        tl.static_assert(BLOCK_M == 32 and BLOCK_N == 32 and STAGE == 1)
+        spill_slot = tl.program_id(0)
+        flat_tile = tl.load(DV_REPLAY_TILE_LIST + spill_slot)
+        query_tiles = tl.cdiv(N_CTX_Q, BLOCK_M)
+        off_hz = flat_tile // query_tiles
+        start_m = flat_tile % query_tiles
     off_z = off_hz // H  # since it's Z then H in the shape
     off_h = off_hz % H
 
@@ -448,15 +650,35 @@ def _attn_fwd(
                                      strides=[N_CTX_Q * HEAD_DIM, HEAD_DIM, 1],
                                      block_shape=[1, BLOCK_M, HEAD_DIM])
     if IS_QAT:
-        desc_high_prec_o = _maybe_make_tensor_desc(desc_high_prec_o,
-                                                   shape=[Z * H, N_CTX_Q, HEAD_DIM],
-                                                   strides=[N_CTX_Q * HEAD_DIM, HEAD_DIM, 1],
-                                                   block_shape=[1, BLOCK_M, HEAD_DIM])
+        desc_high_prec_o = _maybe_make_tensor_desc(
+            desc_high_prec_o,
+            shape=[Z * H, N_CTX_Q, HEAD_DIM],
+            strides=[N_CTX_Q * HEAD_DIM, HEAD_DIM, 1],
+            block_shape=[1, BLOCK_M, HEAD_DIM])
 
     if SAVE_DV_STATS:
-        DV_MAXIMA += off_hz * tl.cdiv(N_CTX_KV, BLOCK_N) * N_CTX_Q
-    offset_y_q = off_z * (N_CTX_Q * H) + off_h * N_CTX_Q  # offset for query tensor
-    offset_y_kv = off_z * (N_CTX_KV * H) + off_h * N_CTX_KV  # offset for key/value tensors
+        if DV_EVENT_CAPACITY:
+            if DV_TILED_VALUES:
+                tl.static_assert(DV_PACKED_SLOTS and BLOCK_M == 32)
+                DV_MAXIMA += off_hz * tl.cdiv(N_CTX_Q, 32) * DV_EVENT_CAPACITY * 32
+            else:
+                DV_MAXIMA += off_hz * DV_EVENT_CAPACITY * N_CTX_Q
+            if DV_PACKED_SLOTS:
+                DV_EVENT_INDICES += off_hz * tl.cdiv(tl.cdiv(N_CTX_KV, BLOCK_N), 5) * N_CTX_Q
+            else:
+                DV_EVENT_INDICES += off_hz * DV_EVENT_CAPACITY * N_CTX_Q
+            DV_EVENT_COUNTS += off_hz * N_CTX_Q
+            DV_EVENT_FINAL += off_hz * N_CTX_Q
+            DV_EVENT_OVERFLOW += off_hz * N_CTX_Q
+        else:
+            if DV_SPILL_HISTORY:
+                DV_MAXIMA += spill_slot * tl.cdiv(N_CTX_KV, BLOCK_N) * BLOCK_M
+            else:
+                DV_MAXIMA += off_hz * tl.cdiv(N_CTX_KV, BLOCK_N) * N_CTX_Q
+    offset_y_q = off_z * (N_CTX_Q *
+                          H) + off_h * N_CTX_Q  # offset for query tensor
+    offset_y_kv = off_z * (
+        N_CTX_KV * H) + off_h * N_CTX_KV  # offset for key/value tensors
     qo_offset_y = offset_y_q + start_m * BLOCK_M
     # initialize offsets
     offs_m = start_m * BLOCK_M + tl.arange(0, BLOCK_M)
@@ -475,7 +697,9 @@ def _attn_fwd(
     qk_scale = sm_scale
     qk_scale *= 1.44269504  # 1/log(2)
     # load q: it will stay in SRAM throughout
-    q = desc_q.load([qo_offset_y, 0])  # load from start of q block and start of the entire head dimension
+    q = desc_q.load([
+        qo_offset_y, 0
+    ])  # load from start of q block and start of the entire head dimension
     q = tl.where(q_valid[:, None], q, 0.0)
     # stage 1: off-band
     # For causal = True, STAGE = 3 and _attn_fwd_inner gets 1 as its STAGE
@@ -486,22 +710,25 @@ def _attn_fwd(
             # valid on the non-causal single-stage path (STAGE == 1).
             tl.static_assert(STAGE == 1)
             acc, high_prec_acc, l_i, m_i = _sm100_qat_fwd_inner(
-                acc, high_prec_acc, l_i, m_i, q, desc_k, desc_v, offset_y_kv, offs_n, qk_scale,
-                N_CTX_KV, BLOCK_M, BLOCK_N)
+                acc, high_prec_acc, l_i, m_i, q, desc_k, desc_v, offset_y_kv,
+                offs_n, qk_scale, N_CTX_KV, BLOCK_M, BLOCK_N)
         else:
-            acc, high_prec_acc, l_i, m_i = _attn_fwd_inner(acc, high_prec_acc, l_i, m_i, q, q_valid, desc_k, desc_v,
-                                                           offset_y_kv, dtype, start_m, qk_scale, BLOCK_M, HEAD_DIM,
-                                                           BLOCK_N, 4 - STAGE, offs_m, offs_n, N_CTX_KV,
-                                                           warp_specialize, IS_HOPPER, IS_QAT, fake_quant_P,
-                                                           two_level_quant_P, use_global_sf_P, JOIN_QAT_PV,
-                                                           DV_MAXIMA, N_CTX_Q, SAVE_DV_STATS)
+            acc, high_prec_acc, l_i, m_i = _attn_fwd_inner(
+                acc, high_prec_acc, l_i, m_i, q, q_valid, desc_k, desc_v,
+                offset_y_kv, dtype, start_m, qk_scale, BLOCK_M, HEAD_DIM,
+                BLOCK_N, 4 - STAGE, offs_m, offs_n, N_CTX_KV, warp_specialize,
+                IS_HOPPER, IS_QAT, fake_quant_P, two_level_quant_P,
+                use_global_sf_P, JOIN_QAT_PV, DV_MAXIMA, N_CTX_Q,
+                SAVE_DV_STATS, DV_EVENT_INDICES, DV_EVENT_COUNTS,
+                DV_EVENT_FINAL, DV_EVENT_OVERFLOW, DV_EVENT_CAPACITY,
+                DV_SPILL_HISTORY, DV_PACKED_SLOTS, DV_TILED_VALUES)
     # stage 2: on-band
     if STAGE & 2:
-        acc, high_prec_acc, l_i, m_i = _attn_fwd_inner(acc, high_prec_acc, l_i, m_i, q, q_valid, desc_k, desc_v,
-                                                       offset_y_kv, dtype, start_m, qk_scale, BLOCK_M, HEAD_DIM,
-                                                       BLOCK_N, 2, offs_m, offs_n, N_CTX_KV, warp_specialize, IS_HOPPER,
-                                                       IS_QAT, fake_quant_P, two_level_quant_P, use_global_sf_P,
-                                                       JOIN_QAT_PV)
+        acc, high_prec_acc, l_i, m_i = _attn_fwd_inner(
+            acc, high_prec_acc, l_i, m_i, q, q_valid, desc_k, desc_v,
+            offset_y_kv, dtype, start_m, qk_scale, BLOCK_M, HEAD_DIM, BLOCK_N,
+            2, offs_m, offs_n, N_CTX_KV, warp_specialize, IS_HOPPER, IS_QAT,
+            fake_quant_P, two_level_quant_P, use_global_sf_P, JOIN_QAT_PV)
     # epilogue
     if SAVE_DV_STATS:
         tl.store(DV_DENOMINATOR + off_hz * N_CTX_Q + offs_m, l_i, mask=q_valid)
@@ -513,7 +740,8 @@ def _attn_fwd(
     tl.store(m_ptrs, m_i, mask=q_valid)
     desc_o.store([off_hz, start_m * BLOCK_M, 0], acc[None, :, :])
     if IS_QAT:
-        desc_high_prec_o.store([off_hz, start_m * BLOCK_M, 0], high_prec_acc[None, :, :])
+        desc_high_prec_o.store([off_hz, start_m * BLOCK_M, 0],
+                               high_prec_acc[None, :, :])
 
 
 @triton.jit
@@ -1297,11 +1525,81 @@ def _attn_bwd(
 
 
 @triton.jit
-def _attn_bwd_dv_forward_weights(Q, K, DO, DV, MAXIMA, DENOMINATOR, sm_scale,
-                                  stride_qz, stride_qh, stride_kz, stride_kh,
-                                  HEADS, NQ, NK,
-                                  HEAD_DIM: tl.constexpr, BLOCK_M: tl.constexpr, BLOCK_N: tl.constexpr):
-    """dV from the forward's quantized online probabilities; see docs/training/attn_qat.md."""
+def _sm121_event_maximum(VALUES, INDICES, COUNTS, bhid, query_rows,
+                         query_valid, kv_tile, NQ, CAPACITY: tl.constexpr,
+                         SEARCH_STEPS: tl.constexpr):
+    """Upper-bound search; masked loads never touch an unwritten event slot."""
+    count = tl.load(COUNTS + bhid * NQ + query_rows, mask=query_valid, other=0)
+    # A local-replay spill retains its true count, which can exceed capacity.
+    # Such rows use spill history instead; this bound also prevents an accidental
+    # query from addressing beyond the physical event allocation.
+    count = tl.minimum(count, CAPACITY)
+    lo = tl.zeros(query_rows.shape, tl.int32)
+    hi = count
+    for _ in tl.static_range(SEARCH_STEPS):
+        mid = (lo + hi) // 2
+        active = query_valid & (lo < hi)
+        event = tl.load(INDICES + (bhid * CAPACITY + mid) * NQ + query_rows,
+                        mask=active,
+                        other=65535).to(tl.int32)
+        advance = event <= kv_tile
+        lo = tl.where(active & advance, mid + 1, lo)
+        hi = tl.where(active & ~advance, mid, hi)
+    slot = tl.maximum(lo - 1, 0)
+    return tl.load(VALUES + (bhid * CAPACITY + slot) * NQ + query_rows,
+                   mask=query_valid & (count > 0),
+                   other=0.0)
+
+
+@triton.jit
+def _sm121_packed_maximum(VALUES, DIRECTORY, bhid, query_rows, query_valid,
+                          kv_tile, NQ, NUM_KV_TILES,
+                          TILED_VALUES: tl.constexpr = False):
+    """Read only the initialized word and its initialized FP32 event slot."""
+    words = tl.cdiv(NUM_KV_TILES, 5)
+    word = tl.load(DIRECTORY + (bhid * words + kv_tile // 5) * NQ + query_rows,
+                   mask=query_valid, other=0).to(tl.uint32)
+    slot = (word >> ((kv_tile % 5) * 6)) & 63
+    if TILED_VALUES:
+        value_offset = (((bhid * tl.cdiv(NQ, 32) + query_rows // 32) * 64 + slot) *
+                        32 + query_rows % 32)
+    else:
+        value_offset = (bhid * 64 + slot) * NQ + query_rows
+    return tl.load(VALUES + value_offset, mask=query_valid, other=0.0)
+
+
+@triton.jit
+def _attn_bwd_dv_forward_weights(Q,
+                                 K,
+                                 DO,
+                                 DV,
+                                 MAXIMA,
+                                 DENOMINATOR,
+                                 sm_scale,
+                                 stride_qz,
+                                 stride_qh,
+                                 stride_kz,
+                                 stride_kh,
+                                 HEADS,
+                                 NQ,
+                                 NK,
+                                 HEAD_DIM: tl.constexpr,
+                                 BLOCK_M: tl.constexpr,
+                                 BLOCK_N: tl.constexpr,
+                                 EVENT_INDICES=None,
+                                 EVENT_COUNTS=None,
+                                 EVENT_FINAL=None,
+                                 EVENT_CAPACITY: tl.constexpr = 0,
+                                 SEARCH_STEPS: tl.constexpr = 0,
+                                 SPILL_MAP=None,
+                                 SPILL_HISTORY=None,
+                                 LOCAL_REPLAY: tl.constexpr = False,
+                                 PACKED_SLOTS: tl.constexpr = False,
+                                 HAS_SPILL: tl.constexpr = True,
+                                 TILED_VALUES: tl.constexpr = False):
+    # dV from the forward's own quantized online probabilities. The legacy backward
+    # re-quantizes the normalized P instead, and its E4M3 group scale underflows to 0
+    # below ~2^-10, which zeroes dV for the whole 16-key group (docs/training/attn_qat.md).
     kv_tile = tl.program_id(0)
     bhid = tl.program_id(1)
     off_z = bhid // HEADS
@@ -1311,7 +1609,9 @@ def _attn_bwd_dv_forward_weights(Q, K, DO, DV, MAXIMA, DENOMINATOR, sm_scale,
     offs_n = kv_tile * BLOCK_N + tl.arange(0, BLOCK_N)
     offs_k = tl.arange(0, HEAD_DIM)
     kv_valid = offs_n < NK
-    k = tl.load(K + k_base + offs_n[:, None] * HEAD_DIM + offs_k[None, :], mask=kv_valid[:, None], other=0.0)
+    k = tl.load(K + k_base + offs_n[:, None] * HEAD_DIM + offs_k[None, :],
+                mask=kv_valid[:, None],
+                other=0.0)
     dv = tl.zeros((BLOCK_N, HEAD_DIM), tl.float32)
     num_kv_tiles = tl.cdiv(NK, BLOCK_N)
     RCP_LN2: tl.constexpr = 1.44269504  # the forward's fp32 literal, so p is bit-identical to the forward's p
@@ -1319,21 +1619,78 @@ def _attn_bwd_dv_forward_weights(Q, K, DO, DV, MAXIMA, DENOMINATOR, sm_scale,
     for query_tile in range(tl.cdiv(NQ, BLOCK_M)):
         offs_m = query_tile * BLOCK_M + tl.arange(0, BLOCK_M)
         q_valid = offs_m < NQ
-        q = tl.load(Q + q_base + offs_m[:, None] * HEAD_DIM + offs_k[None, :], mask=q_valid[:, None], other=0.0)
-        do = tl.load(DO + bhid * NQ * HEAD_DIM + offs_m[:, None] * HEAD_DIM + offs_k[None, :],
-                     mask=q_valid[:, None], other=0.0)
-        # The last KV tile's running maximum is the forward's final m_i.
-        local_max = tl.load(MAXIMA + (bhid * num_kv_tiles + kv_tile) * NQ + offs_m, mask=q_valid, other=0.0)
-        final_max = tl.load(MAXIMA + (bhid * num_kv_tiles + num_kv_tiles - 1) * NQ + offs_m,
-                            mask=q_valid, other=0.0)
-        denominator = tl.load(DENOMINATOR + bhid * NQ + offs_m, mask=q_valid, other=1.0)
+        q = tl.load(Q + q_base + offs_m[:, None] * HEAD_DIM + offs_k[None, :],
+                    mask=q_valid[:, None],
+                    other=0.0)
+        do = tl.load(DO + bhid * NQ * HEAD_DIM + offs_m[:, None] * HEAD_DIM +
+                     offs_k[None, :],
+                     mask=q_valid[:, None],
+                     other=0.0)
+        # Running maximum the forward used for this KV tile; the last tile's is the final m_i.
+        if EVENT_CAPACITY:
+            if LOCAL_REPLAY and HAS_SPILL:
+                spill_slot = tl.load(SPILL_MAP + bhid * tl.cdiv(NQ, BLOCK_M) +
+                                     query_tile)
+                # All 32 rows take the same branch: no truncated event history is
+                # queried for a spill tile, even when only one valid row overflowed.
+                if spill_slot >= 0:
+                    spill_offsets = (spill_slot * num_kv_tiles +
+                                     kv_tile) * BLOCK_M + tl.arange(
+                                         0, BLOCK_M)
+                    local_max = tl.load(SPILL_HISTORY + spill_offsets,
+                                        mask=q_valid,
+                                        other=0.0)
+                else:
+                    if PACKED_SLOTS:
+                        local_max = _sm121_packed_maximum(
+                            MAXIMA, EVENT_INDICES, bhid, offs_m, q_valid,
+                            kv_tile, NQ, num_kv_tiles, TILED_VALUES)
+                    else:
+                        local_max = _sm121_event_maximum(MAXIMA, EVENT_INDICES,
+                                                         EVENT_COUNTS, bhid,
+                                                         offs_m, q_valid, kv_tile,
+                                                         NQ, EVENT_CAPACITY,
+                                                         SEARCH_STEPS)
+            else:
+                # With zero spills every row is represented by initialized
+                # packed values; no map load or run-time branch is needed.
+                if PACKED_SLOTS:
+                    local_max = _sm121_packed_maximum(
+                        MAXIMA, EVENT_INDICES, bhid, offs_m, q_valid,
+                        kv_tile, NQ, num_kv_tiles, TILED_VALUES)
+                else:
+                    local_max = _sm121_event_maximum(MAXIMA, EVENT_INDICES,
+                                                     EVENT_COUNTS, bhid, offs_m,
+                                                     q_valid, kv_tile, NQ,
+                                                     EVENT_CAPACITY, SEARCH_STEPS)
+            final_max = tl.load(EVENT_FINAL + bhid * NQ + offs_m,
+                                mask=q_valid,
+                                other=0.0)
+        else:
+            local_max = tl.load(MAXIMA + (bhid * num_kv_tiles + kv_tile) * NQ +
+                                offs_m,
+                                mask=q_valid,
+                                other=0.0)
+            final_max = tl.load(MAXIMA +
+                                (bhid * num_kv_tiles + num_kv_tiles - 1) * NQ +
+                                offs_m,
+                                mask=q_valid,
+                                other=0.0)
+        denominator = tl.load(DENOMINATOR + bhid * NQ + offs_m,
+                              mask=q_valid,
+                              other=1.0)
         logits = tl.dot(q, tl.trans(k))
         logits = tl.where(kv_valid[None, :], logits, -1.0e6)
         valid = q_valid[:, None] & kv_valid[None, :]
         probability = tl.math.exp2(logits * qk_scale - local_max[:, None])
         probability = tl.where(valid, probability, 0.0)
-        quantized, _ = fake_quantize(probability, valid, BLOCK_M, BLOCK_N, tl.bfloat16,
-                                    use_global_sf=False, two_level_quant_P=False)
+        quantized, _ = fake_quantize(probability,
+                                     valid,
+                                     BLOCK_M,
+                                     BLOCK_N,
+                                     tl.bfloat16,
+                                     use_global_sf=False,
+                                     two_level_quant_P=False)
         # Quantize the un-normalized online p exactly as the forward did, then apply the
         # forward's rescaling and normalization in FP32. V's fake quantizer is an identity
         # STE, so these weights multiply dO directly.
@@ -1345,7 +1702,9 @@ def _attn_bwd_dv_forward_weights(Q, K, DO, DV, MAXIMA, DENOMINATOR, sm_scale,
         lo = (weights - hi.to(tl.float32)).to(tl.bfloat16)
         dv = tl.dot(tl.trans(hi), do, dv)
         dv = tl.dot(tl.trans(lo), do, dv)
-    tl.store(DV + k_base + offs_n[:, None] * HEAD_DIM + offs_k[None, :], dv, mask=kv_valid[:, None])
+    tl.store(DV + k_base + offs_n[:, None] * HEAD_DIM + offs_k[None, :],
+             dv,
+             mask=kv_valid[:, None])
 
 
 def _replay_sm121_dv_statistics(q, k, v, sm_scale, maxima, denominator):
@@ -1370,6 +1729,68 @@ def _replay_sm121_dv_statistics(q, k, v, sm_scale, maxima, denominator):
         IS_QAT=True, fake_quant_P=True, two_level_quant_P=False, use_global_sf_P=False,
         JOIN_QAT_PV=False, DV_MAXIMA=maxima, DV_DENOMINATOR=denominator,
         SAVE_DV_STATS=True, num_warps=SM121_NUM_WARPS, num_stages=SM121_NUM_STAGES)
+
+
+def _replay_sm121_dv_spill_statistics(q: torch.Tensor, k: torch.Tensor, v: torch.Tensor,
+                                      sm_scale: float, spill_tiles: torch.Tensor,
+                                      spill_history: torch.Tensor) -> int:
+    """Replay selected original 32-query tiles with identical forward arithmetic.
+
+    Retain full-size scratch O/STE/M/denominator layouts. Only the history write
+    address and selected program IDs change. In particular the original forward
+    denominator is never overwritten or substituted with the replay denominator.
+    """
+    batch, heads, nq, dim = q.shape
+    nk = k.shape[2]
+    block = SM121_BLOCK
+    stats = torch.empty((batch, heads, nq),
+                        device=q.device,
+                        dtype=torch.float32)
+    denominator = torch.empty_like(stats)
+    out = torch.empty_like(q)
+    ste = torch.empty_like(q)
+    desc_q = TensorDescriptor(q, [batch * heads * nq, dim], [dim, 1],
+                              [block, dim])
+    desc_k = TensorDescriptor(k, [batch * heads * nk, dim], [dim, 1],
+                              [block, dim])
+    desc_v = TensorDescriptor(v, [batch * heads * nk, dim], [dim, 1],
+                              [block, dim])
+    desc_o = TensorDescriptor(out, [batch * heads, nq, dim],
+                              [nq * dim, dim, 1], [1, block, dim])
+    desc_ste = TensorDescriptor(ste, [batch * heads, nq, dim],
+                                [nq * dim, dim, 1], [1, block, dim])
+    _attn_fwd[(spill_tiles.numel(), 1, 1)](sm_scale,
+                                           stats,
+                                           batch,
+                                           heads,
+                                           desc_q,
+                                           desc_k,
+                                           desc_v,
+                                           desc_o,
+                                           desc_ste,
+                                           N_CTX_Q=nq,
+                                           N_CTX_KV=nk,
+                                           HEAD_DIM=dim,
+                                           BLOCK_M=block,
+                                           BLOCK_N=block,
+                                           FP8_OUTPUT=False,
+                                           STAGE=1,
+                                           warp_specialize=False,
+                                           IS_HOPPER=False,
+                                           IS_QAT=True,
+                                           fake_quant_P=True,
+                                           two_level_quant_P=False,
+                                           use_global_sf_P=False,
+                                           JOIN_QAT_PV=False,
+                                           DV_MAXIMA=spill_history,
+                                           DV_DENOMINATOR=denominator,
+                                           SAVE_DV_STATS=True,
+                                           DV_REPLAY_TILE_LIST=spill_tiles,
+                                           DV_SPILL_HISTORY=True,
+                                           num_warps=SM121_NUM_WARPS,
+                                           num_stages=SM121_NUM_STAGES)
+    return sum(t.numel() * t.element_size()
+               for t in (stats, denominator, out, ste))
 
 
 class _attention(torch.autograd.Function):
@@ -1399,8 +1820,10 @@ class _attention(torch.autograd.Function):
             # triton_group_mean wiring would yield silently wrong gradients
             # rather than a feature. The flag is kept for signature
             # compatibility only.
-            raise NotImplementedError("smooth_q=True is not supported: the forward kernel has no "
-                                      "SMOOTH_Q path, so enabling it would produce incorrect gradients")
+            raise NotImplementedError(
+                "smooth_q=True is not supported: the forward kernel has no "
+                "SMOOTH_Q path, so enabling it would produce incorrect gradients"
+            )
 
         # shape constraints
         HEAD_DIM_Q, HEAD_DIM_K = q.shape[-1], k.shape[-1]
@@ -1418,10 +1841,14 @@ class _attention(torch.autograd.Function):
 
         # Support different sequence lengths for q and k/v (needed for cross attention)
         N_CTX_Q = q.shape[2]  # Query sequence length
-        N_CTX_KV = k.shape[2]  # Key/Value sequence length (may differ from query)
-        assert k.shape[2] == v.shape[2], "k and v must have the same sequence length"
-        sm100_optimized = (q.dtype == torch.bfloat16 and k.dtype == q.dtype and v.dtype == q.dtype
-                           and k.device == q.device and v.device == q.device and _use_sm100_optimized_qat(
+        N_CTX_KV = k.shape[
+            2]  # Key/Value sequence length (may differ from query)
+        assert k.shape[2] == v.shape[
+            2], "k and v must have the same sequence length"
+        sm100_optimized = (q.dtype == torch.bfloat16 and k.dtype == q.dtype
+                           and v.dtype == q.dtype and k.device == q.device
+                           and v.device == q.device
+                           and _use_sm100_optimized_qat(
                                q.device,
                                HEAD_DIM_K,
                                causal,
@@ -1452,16 +1879,22 @@ class _attention(torch.autograd.Function):
         stage = 3 if causal else 1
         extra_kern_args = {}
 
-        M = torch.empty((q.shape[0], q.shape[1], q.shape[2]), device=q.device, dtype=torch.float32)  # (Z, H, N_CTX_Q)
+        M = torch.empty((q.shape[0], q.shape[1], q.shape[2]),
+                        device=q.device,
+                        dtype=torch.float32)  # (Z, H, N_CTX_Q)
         # Use device_descriptor for Hopper + warpspec.
-        if supports_host_descriptor() and not (is_hopper() and warp_specialize):
+        if supports_host_descriptor() and not (is_hopper()
+                                               and warp_specialize):
             # Note that on Hopper we cannot perform a FP8 dot with a non-transposed second tensor
             y_dim_q = q.shape[0] * q.shape[1] * q.shape[2]
             y_dim_kv = k.shape[0] * k.shape[1] * k.shape[2]
 
             dummy_block = [1, 1]
             # (Z, H, N_CTX_Q, HEAD_DIM_K) -> (Z*H*N_CTX_Q, HEAD_DIM_K)
-            desc_q = TensorDescriptor(q, shape=[y_dim_q, HEAD_DIM_K], strides=[HEAD_DIM_K, 1], block_shape=dummy_block)
+            desc_q = TensorDescriptor(q,
+                                      shape=[y_dim_q, HEAD_DIM_K],
+                                      strides=[HEAD_DIM_K, 1],
+                                      block_shape=dummy_block)
             if q.dtype == torch.float8_e5m2:
                 desc_v = TensorDescriptor(v,
                                           shape=[HEAD_DIM_K, y_dim_kv],
@@ -1472,19 +1905,24 @@ class _attention(torch.autograd.Function):
                                           shape=[y_dim_kv, HEAD_DIM_K],
                                           strides=[HEAD_DIM_K, 1],
                                           block_shape=dummy_block)
-            desc_k = TensorDescriptor(k, shape=[y_dim_kv, HEAD_DIM_K], strides=[HEAD_DIM_K, 1], block_shape=dummy_block)
+            desc_k = TensorDescriptor(k,
+                                      shape=[y_dim_kv, HEAD_DIM_K],
+                                      strides=[HEAD_DIM_K, 1],
+                                      block_shape=dummy_block)
             # Use 3D descriptor for output to handle N_CTX_Q boundaries correctly
             dummy_block3d = [1, 1, 1]
             ZH = q.shape[0] * q.shape[1]
-            desc_o = TensorDescriptor(o,
-                                      shape=[ZH, N_CTX_Q, HEAD_DIM_K],
-                                      strides=[N_CTX_Q * HEAD_DIM_K, HEAD_DIM_K, 1],
-                                      block_shape=dummy_block3d)
+            desc_o = TensorDescriptor(
+                o,
+                shape=[ZH, N_CTX_Q, HEAD_DIM_K],
+                strides=[N_CTX_Q * HEAD_DIM_K, HEAD_DIM_K, 1],
+                block_shape=dummy_block3d)
             if IS_QAT:
-                desc_high_prec_o = TensorDescriptor(high_prec_o,
-                                                    shape=[ZH, N_CTX_Q, HEAD_DIM_K],
-                                                    strides=[N_CTX_Q * HEAD_DIM_K, HEAD_DIM_K, 1],
-                                                    block_shape=dummy_block3d)
+                desc_high_prec_o = TensorDescriptor(
+                    high_prec_o,
+                    shape=[ZH, N_CTX_Q, HEAD_DIM_K],
+                    strides=[N_CTX_Q * HEAD_DIM_K, HEAD_DIM_K, 1],
+                    block_shape=dummy_block3d)
             else:
                 desc_high_prec_o = desc_o  # Use regular output descriptor when not in QAT mode
         else:
@@ -1504,7 +1942,8 @@ class _attention(torch.autograd.Function):
 
         def grid(META):
             # (ceil(N_CTX / BLOCK_M), Z * H, 1)
-            return (triton.cdiv(q.shape[2], META["BLOCK_M"]), q.shape[0] * q.shape[1], 1)
+            return (triton.cdiv(q.shape[2],
+                                META["BLOCK_M"]), q.shape[0] * q.shape[1], 1)
 
         ctx.grid = grid
         if is_blackwell() and warp_specialize:
@@ -1518,7 +1957,8 @@ class _attention(torch.autograd.Function):
         fwd_num_warps, fwd_num_stages = 4, 2
         fwd_mode = "legacy"
         if sm100_optimized:
-            fwd_mode = os.environ.get("FASTVIDEO_ATTN_QAT_FWD_MODE", "fast").lower()
+            fwd_mode = os.environ.get("FASTVIDEO_ATTN_QAT_FWD_MODE",
+                                      "fast").lower()
             if fwd_mode not in {"fast", "balanced", "reference"}:
                 raise ValueError(f"FASTVIDEO_ATTN_QAT_FWD_MODE={fwd_mode!r} "
                                  "(want fast|balanced|reference)")
@@ -1530,7 +1970,8 @@ class _attention(torch.autograd.Function):
             fake_v = torch.empty_like(v)
 
             # override desc_q, desc_k, desc_v with fake_q, fake_k, fake_v
-            if supports_host_descriptor() and not (is_hopper() and warp_specialize):
+            if supports_host_descriptor() and not (is_hopper()
+                                                   and warp_specialize):
                 # (Z, H, N_CTX_Q, HEAD_DIM_K) -> (Z*H*N_CTX_Q, HEAD_DIM_K)
                 desc_q = TensorDescriptor(fake_q,
                                           shape=[y_dim_q, HEAD_DIM_K],
@@ -1550,8 +1991,10 @@ class _attention(torch.autograd.Function):
                 desc_v = fake_v
 
             H = q.shape[1]
-            grid_1 = (triton.cdiv(q.shape[2], qkv_block_m), q.shape[0] * q.shape[1], 1)
-            grid_2 = (triton.cdiv(k.shape[2], qkv_block_n), q.shape[0] * q.shape[1], 1)
+            grid_1 = (triton.cdiv(q.shape[2],
+                                  qkv_block_m), q.shape[0] * q.shape[1], 1)
+            grid_2 = (triton.cdiv(k.shape[2],
+                                  qkv_block_n), q.shape[0] * q.shape[1], 1)
 
             fake_quantize_q[grid_1](
                 q,
@@ -1593,15 +2036,73 @@ class _attention(torch.autograd.Function):
         forward_consistent_dv = _use_sm121_forward_consistent_dv(
             q, k, v, causal, IS_QAT, fake_quant_P, two_level_quant_P,
             use_global_sf_P, use_qat_qkv_backward, smooth_k)
-        dv_stats_mode = _sm121_dv_stats_mode() if forward_consistent_dv else None
+        dv_stats_mode = _sm121_dv_stats_mode(
+        ) if forward_consistent_dv else None
         save_dv_stats = forward_consistent_dv and dv_stats_mode == "save"
+        dv_stats_format, dv_event_capacity, dv_force_short = _sm121_dv_stats_format(
+        )
+        if dv_stats_format not in ("dense", "change_points", "packed_slots"):
+            raise ValueError(
+                f"unsupported private statistics format {dv_stats_format!r}")
+        if dv_stats_format in ("change_points", "packed_slots") and (
+                not isinstance(dv_event_capacity, int)
+                or isinstance(dv_event_capacity, bool)
+                or not 1 <= dv_event_capacity <= 128):
+            raise ValueError(
+                "private change-point capacity must be in [1, 128]")
+        packed_dv_stats = dv_stats_format == "packed_slots"
+        if packed_dv_stats and dv_event_capacity != 64:
+            raise ValueError("private packed-slot directory requires capacity 64")
+        compress_dv_stats = _sm121_use_change_points(save_dv_stats,
+                                                     dv_stats_format, N_CTX_Q,
+                                                     N_CTX_KV, dv_force_short)
+        dv_event_capacity = dv_event_capacity if compress_dv_stats else 0
+        local_dv_replay = compress_dv_stats and _sm121_local_replay_enabled()
+        if local_dv_replay and dv_event_capacity != 64:
+            raise ValueError(
+                "private query-tile local replay requires capacity 64")
+        packed_dv_stats = packed_dv_stats and compress_dv_stats
+        if packed_dv_stats and not local_dv_replay:
+            raise ValueError("private packed slots require query-tile local replay")
+        dv_zero_spill_fastpath, dv_tiled_values = _sm121_effective_packed_tuning(
+            packed_dv_stats)
+        dv_stats_format = ("packed_slots" if packed_dv_stats else "change_points") if compress_dv_stats else "dense"
+        dv_overflow_fallback = False
+        dv_fallback_reason = None
+        dv_spill_map, dv_spill_tiles, dv_spill_history = None, None, None
+        dv_spill_tile_count = 0
+        dv_attempted_spill_tile_count = 0
+        dv_replay_scratch_bytes = 0
+        dv_dense_storage_bytes = (q.shape[0] * q.shape[1] * N_CTX_Q *
+                                  (triton.cdiv(N_CTX_KV, SM121_BLOCK) + 1) * 4)
         # ``None`` is specialized as a constexpr, so other architectures do not
         # gain two pointer arguments when the statistics are not saved.
         dv_maxima, dv_denominator = None, None
+        dv_event_indices, dv_event_counts, dv_event_final, dv_event_overflow = None, None, None, None
         if save_dv_stats:
             assert fwd_block_n == SM121_BLOCK, "saved dV statistics are indexed by the SM121 forward KV tile"
-            dv_maxima = torch.empty(_sm121_dv_stats_shape(q.shape[0], q.shape[1], N_CTX_Q, N_CTX_KV),
-                                   device=q.device, dtype=torch.float32)
+            if compress_dv_stats:
+                event_shape = (q.shape[0], q.shape[1], dv_event_capacity,
+                               N_CTX_Q)
+                value_shape = _sm121_event_value_shape(
+                    q.shape[0], q.shape[1], N_CTX_Q, dv_event_capacity,
+                    dv_tiled_values)
+                dv_maxima = torch.empty(value_shape,
+                                        device=q.device,
+                                        dtype=torch.float32)
+                directory_shape = (q.shape[0], q.shape[1],
+                                   triton.cdiv(triton.cdiv(N_CTX_KV, SM121_BLOCK), 5), N_CTX_Q)
+                dv_event_indices = torch.empty(directory_shape if packed_dv_stats else event_shape,
+                                               device=q.device,
+                                               dtype=torch.uint32 if packed_dv_stats else torch.uint16)
+                dv_event_counts = torch.empty_like(M, dtype=torch.int32)
+                dv_event_final = torch.empty_like(M)
+                dv_event_overflow = torch.empty_like(M, dtype=torch.bool)
+            else:
+                dv_maxima = torch.empty(_sm121_dv_stats_shape(
+                    q.shape[0], q.shape[1], N_CTX_Q, N_CTX_KV),
+                                        device=q.device,
+                                        dtype=torch.float32)
             dv_denominator = torch.empty_like(M)
 
         # Apply pre-hook to set block shapes on tensor descriptors
@@ -1617,40 +2118,184 @@ class _attention(torch.autograd.Function):
             "FP8_OUTPUT": q.dtype == torch.float8_e5m2,
         })
 
-        _attn_fwd[grid](sm_scale,
-                        M,
-                        q.shape[0],
-                        q.shape[1],
-                        desc_q,
-                        desc_k,
-                        desc_v,
-                        desc_o,
-                        desc_high_prec_o,
-                        N_CTX_Q=N_CTX_Q,
-                        N_CTX_KV=N_CTX_KV,
-                        HEAD_DIM=HEAD_DIM_K,
-                        BLOCK_M=fwd_block_m,
-                        BLOCK_N=fwd_block_n,
-                        FP8_OUTPUT=q.dtype == torch.float8_e5m2,
-                        STAGE=stage,
-                        warp_specialize=warp_specialize,
-                        IS_HOPPER=is_hopper(),
-                        IS_QAT=IS_QAT,
-                        fake_quant_P=fake_quant_P,
-                        two_level_quant_P=two_level_quant_P,
-                        use_global_sf_P=use_global_sf_P,
-                        JOIN_QAT_PV=_use_consumer_blackwell_joined_qat_pv(q.device),
-                        SM100_SPLIT_FULL_TILES=_sm100_long_sequence_route(
-                            N_CTX_Q, N_CTX_KV, q.dtype, sm100_optimized, fwd_mode),
-                        DV_MAXIMA=dv_maxima,
-                        DV_DENOMINATOR=dv_denominator,
-                        SAVE_DV_STATS=save_dv_stats,
-                        num_warps=fwd_num_warps,
-                        num_stages=fwd_num_stages,
-                        **extra_kern_args)
+        _attn_fwd[grid](
+            sm_scale,
+            M,
+            q.shape[0],
+            q.shape[1],
+            desc_q,
+            desc_k,
+            desc_v,
+            desc_o,
+            desc_high_prec_o,
+            N_CTX_Q=N_CTX_Q,
+            N_CTX_KV=N_CTX_KV,
+            HEAD_DIM=HEAD_DIM_K,
+            BLOCK_M=fwd_block_m,
+            BLOCK_N=fwd_block_n,
+            FP8_OUTPUT=q.dtype == torch.float8_e5m2,
+            STAGE=stage,
+            warp_specialize=warp_specialize,
+            IS_HOPPER=is_hopper(),
+            IS_QAT=IS_QAT,
+            fake_quant_P=fake_quant_P,
+            two_level_quant_P=two_level_quant_P,
+            use_global_sf_P=use_global_sf_P,
+            JOIN_QAT_PV=_use_consumer_blackwell_joined_qat_pv(q.device),
+            SM100_SPLIT_FULL_TILES=_sm100_long_sequence_route(
+                N_CTX_Q, N_CTX_KV, q.dtype, sm100_optimized, fwd_mode),
+            DV_MAXIMA=dv_maxima,
+            DV_DENOMINATOR=dv_denominator,
+            SAVE_DV_STATS=save_dv_stats,
+            DV_EVENT_INDICES=dv_event_indices,
+            DV_EVENT_COUNTS=dv_event_counts,
+            DV_EVENT_FINAL=dv_event_final,
+            DV_EVENT_OVERFLOW=dv_event_overflow,
+            DV_EVENT_CAPACITY=dv_event_capacity,
+            DV_PACKED_SLOTS=packed_dv_stats,
+            DV_TILED_VALUES=dv_tiled_values,
+            num_warps=fwd_num_warps,
+            num_stages=fwd_num_stages,
+            **extra_kern_args)
+
+        if compress_dv_stats and _sm121_dv_stats_observer is not None:
+            _sm121_dv_stats_observer({
+                "counts": dv_event_counts,
+                "overflow": dv_event_overflow,
+                "capacity": dv_event_capacity,
+                "nq": N_CTX_Q,
+                "nk": N_CTX_KV,
+                "tiled_values": dv_tiled_values,
+                "zero_spill_fastpath": dv_zero_spill_fastpath,
+            })
+        fused_map = None
+        if local_dv_replay and packed_dv_stats and _sm121_fused_spill_builder is not None:
+            fused_map = _sm121_fused_spill_builder(dv_event_overflow)
+            overflowed = fused_map[1].numel() > 0
+        else:
+            overflowed = compress_dv_stats and bool(torch.any(dv_event_overflow).item())
+        if local_dv_replay:
+            if fused_map is not None:
+                dv_spill_map, dv_spill_tiles = fused_map
+            elif overflowed:
+                dv_spill_map, dv_spill_tiles = _sm121_build_spill_map(
+                    dv_event_overflow)
+            else:
+                tile_shape = (q.shape[0], q.shape[1],
+                              triton.cdiv(N_CTX_Q, SM121_BLOCK))
+                dv_spill_map = torch.full(tile_shape,
+                                          -1,
+                                          device=q.device,
+                                          dtype=torch.int32)
+                dv_spill_tiles = torch.empty((0, ),
+                                             device=q.device,
+                                             dtype=torch.int32)
+            dv_spill_tile_count = dv_spill_tiles.numel()
+            dv_attempted_spill_tile_count = dv_spill_tile_count
+            candidate_bytes = _sm121_local_cache_bytes(q.shape[0], q.shape[1],
+                                                       N_CTX_Q, N_CTX_KV,
+                                                       dv_spill_tile_count,
+                                                       dv_event_capacity,
+                                                       packed_slots=packed_dv_stats,
+                                                       tiled_values=dv_tiled_values)
+            if candidate_bytes >= dv_dense_storage_bytes:
+                # Release every candidate-owned allocation before the safe full
+                # replay allocates dense history. No truncated history survives.
+                dv_spill_map, dv_spill_tiles = None, None
+                dv_spill_tile_count = 0
+                dv_fallback_reason = "cache_not_smaller"
+            else:
+                dv_spill_history = torch.empty(
+                    (dv_spill_tile_count, triton.cdiv(
+                        N_CTX_KV, SM121_BLOCK), SM121_BLOCK),
+                    device=q.device,
+                    dtype=torch.float32)
+                if dv_spill_tile_count:
+                    dv_replay_scratch_bytes = _replay_sm121_dv_spill_statistics(
+                        fake_q, fake_k, fake_v, sm_scale, dv_spill_tiles,
+                        dv_spill_history)
+                dv_stats_format = "packed_slots_local_replay" if packed_dv_stats else "change_points_local_replay"
+        if compress_dv_stats and ((overflowed and not local_dv_replay)
+                                  or dv_fallback_reason is not None):
+            # The synchronization is part of every compressed forward's measured cost.
+            # Discard partial event histories before allocating and exactly replaying dense
+            # statistics. The backward never sees a truncated change-point history.
+            dv_maxima, dv_event_indices, dv_event_counts = None, None, None
+            dv_event_final, dv_event_overflow = None, None
+            dv_maxima = torch.empty(_sm121_dv_stats_shape(
+                q.shape[0], q.shape[1], N_CTX_Q, N_CTX_KV),
+                                    device=q.device,
+                                    dtype=torch.float32)
+            _replay_sm121_dv_statistics(fake_q, fake_k, fake_v, sm_scale,
+                                        dv_maxima, dv_denominator)
+            dv_event_capacity = 0
+            dv_stats_format = "dense"
+            dv_overflow_fallback = True
+            dv_fallback_reason = dv_fallback_reason or "event_overflow"
+            local_dv_replay = False
+            packed_dv_stats = False
+            dv_zero_spill_fastpath = False
+            dv_tiled_values = False
+
+        dv_has_spill_launch = _sm121_has_spill_launch(
+            local_dv_replay, dv_spill_tile_count, dv_zero_spill_fastpath)
+        if compress_dv_stats and _sm121_local_replay_observer is not None:
+            saved_stats = (dv_maxima, dv_denominator, dv_event_indices,
+                           dv_event_counts, dv_event_final, dv_event_overflow,
+                           dv_spill_map, dv_spill_tiles, dv_spill_history)
+            _sm121_local_replay_observer({
+                "format":
+                dv_stats_format,
+                "tiled_values":
+                dv_tiled_values,
+                "zero_spill_fastpath":
+                dv_zero_spill_fastpath,
+                "has_spill_launch":
+                dv_has_spill_launch,
+                "capacity":
+                dv_event_capacity,
+                "maxima":
+                dv_maxima,
+                "denominator":
+                dv_denominator,
+                "indices":
+                dv_event_indices,
+                "counts":
+                dv_event_counts,
+                "final":
+                dv_event_final,
+                "overflow":
+                dv_event_overflow,
+                "spill_map":
+                dv_spill_map,
+                "spill_tiles":
+                dv_spill_tiles,
+                "spill_history":
+                dv_spill_history,
+                "spill_tile_count":
+                dv_spill_tile_count,
+                "attempted_spill_tile_count":
+                dv_attempted_spill_tile_count,
+                "storage_bytes":
+                sum(t.numel() * t.element_size() for t in saved_stats
+                    if t is not None),
+                "dense_storage_bytes":
+                dv_dense_storage_bytes,
+                "fallback":
+                dv_overflow_fallback,
+                "fallback_reason":
+                dv_fallback_reason,
+                "replay_scratch_bytes":
+                dv_replay_scratch_bytes,
+                "nq":
+                N_CTX_Q,
+                "nk":
+                N_CTX_KV,
+            })
 
         exact_m = _sm100_exact_m_enabled()
-        if (sm100_optimized and fwd_mode != "reference" and exact_m and (fwd_block_m != 32 or fwd_block_n != 32)):
+        if (sm100_optimized and fwd_mode != "reference" and exact_m
+                and (fwd_block_m != 32 or fwd_block_n != 32)):
             # The large forward tile changes a legal reduction order. Restore
             # the legacy statistic so dV remains bitwise-compatible while the
             # two output paths retain the faster large-tile PV computation.
@@ -1679,12 +2324,36 @@ class _attention(torch.autograd.Function):
             k = fake_k
             v = fake_v
 
-        saved = (q, k, v, o_for_bwd, M)
+        saved: tuple[torch.Tensor, ...] = (q, k, v, o_for_bwd, M)
         if save_dv_stats:
+            assert dv_maxima is not None and dv_denominator is not None
             saved += (dv_maxima, dv_denominator)
+            if dv_event_capacity:
+                assert dv_event_indices is not None and dv_event_counts is not None
+                assert dv_event_final is not None and dv_event_overflow is not None
+                saved += (dv_event_indices, dv_event_counts, dv_event_final,
+                          dv_event_overflow)
+                if local_dv_replay:
+                    assert dv_spill_map is not None and dv_spill_tiles is not None and dv_spill_history is not None
+                    saved += (dv_spill_map, dv_spill_tiles, dv_spill_history)
         ctx.save_for_backward(*saved)
         ctx.forward_consistent_dv = forward_consistent_dv
         ctx.dv_stats_mode = dv_stats_mode
+        ctx.dv_stats_format = dv_stats_format
+        ctx.dv_packed_slots = packed_dv_stats
+        ctx.dv_packed_tiled_values = dv_tiled_values
+        ctx.dv_zero_spill_fastpath = dv_zero_spill_fastpath
+        ctx.dv_has_spill_launch = dv_has_spill_launch
+        ctx.dv_event_capacity = dv_event_capacity
+        ctx.dv_overflow_fallback = dv_overflow_fallback
+        ctx.dv_local_replay = local_dv_replay
+        ctx.dv_spill_tile_count = dv_spill_tile_count
+        ctx.dv_attempted_spill_tile_count = dv_attempted_spill_tile_count
+        ctx.dv_fallback_reason = dv_fallback_reason
+        ctx.dv_replay_scratch_bytes = dv_replay_scratch_bytes
+        ctx.dv_dense_storage_bytes = dv_dense_storage_bytes
+        ctx.dv_stats_storage_bytes = sum(t.numel() * t.element_size()
+                                         for t in saved[5:])
         ctx.sm_scale = sm_scale
         ctx.HEAD_DIM = HEAD_DIM_K
         ctx.causal = causal
@@ -1711,12 +2380,14 @@ class _attention(torch.autograd.Function):
         dv = torch.empty_like(v)
         BATCH, N_HEAD, N_CTX_Q = q.shape[:3]
         N_CTX_KV = k.shape[2]
-        assert k.shape[2] == v.shape[2], "k and v must have the same sequence length"
+        assert k.shape[2] == v.shape[
+            2], "k and v must have the same sequence length"
         PRE_BLOCK = 128
         # Long video sequences are occupancy-bound on consumer Blackwell: a
         # third software-pipeline stage consumes shared memory without hiding
         # additional latency. Shorter sequences retain the deeper pipeline.
-        NUM_STAGES = 2 if is_consumer_blackwell() and max(N_CTX_Q, N_CTX_KV) >= 8192 else 3
+        NUM_STAGES = 2 if is_consumer_blackwell() and max(
+            N_CTX_Q, N_CTX_KV) >= 8192 else 3
         NUM_WARPS = 4
         BLOCK_M1, BLOCK_N1, BLOCK_M2, BLOCK_N2 = 32, 32, 32, 32
         if not ctx.use_qat_qkv_backward:
@@ -1741,8 +2412,10 @@ class _attention(torch.autograd.Function):
         # smooth_q is rejected in forward(); ctx.smooth_q is always False here.
         q_m = None
 
-        sm100_optimized_backward = (getattr(ctx, "sm100_optimized", False) and ctx.use_qat_qkv_backward
-                                    and not ctx.smooth_k and not ctx.smooth_q and N_CTX_KV % 16 == 0)
+        sm100_optimized_backward = (getattr(ctx, "sm100_optimized", False)
+                                    and ctx.use_qat_qkv_backward
+                                    and not ctx.smooth_k and not ctx.smooth_q
+                                    and N_CTX_KV % 16 == 0)
         if sm100_optimized_backward:
             # Keeping dQ and dK/dV in separate programs allows larger tiles
             # without carrying all three fp32 accumulators at once. On SM100
@@ -1750,7 +2423,8 @@ class _attention(torch.autograd.Function):
             # self-attention program with the same math and BF16 parity bounds.
             block_m, block_n = _select_sm100_backward_blocks(N_CTX_Q, N_CTX_KV)
             split_full_backward = block_n == 128
-            dq_launch, dkdv_launch = _sm100_backward_launch_config(block_n, q.dtype)
+            dq_launch, dkdv_launch = _sm100_backward_launch_config(
+                block_n, q.dtype)
             grid_dq = ((N_CTX_Q + block_m - 1) // block_m, 1, BATCH * N_HEAD)
             _attn_bwd_dq_cross[grid_dq](
                 q,
@@ -1782,7 +2456,8 @@ class _attention(torch.autograd.Function):
                 num_warps=dq_launch[0],
                 num_stages=dq_launch[1],
             )
-            grid_dkdv = ((N_CTX_KV + block_n - 1) // block_n, 1, BATCH * N_HEAD)
+            grid_dkdv = ((N_CTX_KV + block_n - 1) // block_n, 1,
+                         BATCH * N_HEAD)
             _attn_bwd_dkdv_cross[grid_dkdv](
                 q,
                 arg_k,
@@ -1888,7 +2563,8 @@ class _attention(torch.autograd.Function):
                 num_warps=NUM_WARPS,
                 num_stages=NUM_STAGES,
             )
-            grid_dkdv = ((N_CTX_KV + BLOCK_N1 - 1) // BLOCK_N1, 1, BATCH * N_HEAD)
+            grid_dkdv = ((N_CTX_KV + BLOCK_N1 - 1) // BLOCK_N1, 1,
+                         BATCH * N_HEAD)
             _attn_bwd_dkdv_cross[grid_dkdv](
                 q,
                 arg_k,
@@ -1926,19 +2602,56 @@ class _attention(torch.autograd.Function):
             )
 
         if ctx.forward_consistent_dv:
+            dv_event_indices, dv_event_counts, dv_event_final = None, None, None
+            dv_spill_map, dv_spill_history = None, None
+            dv_event_capacity = ctx.dv_event_capacity
             if ctx.dv_stats_mode == "save":
                 dv_maxima, dv_denominator = saved[5:7]
+                if dv_event_capacity:
+                    dv_event_indices, dv_event_counts, dv_event_final = saved[
+                        7:10]
+                    if ctx.dv_local_replay:
+                        dv_spill_map, _, dv_spill_history = saved[11:14]
             else:
-                dv_maxima = torch.empty(_sm121_dv_stats_shape(BATCH, N_HEAD, N_CTX_Q, N_CTX_KV),
-                                       device=q.device, dtype=torch.float32)
+                dv_maxima = torch.empty(_sm121_dv_stats_shape(
+                    BATCH, N_HEAD, N_CTX_Q, N_CTX_KV),
+                                        device=q.device,
+                                        dtype=torch.float32)
                 dv_denominator = torch.empty_like(M)
-                _replay_sm121_dv_statistics(q, k, v, ctx.sm_scale, dv_maxima, dv_denominator)
-            _attn_bwd_dv_forward_weights[(triton.cdiv(N_CTX_KV, SM121_BLOCK), BATCH * N_HEAD)](
-                q, k, do, dv, dv_maxima, dv_denominator, ctx.sm_scale,
-                q.stride(0), q.stride(1), k.stride(0), k.stride(1),
-                N_HEAD, N_CTX_Q, N_CTX_KV, HEAD_DIM=ctx.HEAD_DIM,
-                BLOCK_M=SM121_BLOCK, BLOCK_N=SM121_BLOCK,
-                num_warps=SM121_NUM_WARPS, num_stages=SM121_NUM_STAGES)
+                _replay_sm121_dv_statistics(q, k, v, ctx.sm_scale, dv_maxima,
+                                            dv_denominator)
+            _attn_bwd_dv_forward_weights[(triton.cdiv(
+                N_CTX_KV, SM121_BLOCK), BATCH * N_HEAD)](
+                    q,
+                    k,
+                    do,
+                    dv,
+                    dv_maxima,
+                    dv_denominator,
+                    ctx.sm_scale,
+                    q.stride(0),
+                    q.stride(1),
+                    k.stride(0),
+                    k.stride(1),
+                    N_HEAD,
+                    N_CTX_Q,
+                    N_CTX_KV,
+                    HEAD_DIM=ctx.HEAD_DIM,
+                    BLOCK_M=SM121_BLOCK,
+                    BLOCK_N=SM121_BLOCK,
+                    EVENT_INDICES=dv_event_indices,
+                    EVENT_COUNTS=dv_event_counts,
+                    EVENT_FINAL=dv_event_final,
+                    EVENT_CAPACITY=dv_event_capacity,
+                    SEARCH_STEPS=dv_event_capacity.bit_length(),
+                    SPILL_MAP=dv_spill_map,
+                    SPILL_HISTORY=dv_spill_history,
+                    LOCAL_REPLAY=ctx.dv_local_replay,
+                    PACKED_SLOTS=ctx.dv_packed_slots,
+                    HAS_SPILL=ctx.dv_has_spill_launch,
+                    TILED_VALUES=ctx.dv_packed_tiled_values,
+                    num_warps=SM121_NUM_WARPS,
+                    num_stages=SM121_NUM_STAGES)
 
         return dq, dk, dv, None, None, None, None, None, None, None, None, None, None, None, None
 
