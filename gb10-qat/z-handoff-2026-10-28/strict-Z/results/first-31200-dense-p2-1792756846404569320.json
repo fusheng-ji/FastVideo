@@ -1,0 +1,75 @@
+{
+  "acceptance_scope": "gb10-packed-tuning-v1-production-torch-determinism",
+  "accepted": true,
+  "artifact_sha256": {
+    "application.log": "2ac7701a9cd8b6739fb666befc2df73662b2c19b3934f44c4607489b64188f3d",
+    "probe/distributed-rendezvous": "a4e0706121bb5a6505c18f430b7c8106beaa9083c2bad879aaafbcc2fd84c87a",
+    "probe/rep0-layer00.pt": "fb9372c4a26794ce59a62345bbfb2fb04469161073b16260497d5f4a3190f89f",
+    "probe/rep0-layer15.pt": "89cb60e4a3c65397e6388f6d27ea13614c98f5f38de522c448bf680e310bb559",
+    "probe/rep0-layer29.pt": "d99ad92898dc47c17eac273297a7487af42140c9db8d5439a70ddb06cfd8853f",
+    "probe/report.json": "0f9a14151510c5f77fd03dac8da8d4066c0a6b92b774da7fef3e4a179cb7eb2b"
+  },
+  "command": [
+    "${SOURCE_CHECKOUT}/.venv/bin/python",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-acceptance-v1/code/bootstrap.py",
+    "--snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-stats-overflow-v2/snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-acceptance-v1/code/probe_model.py",
+    "--snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-stats-overflow-v2/snapshot",
+    "--artifact-root",
+    "${RECOVERY_ROOT}/diagnostics/artifact",
+    "--variant",
+    "dense",
+    "--tokens",
+    "31200",
+    "--seed",
+    "1000",
+    "--repetitions",
+    "1",
+    "--output-dir",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-dense-p2-1792756846404569320/output/data/probe",
+    "--strict",
+    "--production-determinism",
+    "--capture-layer",
+    "0",
+    "--capture-layer",
+    "15",
+    "--capture-layer",
+    "29"
+  ],
+  "execution_complete": true,
+  "kind": "probe",
+  "report": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-dense-p2-1792756846404569320/output/data/probe/report.json",
+  "returncode": 0,
+  "source_fingerprint": "87d8427401fc7595a8ad521c18505e6b35edbad5996b508089041a03606fcc0f",
+  "status": "complete",
+  "verdict": {
+    "accepted": true,
+    "compact_certification": {},
+    "compact_coverage": {
+      "dense": {
+        "compact_calls": 0,
+        "compact_path_exercised": false,
+        "fallback_calls": 0,
+        "observed_calls": 60
+      }
+    },
+    "comparisons": [],
+    "errors": [],
+    "repeats_per_process": [
+      1
+    ],
+    "required_processes": 1,
+    "required_variants": [
+      "dense"
+    ],
+    "route": {
+      "category": "none",
+      "layer": null
+    },
+    "schema_version": 2,
+    "scope": "Byte equality and finite values; scalar norm differences are not tensor relative L2.",
+    "status": "complete"
+  }
+}

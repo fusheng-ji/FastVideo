@@ -1,0 +1,95 @@
+{
+  "acceptance_scope": "gb10-packed-tuning-v1-production-torch-determinism",
+  "accepted": true,
+  "artifact_sha256": {
+    "application.log": "65fa1de1cf9e9f408ac0e3d78bda487053c5c5d681a72f11bebba37b0b8fb846",
+    "probe/distributed-rendezvous": "7be1f5fad3fef1108067939f0665dedc20064ea877da24900fdc5f8f1ea3ca9b",
+    "probe/rep0-layer00.pt": "fb9372c4a26794ce59a62345bbfb2fb04469161073b16260497d5f4a3190f89f",
+    "probe/rep0-layer15.pt": "89cb60e4a3c65397e6388f6d27ea13614c98f5f38de522c448bf680e310bb559",
+    "probe/rep0-layer29.pt": "d99ad92898dc47c17eac273297a7487af42140c9db8d5439a70ddb06cfd8853f",
+    "probe/rep1-layer00.pt": "3f41bf09f04bfb8ee74c124cc44296cb17c55fd0dba5733b92a86a7df99b5cae",
+    "probe/rep1-layer15.pt": "60243d19990fc8116e61ec3f067ae6683c4f9c37f5bbbce99635d9cf49527961",
+    "probe/rep1-layer29.pt": "f0849c3fa481bcd35ff7711bbd3ce32bc0a2373f7afe5c6307a47c47daa5fa24",
+    "probe/report.json": "0e460962e2dc6c95b0210ccecd82446eda3bc40e4e7306dc049542cfd1f190ab"
+  },
+  "command": [
+    "${SOURCE_CHECKOUT}/.venv/bin/python",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-acceptance-v1/code/bootstrap.py",
+    "--snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-stats-overflow-v2/snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-acceptance-v1/code/probe_model.py",
+    "--snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-stats-overflow-v2/snapshot",
+    "--artifact-root",
+    "${RECOVERY_ROOT}/diagnostics/artifact",
+    "--variant",
+    "dense",
+    "--tokens",
+    "31200",
+    "--seed",
+    "1000",
+    "--repetitions",
+    "2",
+    "--output-dir",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-dense-p1-1792756460122690749/output/data/probe",
+    "--strict",
+    "--production-determinism",
+    "--capture-layer",
+    "0",
+    "--capture-layer",
+    "15",
+    "--capture-layer",
+    "29"
+  ],
+  "execution_complete": true,
+  "kind": "probe",
+  "report": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-dense-p1-1792756460122690749/output/data/probe/report.json",
+  "returncode": 0,
+  "source_fingerprint": "87d8427401fc7595a8ad521c18505e6b35edbad5996b508089041a03606fcc0f",
+  "status": "complete",
+  "verdict": {
+    "accepted": true,
+    "compact_certification": {},
+    "compact_coverage": {
+      "dense": {
+        "compact_calls": 0,
+        "compact_path_exercised": false,
+        "fallback_calls": 0,
+        "observed_calls": 120
+      }
+    },
+    "comparisons": [
+      {
+        "accepted": true,
+        "difference_count": 0,
+        "differences": [],
+        "kind": "within_process",
+        "process_index": 0,
+        "repetitions": [
+          0,
+          1
+        ],
+        "route": {
+          "category": "none",
+          "layer": null
+        },
+        "variant": "dense"
+      }
+    ],
+    "errors": [],
+    "repeats_per_process": [
+      2
+    ],
+    "required_processes": 1,
+    "required_variants": [
+      "dense"
+    ],
+    "route": {
+      "category": "none",
+      "layer": null
+    },
+    "schema_version": 2,
+    "scope": "Byte equality and finite values; scalar norm differences are not tensor relative L2.",
+    "status": "complete"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "acceptance_scope": "gb10-z-nonstrict-v1-diagnostic",
+  "accepted": false,
+  "default_model_acceptance": false,
+  "error": "ModuleNotFoundError(\"No module named 'matplotlib'\")",
+  "execution_complete": false,
+  "kind": "compare",
+  "statistical_equivalence": null
+}

@@ -1,0 +1,40 @@
+{
+  "files": {
+    "inputs/31200/train/data.parquet": "62dbfa833ae4989df0655bc132f2f11938e11be788440b7029eb9ef4c59bae7f",
+    "inputs/31200/train/map_style_cache/file_info.pkl": "5436a319fbe0bd2411b75fc77525cfddf60e287528fb61dad13e1a4466653201",
+    "inputs/8192/train/data.parquet": "94275e366c8ef81b08f76691ff0396fb5c0daf0ed98d9a9e846707c32b3dad6e",
+    "inputs/8192/train/map_style_cache/file_info.pkl": "3848abfedc8fd74516ebd5f7677c1bbfafd5ca5fe9e80918ad58ffdbac7acd66",
+    "longseq-31200.yaml": "22fd9d805cc41a49dcf4d3493bc2f4a357fe9b3b497edeecd919c167c465e413",
+    "longseq-8192.yaml": "d3223b218c3ba1962428ad2be3c08ae96dbbe57a073bc6f186d52c6e9cbc5c70",
+    "wan-model/model_index.json": "b8b28e022329acf975e027579a1d2dc3de44dba28f4c909b98a880fbf5b0de7d",
+    "wan-model/scheduler/scheduler_config.json": "3fed2abbd9bbc301a74db01947198057ec5049808910dccab320925bf27bea6e",
+    "wan-model/text_encoder/config.json": "4087b6192155a4643f6d29fd326c4610103130674011ef4d0a53f8bce5de967d",
+    "wan-model/text_encoder/model.safetensors.index.json": "8af791f24a6447aa30c95786f40adf23d3c9df97470d2f36159c8f1113f120b4",
+    "wan-model/tokenizer/special_tokens_map.json": "456b58fd240a06c743a7c2cf8008bec501240d68ebd1fc4018ea569505fea270",
+    "wan-model/tokenizer/tokenizer.json": "20a46ac256746594ed7e1e3ef733b83fbc5a6f0922aa7480eda961743de080ef",
+    "wan-model/tokenizer/tokenizer_config.json": "1d8d2a216bf8e70ac15b7ddcea566c4dd0433c024b39a58ca5e4c66bd78defbd",
+    "wan-model/transformer/config.json": "0b093fa072e9ff28763febe9b964ee582f566733a6d6709deb9dfba1bde16b81",
+    "wan-model/transformer/diffusion_pytorch_model-00001-of-00002.safetensors": "6d011927dbd2cc8afe53d57abab04a8fd86f615d83324770d985fb058ece3a24",
+    "wan-model/transformer/diffusion_pytorch_model-00002-of-00002.safetensors": "b92ec2309b1f239af6f746431815a881afcc938abb26a4f08d9a2fd6c892f872",
+    "wan-model/transformer/diffusion_pytorch_model.safetensors.index.json": "dcbcf3497134a3f50557ff069dd7d2c84b5c4d8c5932472f6bdb780fb4016589",
+    "wan-model/vae/config.json": "f0c1cc1d7decb5badc384f54691746a27a9aeff49f7ebca974e583389342d527",
+    "wan-model/vae/diffusion_pytorch_model.safetensors": "d6e524b3fffede1787a74e81b30976dce5400c4439ba64222168e607ed19e793",
+    "models-metadata.json": "ea528a9c7787ed091b9b80187c241a92155276c931e36bc384ce646c2a00624c",
+    "datasets-metadata.json": "20eddfe04d2fa9a5a83869d0504662221a56c2655a696722081c3b47f2befad9",
+    "inputs/dataset-crops.json": "1eb673403d39759721b3107cc76de27375f789efcc59fa63ef86468d3c8c5819",
+    "inputs/split.json": "91c7149c73cbf8a028ed771c85eaafd822998c5f2c3cca9c1fe197ccbe2b48be",
+    "inputs/8192/heldout/data.parquet": "302509f50cb958b1d1512a8aed622994c9c4a287e235202fae8792ed02f3c796",
+    "inputs/31200/heldout/data.parquet": "b9b266e17fc7e319fb93f6f75a66d03a538340ebbaebd6b5f59d5f493d15b66b",
+    "mixkit-source/combined_parquet_dataset/worker_0/data_chunk_0.parquet": "6ea18627155306780c59bf9833fe113532d0a666076c90fd7a37714946372c6c"
+  },
+  "uploaded": false,
+  "model": {
+    "id": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+    "sha": "0fad780a534b6463e45facd96134c9f345acfa5b"
+  },
+  "dataset": {
+    "id": "weizhou03/HD-Mixkit-Finetune-Wan",
+    "sha": "33e41fcc2f99f5c2615ff3eca6b25a827a982615"
+  },
+  "note": "Exact cached data and captures are not uploaded. Regenerated inputs require new verification; original hash identity is not presumed."
+}

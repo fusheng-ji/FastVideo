@@ -1,0 +1,10 @@
+{
+  "numeric_report_reproduced": true,
+  "csv_rows_reproduced": true,
+  "csv_line_endings_normalized": true,
+  "gpu_used": false,
+  "plots": {
+    "validation-loss.png": "d340e107286588fdfbff0b50154fafda285a3e8f801a2d92fa2e022d7ae688e9",
+    "paired-differences.png": "7bbf10caa5783889789b1e9a9d821a789ee682cc26d8427422b79bff8ab0b5ee"
+  }
+}

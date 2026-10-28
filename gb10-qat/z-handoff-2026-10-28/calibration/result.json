@@ -1,0 +1,239 @@
+{
+  "execution_complete": true,
+  "statistical_equivalence": null,
+  "independent_seeds": 3,
+  "runs": 9,
+  "updates": 180,
+  "validation_forwards": 864,
+  "results": [
+    {
+      "execution_complete": true,
+      "paired_checks_passed": true,
+      "seed": 41001,
+      "means": {
+        "A": {
+          "0": 0.20839796750806272,
+          "10": 0.20429533475544304,
+          "20": 0.20067652384750545
+        },
+        "B": {
+          "0": 0.20839796750806272,
+          "10": 0.204414103878662,
+          "20": 0.20059264649171382
+        },
+        "Z": {
+          "0": 0.20839796750806272,
+          "10": 0.2043843891005963,
+          "20": 0.20081221999134868
+        }
+      },
+      "dense_repeat_log_ratio": 0.00041806031070040425,
+      "Z_dense_log_ratio": 0.0008849732071531648,
+      "final_tensor_comparisons": {
+        "A-B": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.0866949916565328,
+            "relative_l2": 6.89047015700626e-05,
+            "max_absolute": 2.5119632482528687e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.16893834113656941,
+            "relative_l2": 0.5986212962151644,
+            "max_absolute": 0.0098876953125
+          }
+        },
+        "A-Z": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.09146137747212629,
+            "relative_l2": 7.269299848786685e-05,
+            "max_absolute": 2.631358802318573e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.1747632134788891,
+            "relative_l2": 0.5838161432855055,
+            "max_absolute": 0.014404296875
+          }
+        },
+        "B-Z": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.09269596390360778,
+            "relative_l2": 7.367424097597804e-05,
+            "max_absolute": 2.4769455194473267e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.12607366637820472,
+            "relative_l2": 0.42116324259325955,
+            "max_absolute": 0.0140380859375
+          }
+        }
+      },
+      "statistical_equivalence": null,
+      "independent_unit": "seed",
+      "acceptance_scope": "gb10-z-nonstrict-calibration-v1"
+    },
+    {
+      "execution_complete": true,
+      "paired_checks_passed": true,
+      "seed": 41002,
+      "means": {
+        "A": {
+          "0": 0.20839796750806272,
+          "10": 0.20237565715797246,
+          "20": 0.19747491355519742
+        },
+        "B": {
+          "0": 0.20839796750806272,
+          "10": 0.20223684888333082,
+          "20": 0.19778589613270015
+        },
+        "Z": {
+          "0": 0.20839796750806272,
+          "10": 0.20231002126820385,
+          "20": 0.19781752454582602
+        }
+      },
+      "dense_repeat_log_ratio": -0.0015735566696655108,
+      "Z_dense_log_ratio": 0.0009463684188791844,
+      "final_tensor_comparisons": {
+        "A-B": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.11237020233496772,
+            "relative_l2": 8.93112145842185e-05,
+            "max_absolute": 2.4966895580291748e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.09957505259916521,
+            "relative_l2": 0.34280758463410027,
+            "max_absolute": 0.00537109375
+          }
+        },
+        "A-Z": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.11185074815194462,
+            "relative_l2": 8.889835621627905e-05,
+            "max_absolute": 2.5257468223571777e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.1091806370741499,
+            "relative_l2": 0.36484616838183237,
+            "max_absolute": 0.01025390625
+          }
+        },
+        "B-Z": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.10731027069009857,
+            "relative_l2": 8.528960983358301e-05,
+            "max_absolute": 2.597179263830185e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.098239356460446,
+            "relative_l2": 0.3282839681961968,
+            "max_absolute": 0.00799560546875
+          }
+        }
+      },
+      "statistical_equivalence": null,
+      "independent_unit": "seed",
+      "acceptance_scope": "gb10-z-nonstrict-calibration-v1"
+    },
+    {
+      "execution_complete": true,
+      "paired_checks_passed": true,
+      "seed": 41003,
+      "means": {
+        "A": {
+          "0": 0.20839796750806272,
+          "10": 0.2002940489910543,
+          "20": 0.1961325091542676
+        },
+        "B": {
+          "0": 0.20839796750806272,
+          "10": 0.20017584541346878,
+          "20": 0.19544158794451505
+        },
+        "Z": {
+          "0": 0.20839796750806272,
+          "10": 0.20012011425569654,
+          "20": 0.19573520577978343
+        }
+      },
+      "dense_repeat_log_ratio": 0.003528946025293838,
+      "Z_dense_log_ratio": -0.0002648266827116147,
+      "final_tensor_comparisons": {
+        "A-B": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.09878455901372316,
+            "relative_l2": 7.851342691928223e-05,
+            "max_absolute": 2.6137568056583405e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.12388683920064424,
+            "relative_l2": 0.44901101506220115,
+            "max_absolute": 0.0101318359375
+          }
+        },
+        "A-Z": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.09765659786945732,
+            "relative_l2": 7.761692807803755e-05,
+            "max_absolute": 2.5331508368253708e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.1243254122256797,
+            "relative_l2": 0.4784068442910263,
+            "max_absolute": 0.009033203125
+          }
+        },
+        "B-Z": {
+          "parameters": {
+            "byte_equal": false,
+            "absolute_l2": 0.09538972224073959,
+            "relative_l2": 7.581522776823115e-05,
+            "max_absolute": 2.4903565645217896e-05
+          },
+          "gradients": {
+            "byte_equal": false,
+            "absolute_l2": 0.11234322360855534,
+            "relative_l2": 0.43229912631609824,
+            "max_absolute": 0.0140380859375
+          }
+        }
+      },
+      "statistical_equivalence": null,
+      "independent_unit": "seed",
+      "acceptance_scope": "gb10-z-nonstrict-calibration-v1"
+    }
+  ],
+  "descriptive_summary": {
+    "dense_repeat_log_ratio": {
+      "mean": 0.0007911498887762438,
+      "sample_sd": 0.002571629894243816,
+      "minimum": -0.0015735566696655108,
+      "maximum": 0.003528946025293838
+    },
+    "Z_dense_log_ratio": {
+      "mean": 0.0005221716477735781,
+      "sample_sd": 0.0006822515094491044,
+      "minimum": -0.0002648266827116147,
+      "maximum": 0.0009463684188791844
+    }
+  },
+  "scope": "8192/G1/20 updates, reused validation videos; no performance or video-quality claim",
+  "next_step": "Choose a practical equivalence margin independently of Z observations, then size a new independent-seed confirmation experiment"
+}

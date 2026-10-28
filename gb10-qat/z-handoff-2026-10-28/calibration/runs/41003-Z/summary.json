@@ -1,0 +1,65 @@
+{
+  "variant": "save",
+  "tokens": 8192,
+  "seed": 41003,
+  "steps": 20,
+  "optimizer_steps": 20,
+  "samples_seen": 20,
+  "grad_accum_steps": 1,
+  "lr": 1e-06,
+  "real_pretrained_model": "Wan2.1-T2V-1.3B",
+  "initial_full_parameter_sha256": "72fb71f0b57c3badbdf4d3466738fcfe21ba4d78788270862923b5205318bc31",
+  "evaluations": {
+    "0": {
+      "fixed_heldout_mean": 0.20839796750806272
+    },
+    "10": {
+      "fixed_heldout_mean": 0.20012011425569654
+    },
+    "20": {
+      "fixed_heldout_mean": 0.19573520577978343
+    }
+  },
+  "updates": {
+    "blocks.0._checkpoint_wrapped_module.to_v.weight": {
+      "relative_l2": 0.0001786177308531478,
+      "initial_sha256": "093d19bd74ea1c229a1c0875f349fa5885e47a4d02df2700f8b65547f99328dd",
+      "final_sha256": "6cac5f208ae5a92043ddca6096868be865ebc1541096c914ae69ed6275347bc6"
+    },
+    "blocks.15._checkpoint_wrapped_module.to_v.weight": {
+      "relative_l2": 0.00015919738507363945,
+      "initial_sha256": "8aecd345d0a50438d9d7ccb5221ffb6dbe61259a393da2f51dda6a9804587d70",
+      "final_sha256": "5dba3a68061a0c65f321fd06a82994e8b42a4490d6fbb826c4a422b99445d357"
+    },
+    "blocks.29._checkpoint_wrapped_module.to_v.weight": {
+      "relative_l2": 0.00019255992083344609,
+      "initial_sha256": "5567e852606278c6ce86f1ead519dacd9f2413d7f1f7f4e0885b14240741c5b0",
+      "final_sha256": "c0992f7df197073704c8c77db2f0f5143b597feba026efaa4cebde5b6794cac7"
+    }
+  },
+  "launch_shapes": {
+    "(12, 8192, 8192, 128)": 4080
+  },
+  "elapsed_training_sec": 1292.5270600318909,
+  "grad_norm_median": 0.33437466621398926,
+  "store_mode": "tma",
+  "stats_format": "packed_slots",
+  "event_capacity": 64,
+  "evaluation_role": "reused validation split; not an independent heldout test",
+  "active_training_seconds_raw": 1124.1274931430817,
+  "saved_statistics_cache_totals": {
+    "attention_forward_calls": 600,
+    "saved_statistics_calls": 600,
+    "saved_cache_bytes": 28142010372,
+    "dense_cache_bytes": 60633907200,
+    "overflow_fallback_calls": 0,
+    "formats": {
+      "packed_slots_local_replay": 600
+    },
+    "maximum_saved_cache_bytes_per_attention": 46936068,
+    "maximum_dense_cache_bytes_per_attention": 101056512,
+    "minimum_saved_cache_reduction_per_attention": 0.5355463287709752,
+    "saved_cache_reduction": 0.5358700820784315
+  },
+  "scope": "early full-parameter training on real MixKit latents; not long-term convergence or video quality"
+}

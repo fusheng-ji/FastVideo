@@ -1,0 +1,19 @@
+{
+  "acceptance_scope": "gb10-packed-tuning-v1-production-torch-determinism",
+  "accepted": true,
+  "artifact_sha256": {},
+  "execution_complete": true,
+  "kind": "compare-training",
+  "source_fingerprint": "87d8427401fc7595a8ad521c18505e6b35edbad5996b508089041a03606fcc0f",
+  "status": "complete",
+  "verdict": {
+    "accepted": true,
+    "compact_calls": 4800,
+    "counts": {
+      "audit-microsteps.jsonl": 80,
+      "audit-updates.jsonl": 20
+    },
+    "fallback_calls": 0,
+    "numerical_accepted": true
+  }
+}

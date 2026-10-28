@@ -1,0 +1,51 @@
+{
+  "acceptance_domain": "gb10-packed-tuning-v1-selection",
+  "accepted": true,
+  "candidate": "Z",
+  "configuration": {
+    "layers": [
+      0,
+      15,
+      29
+    ],
+    "repeats": 30,
+    "rounds": 5,
+    "seed": 1000,
+    "tokens": [
+      8192,
+      31200
+    ],
+    "warmup": 5
+  },
+  "execution_complete": true,
+  "input_manifest_sha256": "dd6b32f75d35c6941532a9086eefad1fb98e06fd71864ad3e8be48d833e61e6b",
+  "prerequisite_evidence": [
+    {
+      "kind": "numerical",
+      "path": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/kernel-screen-v2/attempts/numerical-Z-1792748336168492693/output/data/result.json",
+      "sha256": "a667c82839642edeee1231349b2fb6e8e44f3b94a2f3883476ef93e047dc066a"
+    },
+    {
+      "kind": "reference",
+      "path": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/kernel-screen-v2/attempts/reference-Z-1792748361173853127/output/data/result.json",
+      "sha256": "e961b2e03cd8701a9d1069ad9c84fe8517b9e2e467f59474be3c104f25aebc98"
+    },
+    {
+      "kind": "tools",
+      "path": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/kernel-screen-v2/attempts/select-candidate-1792755207547941876/output/data/tools.json",
+      "sha256": "3591a4d72d20ca7485f225955d66de08a4161f038f7fd50a94a9471ace097d5b"
+    },
+    {
+      "kind": "regressions",
+      "path": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/kernel-screen-v2/attempts/select-candidate-1792755207547941876/output/data/regressions.json",
+      "sha256": "b489b347ae3d00b22fd661d28d184e4212a8986af5ffddae223afa66bd211583"
+    }
+  ],
+  "screen_evidence": [
+    {
+      "path": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/kernel-screen-v2/attempts/screen-Z-1792748877065569718/output/data/result.json",
+      "sha256": "c6786ecce5e230b912afd883e720989eb21bb9aa32945df3ad28b81fd5815a0e"
+    }
+  ],
+  "source_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407"
+}

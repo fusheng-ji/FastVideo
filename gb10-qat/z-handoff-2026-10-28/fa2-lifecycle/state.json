@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "execution_complete": true,
+  "jobs": {
+    "8192-dense": {
+      "accepted": true,
+      "output": "${RECOVERY_ROOT}/gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/8192-dense"
+    },
+    "8192-Z": {
+      "accepted": true,
+      "output": "${RECOVERY_ROOT}/gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/8192-Z"
+    },
+    "31200-dense": {
+      "accepted": true,
+      "output": "${RECOVERY_ROOT}/gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/31200-dense"
+    },
+    "31200-Z": {
+      "accepted": true,
+      "output": "${RECOVERY_ROOT}/gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/31200-Z"
+    }
+  },
+  "default_model_acceptance": false,
+  "current_job": "31200-Z"
+}

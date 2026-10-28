@@ -1,0 +1,8 @@
+{
+  "acceptance_domain": "gb10-packed-tuning-v1-model-prerequisite",
+  "accepted": true,
+  "candidate": "Z",
+  "execution_complete": true,
+  "old_model_acceptance_reused": false,
+  "source_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407"
+}

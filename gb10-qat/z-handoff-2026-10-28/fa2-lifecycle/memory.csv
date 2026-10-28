@@ -1,0 +1,5 @@
+tokens,policy,captured_native_divergence,default_repeatable,deterministic_repeatable,input_span_bytes,max_rss_bytes,max_allocated_bytes,max_reserved_bytes
+8192,dense,True,False,True,79036416,929824768,309067776,375390208
+8192,Z,True,False,True,79036416,929734656,309067776,375390208
+31200,dense,True,False,True,292182528,1254809600,1162721792,1367343104
+31200,Z,True,False,True,292182528,1255276544,1162721792,1367343104

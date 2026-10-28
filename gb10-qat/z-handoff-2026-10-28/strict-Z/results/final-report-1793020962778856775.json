@@ -1,0 +1,128 @@
+{
+  "execution_complete": true,
+  "performance_accepted": true,
+  "groups": [
+    {
+      "tokens": 8192,
+      "factor": 1,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 14324.092702474445,
+        "candidate": 14588.067533972207
+      },
+      "samples_per_second": {
+        "dense": 0.06981244960996748,
+        "candidate": 0.06854917539086196
+      },
+      "overhead": 0.018428729622237183,
+      "median_peak_allocated_bytes": {
+        "dense": 29535849984.0,
+        "candidate": 29534801408.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 32709279744,
+        "candidate": 32711376896
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 29535849984,
+        "candidate": 29534801408
+      },
+      "actual_compact_calls": 4500,
+      "minimum_cache_saving": 0.5358706225680934,
+      "performance_qualified": true
+    },
+    {
+      "tokens": 8192,
+      "factor": 4,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 55628.41991701862,
+        "candidate": 56580.27697552461
+      },
+      "samples_per_second": {
+        "dense": 0.07190569147868722,
+        "candidate": 0.07069601305999813
+      },
+      "overhead": 0.017110984995185596,
+      "median_peak_allocated_bytes": {
+        "dense": 31008647680.0,
+        "candidate": 30955805184.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 38658899968,
+        "candidate": 38449184768
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 31008647680,
+        "candidate": 30955805184
+      },
+      "actual_compact_calls": 18000,
+      "minimum_cache_saving": 0.5358706225680934,
+      "performance_qualified": true
+    },
+    {
+      "tokens": 31200,
+      "factor": 1,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 93183.92247497104,
+        "candidate": 95013.58049805276
+      },
+      "samples_per_second": {
+        "dense": 0.010731464972067443,
+        "candidate": 0.010524811240225753
+      },
+      "overhead": 0.01963491098556358,
+      "median_peak_allocated_bytes": {
+        "dense": 32409723392.0,
+        "candidate": 31660797440.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 43241177088,
+        "candidate": 42825940992
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 32409723392,
+        "candidate": 31660797440
+      },
+      "actual_compact_calls": 4500,
+      "minimum_cache_saving": 0.7160706365156928,
+      "performance_qualified": true
+    },
+    {
+      "tokens": 31200,
+      "factor": 4,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 370953.32174003124,
+        "candidate": 378013.14675895264
+      },
+      "samples_per_second": {
+        "dense": 0.010783027851690866,
+        "candidate": 0.010581642554751348
+      },
+      "overhead": 0.019031572451773338,
+      "median_peak_allocated_bytes": {
+        "dense": 38115081728.0,
+        "candidate": 37052680704.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 50295996416,
+        "candidate": 48922361856
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 38115081728,
+        "candidate": 37056679936
+      },
+      "actual_compact_calls": 18000,
+      "minimum_cache_saving": 0.7158144807648521,
+      "performance_qualified": true
+    }
+  ],
+  "accepted": true,
+  "numerical_accepted": true,
+  "compressed_path_covered": true,
+  "original_tma_certified": false,
+  "default_model_acceptance": false,
+  "scope": "GB10 deterministic full-model training and P64 performance; no convergence/video quality claim"
+}

@@ -1,0 +1,10 @@
+{
+  "code_commit": "41ef03d7e7453dedde129439a08109149abbe515",
+  "code_branch": "perf/attn-qat-gb10-stats-overflow",
+  "asset_branch": "pr_asset",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "gpu_rerun": false,
+  "ordinary_mode_statistical_equivalence": null,
+  "cpu_handoff_tests": 111,
+  "cpu_fa2_tests": 18
+}

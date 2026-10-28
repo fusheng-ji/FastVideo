@@ -1,0 +1,1090 @@
+{
+  "numeric_fields_verified_equal": true,
+  "identity_fields_redacted": [
+    "data_ptr",
+    "host_name",
+    "hostname",
+    "object_id",
+    "parameter_id",
+    "pid",
+    "ppid",
+    "process_id",
+    "storage_ptr"
+  ],
+  "files": [
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/result.json",
+      "source_sha256": "10b3b0cc49a242f962a1874d048f323c793315308776d551d4e71e1f3c1bb243",
+      "export": "calibration/result.json",
+      "export_sha256": "10b3b0cc49a242f962a1874d048f323c793315308776d551d4e71e1f3c1bb243"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/state.json",
+      "source_sha256": "be1b2b39008be0eb177c9abb6b42cc36166968494f1efa894108b89def46711b",
+      "export": "calibration/state.json",
+      "export_sha256": "be1b2b39008be0eb177c9abb6b42cc36166968494f1efa894108b89def46711b"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/validation-loss.csv",
+      "source_sha256": "5a79fa6112e6b14830b16a1f051e808cc5aac4412c938b19d2a6b16cae9bb203",
+      "export": "calibration/validation-loss.csv",
+      "export_sha256": "ee8bbfba121005d68c5d6b001642d2a5ca9525a16892bc4682811ad995a0da87"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/validation-loss.png",
+      "source_sha256": "d340e107286588fdfbff0b50154fafda285a3e8f801a2d92fa2e022d7ae688e9",
+      "export": "calibration/validation-loss.png",
+      "export_sha256": "d340e107286588fdfbff0b50154fafda285a3e8f801a2d92fa2e022d7ae688e9"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/paired-differences.png",
+      "source_sha256": "7bbf10caa5783889789b1e9a9d821a789ee682cc26d8427422b79bff8ab0b5ee",
+      "export": "calibration/paired-differences.png",
+      "export_sha256": "7bbf10caa5783889789b1e9a9d821a789ee682cc26d8427422b79bff8ab0b5ee"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/cpu-tests.log",
+      "source_sha256": "6d753a98ac5231c038d5f0e3348459ee22b8d825547fcf013fcc14d53bbd34e3",
+      "export": "calibration/cpu-tests.log",
+      "export_sha256": "6d753a98ac5231c038d5f0e3348459ee22b8d825547fcf013fcc14d53bbd34e3"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/window-regression.log",
+      "source_sha256": "15d2a5cb344ce83832e3de18b0ddd3f9580597078ddede1a3783946f059c6e0f",
+      "export": "calibration/window-regression.log",
+      "export_sha256": "15d2a5cb344ce83832e3de18b0ddd3f9580597078ddede1a3783946f059c6e0f"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/precommit.log",
+      "source_sha256": "742015d61a9397207f31f805eb063a0ba6515cdea689674332b4cd36f3989404",
+      "export": "calibration/precommit.log",
+      "export_sha256": "742015d61a9397207f31f805eb063a0ba6515cdea689674332b4cd36f3989404"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-A/audit.json",
+      "source_sha256": "9d7e4904665f385243dab60c10eae55694d46c8c10a6493ff5d711f517242498",
+      "export": "calibration/runs/41001-A/audit.json",
+      "export_sha256": "14db06ccd0c3461505a614b9c96390e646e5a7007ab828579307a7dfe6a0f848"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-A/metrics.jsonl",
+      "source_sha256": "e849adef5545f487b1c24a1331427c62c12431d7dec9b1eb3ac49895c4d393eb",
+      "export": "calibration/runs/41001-A/metrics.jsonl",
+      "export_sha256": "00a278f51a0022998a5bf69b83f9b595b1d01c0a6de227490edd433d492ee7d9"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-A/evaluation-isolation.jsonl",
+      "source_sha256": "912dd243bb6548b4c3f68e92f9fbcf5d518ac16a5f0313361a9eb976d65f3c71",
+      "export": "calibration/runs/41001-A/evaluation-isolation.jsonl",
+      "export_sha256": "912dd243bb6548b4c3f68e92f9fbcf5d518ac16a5f0313361a9eb976d65f3c71"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-A/summary.json",
+      "source_sha256": "fa46354e005c0a0c7f267b6537b6632a4c5e8a005f4c51a05b42890e192affe5",
+      "export": "calibration/runs/41001-A/summary.json",
+      "export_sha256": "fa46354e005c0a0c7f267b6537b6632a4c5e8a005f4c51a05b42890e192affe5"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41001-A.log",
+      "source_sha256": "5881eda0e85c8326b598c95af7dda53e8b491429b99750e6a34f7c68939672e5",
+      "export": "calibration/logs/41001-A.log",
+      "export_sha256": "c39cc6e9a5d20f4740123871d1be5f6bbe2cb264506513cf643cea82d60fb2a0"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-B/audit.json",
+      "source_sha256": "e7af46afb8831cf955551ab67341665cca8041a81db95818f88f2b4009f8ed5a",
+      "export": "calibration/runs/41001-B/audit.json",
+      "export_sha256": "0114572d420275bd525fd48c2cdd43cadb3695c305eacdbfdc2da6a92ac2622d"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-B/metrics.jsonl",
+      "source_sha256": "224a4f32aee274b951273b6e9604049477f087db52d79837ea575726d1322f11",
+      "export": "calibration/runs/41001-B/metrics.jsonl",
+      "export_sha256": "053c85748e4b0899d4aea5120f9bd37ca728223d00e7bde97843418350751588"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-B/evaluation-isolation.jsonl",
+      "source_sha256": "d27aaa877bab7cff09200edc679593d6e789bf2b5303ffa3e827cb9509cb8538",
+      "export": "calibration/runs/41001-B/evaluation-isolation.jsonl",
+      "export_sha256": "d27aaa877bab7cff09200edc679593d6e789bf2b5303ffa3e827cb9509cb8538"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-B/summary.json",
+      "source_sha256": "136fc8d55f120beeb9c6d613391782223445feab60ff1131e072f80f7c15c98a",
+      "export": "calibration/runs/41001-B/summary.json",
+      "export_sha256": "136fc8d55f120beeb9c6d613391782223445feab60ff1131e072f80f7c15c98a"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41001-B.log",
+      "source_sha256": "aa7bbfa987c324e2c2a6eaf4539fcc747e88906a978fd50dc140ec4e338f1233",
+      "export": "calibration/logs/41001-B.log",
+      "export_sha256": "186d244a8920a5ae2e15f1fba53841818d2c979be76cba0f13bfc448e2334343"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-Z/audit.json",
+      "source_sha256": "24fe8c50f342161d793f95e47586c93a486d7cb74821f3462ff63de80bf2a5d1",
+      "export": "calibration/runs/41001-Z/audit.json",
+      "export_sha256": "3d6b709c4d025d6e586c3cd8ef70551f54cfd23d0a0b207c684dafb9a624bead"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-Z/metrics.jsonl",
+      "source_sha256": "3a1ae7b7012900db3e65624c1c28564c286b31b7cbbb1a8c998bac83390eebc4",
+      "export": "calibration/runs/41001-Z/metrics.jsonl",
+      "export_sha256": "176f6efeb0e9e1ad762f603157b862f22a087b0ffbf63caa8795e29255bb1b8c"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-Z/evaluation-isolation.jsonl",
+      "source_sha256": "2edca4e4ba6df2f6e1db924205e7ed77c4e56615a09ed9627e1b3b1c0c7dffc9",
+      "export": "calibration/runs/41001-Z/evaluation-isolation.jsonl",
+      "export_sha256": "2edca4e4ba6df2f6e1db924205e7ed77c4e56615a09ed9627e1b3b1c0c7dffc9"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41001-Z/summary.json",
+      "source_sha256": "ab89eea85413a66f6694577f1c0c5c080404730d4095293b98cc86220ec089f5",
+      "export": "calibration/runs/41001-Z/summary.json",
+      "export_sha256": "ab89eea85413a66f6694577f1c0c5c080404730d4095293b98cc86220ec089f5"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41001-Z.log",
+      "source_sha256": "84a54615fbac4f6e578781c4628290a357d95180a4b31c51e56bb6c5fd84b869",
+      "export": "calibration/logs/41001-Z.log",
+      "export_sha256": "1a89d0ca5193ed8a1b316c6a0f6004c30a6cd7e5910487cc102872c245d856a9"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-A/audit.json",
+      "source_sha256": "fbc35b4769accb5ce1e6797cb5dc383fd4ae249b26ece318d0817fe748137e6d",
+      "export": "calibration/runs/41002-A/audit.json",
+      "export_sha256": "9b607a582c2dc827f2a4bd7041620b696a8a5bae0734f54e0f3b3227e45f06a7"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-A/metrics.jsonl",
+      "source_sha256": "370b200576e718b74d7cdfec814bb3c4e572995cf613269fd58ccf0eb6f14a0f",
+      "export": "calibration/runs/41002-A/metrics.jsonl",
+      "export_sha256": "d26ec3d0661f47deb746a8661903e149edee841564cbe1f583746c377034ddd0"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-A/evaluation-isolation.jsonl",
+      "source_sha256": "222c630e17ee790b6422a58ff97d31dbecbb67a093b8cdc06465894d3c301345",
+      "export": "calibration/runs/41002-A/evaluation-isolation.jsonl",
+      "export_sha256": "222c630e17ee790b6422a58ff97d31dbecbb67a093b8cdc06465894d3c301345"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-A/summary.json",
+      "source_sha256": "322cfae5fb641503f7d59eb93846411523062baf4a42705dccfaed6c35ae2b96",
+      "export": "calibration/runs/41002-A/summary.json",
+      "export_sha256": "322cfae5fb641503f7d59eb93846411523062baf4a42705dccfaed6c35ae2b96"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41002-A.log",
+      "source_sha256": "43889a08a37abb1819b1829851b3a38bf1db7c087bf6188989b4292ad572de06",
+      "export": "calibration/logs/41002-A.log",
+      "export_sha256": "4197aff6301aa186094e097ebfcfed22640fac0c6f690da44ecb3ecff7e4fe79"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-B/audit.json",
+      "source_sha256": "6d706bf5cf1fe2e303d57d8dfccdfda26ed9ad51abaf7d5cbdc2ecfba65b9d25",
+      "export": "calibration/runs/41002-B/audit.json",
+      "export_sha256": "d3e1469fe6639ed7bf84fb0650dfac646bc8d01f2519c57a68872ef7215e7043"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-B/metrics.jsonl",
+      "source_sha256": "f3216667b9d411d6a095e9d34b4134ef6f8a49e5fe27898f1760936f16ea73df",
+      "export": "calibration/runs/41002-B/metrics.jsonl",
+      "export_sha256": "f662befb755030a2a5f5b9ab4a6ac5fb047b4854ee474bbaeae944098d8dda81"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-B/evaluation-isolation.jsonl",
+      "source_sha256": "302ff7d0d84492a01fceca2474baec4ff37d1749709a186b2028a49cabb662b1",
+      "export": "calibration/runs/41002-B/evaluation-isolation.jsonl",
+      "export_sha256": "302ff7d0d84492a01fceca2474baec4ff37d1749709a186b2028a49cabb662b1"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-B/summary.json",
+      "source_sha256": "07be6241d44a796a7cf8ce78b487f961b6bb064627e9dc281c437270da7483a4",
+      "export": "calibration/runs/41002-B/summary.json",
+      "export_sha256": "07be6241d44a796a7cf8ce78b487f961b6bb064627e9dc281c437270da7483a4"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41002-B.log",
+      "source_sha256": "c40726917cba7062d30f17b2b0672b5901508b4c9e7cc815b5a36bae38549fd2",
+      "export": "calibration/logs/41002-B.log",
+      "export_sha256": "f2f13c828c7d80f4c1f87c98686b14564ba796e3ff8c43547622993a0ddb86d5"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-Z/audit.json",
+      "source_sha256": "ac942ab75fd4fe37b7fbe0bd4b0b77ceb50c25c42b727b4c9421c136bdd02b83",
+      "export": "calibration/runs/41002-Z/audit.json",
+      "export_sha256": "0a0cf5b87a13727ab109ce0cc7acd808c7c1c8376eaaa702dc49093b1aa0450b"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-Z/metrics.jsonl",
+      "source_sha256": "372845eb3ed0a793d9699e66dc9f7b3f6827a5bb15e5c32ba63a391e463cf607",
+      "export": "calibration/runs/41002-Z/metrics.jsonl",
+      "export_sha256": "910d2888428548f48e27e0b9d64c57b8c56653fd5dcd0821c41f97f76cb88b3b"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-Z/evaluation-isolation.jsonl",
+      "source_sha256": "b9eb7466939ecf2a32103b2044802c01a46d20ee1323a9133021709735f040df",
+      "export": "calibration/runs/41002-Z/evaluation-isolation.jsonl",
+      "export_sha256": "b9eb7466939ecf2a32103b2044802c01a46d20ee1323a9133021709735f040df"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41002-Z/summary.json",
+      "source_sha256": "ccdd62d9d44898a7242db27b98f9a2f5e3ee2bc8bc0f176d4aa0aaf033bfcfc0",
+      "export": "calibration/runs/41002-Z/summary.json",
+      "export_sha256": "ccdd62d9d44898a7242db27b98f9a2f5e3ee2bc8bc0f176d4aa0aaf033bfcfc0"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41002-Z.log",
+      "source_sha256": "36e37840a85e5c5c34af82f57c095edc162e9a08175a0546b169797986ba32b9",
+      "export": "calibration/logs/41002-Z.log",
+      "export_sha256": "02c624aa66427a372b7bd7170e192521c7ba30145795c15551179bf18228e016"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-A/audit.json",
+      "source_sha256": "843e5d677c550218894ec6645504f1762fae3cb3e231bccde8a1bc75e67dd7d9",
+      "export": "calibration/runs/41003-A/audit.json",
+      "export_sha256": "6997aefaa1d45b21d32874b56f516c1a2529cd3c0f7d4edf1d5a6ccdee7c2a41"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-A/metrics.jsonl",
+      "source_sha256": "01e0ea6c302ca645f247c0842a78c811245cb1855de601775702ed5175ecaf2c",
+      "export": "calibration/runs/41003-A/metrics.jsonl",
+      "export_sha256": "3ea288c5be6872a79fe6dc4ecb0141f10aeb3e8dc3ca37edd29efd22f0fefb53"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-A/evaluation-isolation.jsonl",
+      "source_sha256": "e7cef7e9061f1ed1310bd98022598ce49e406951b2901b0ee65aa00799315319",
+      "export": "calibration/runs/41003-A/evaluation-isolation.jsonl",
+      "export_sha256": "e7cef7e9061f1ed1310bd98022598ce49e406951b2901b0ee65aa00799315319"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-A/summary.json",
+      "source_sha256": "fa1404fcabcecf5f443cba9e197504ef29b8ea2565bbe2661e8ddde02815582c",
+      "export": "calibration/runs/41003-A/summary.json",
+      "export_sha256": "fa1404fcabcecf5f443cba9e197504ef29b8ea2565bbe2661e8ddde02815582c"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41003-A.log",
+      "source_sha256": "324c77dca00ead76c0dc516572c31bdd22516e88dff069980623e93d8a3b78db",
+      "export": "calibration/logs/41003-A.log",
+      "export_sha256": "082db589330c34af3ed8783b6e85b69326f68f971a54fb8b6c36ef269ed5fd84"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-B/audit.json",
+      "source_sha256": "f0d1f6b70e826c69db5d5bdae2515d4ca5c93084ea12c3e9ce72757cbc1e1f29",
+      "export": "calibration/runs/41003-B/audit.json",
+      "export_sha256": "74251c0d7c1600c94fe4b370e2bf76e262520ba8c05afa613da920357dec8f9f"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-B/metrics.jsonl",
+      "source_sha256": "7342c33247a641f19cca4ba4c46cecdb2eff43dafca0896e8e9fc22f3f4ce848",
+      "export": "calibration/runs/41003-B/metrics.jsonl",
+      "export_sha256": "5ae5d0f9002365e09515d1249d3809439f7dbcef5b7a85f2ed379eb466eff160"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-B/evaluation-isolation.jsonl",
+      "source_sha256": "a46f4065394f43b433e650f365925789a7d92650bbc086123ebb8e1493cf70d5",
+      "export": "calibration/runs/41003-B/evaluation-isolation.jsonl",
+      "export_sha256": "a46f4065394f43b433e650f365925789a7d92650bbc086123ebb8e1493cf70d5"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-B/summary.json",
+      "source_sha256": "2f442efce1901efbeb0bed19c5b3301b5974d5e7dfed6893d7d414c095873aac",
+      "export": "calibration/runs/41003-B/summary.json",
+      "export_sha256": "2f442efce1901efbeb0bed19c5b3301b5974d5e7dfed6893d7d414c095873aac"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41003-B.log",
+      "source_sha256": "ae071e0ced40ac638a7ba05e307369f0775ec569f81d8d4e4615f74647443581",
+      "export": "calibration/logs/41003-B.log",
+      "export_sha256": "3b6b4ddcd5b762bca1ad325a3f8dd358f47992d72110c8663c29031513d42b78"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-Z/audit.json",
+      "source_sha256": "42c8d4afe2c9064d020af754ccbc1493d32091225924985ebd994ed05c902c59",
+      "export": "calibration/runs/41003-Z/audit.json",
+      "export_sha256": "b7588355f9916343172188e058bda0611b3a1cfe6afc3a52b3d0d592d7362928"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-Z/metrics.jsonl",
+      "source_sha256": "3c9eda997b35c78f08c77ceb764e8153b3590a61a4ea169e4a07d1175c587500",
+      "export": "calibration/runs/41003-Z/metrics.jsonl",
+      "export_sha256": "62ae69ac1f3bc8a481d2d5c057481a7f2711687b27c2e1aaf0f0765023607321"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-Z/evaluation-isolation.jsonl",
+      "source_sha256": "47315b6ec87e76cb0cc145b83badfe8ab0f418f41cb1f3e320391ab7b4ae872f",
+      "export": "calibration/runs/41003-Z/evaluation-isolation.jsonl",
+      "export_sha256": "47315b6ec87e76cb0cc145b83badfe8ab0f418f41cb1f3e320391ab7b4ae872f"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/runs/41003-Z/summary.json",
+      "source_sha256": "470f63914a5cefdcc25be762a03b86933c45772058bc088ae79741375151f19c",
+      "export": "calibration/runs/41003-Z/summary.json",
+      "export_sha256": "470f63914a5cefdcc25be762a03b86933c45772058bc088ae79741375151f19c"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/logs/41003-Z.log",
+      "source_sha256": "bbe0d8949a164a3145403f3a788db16c676f243e34798d3e8f5cd9503b7ad23e",
+      "export": "calibration/logs/41003-Z.log",
+      "export_sha256": "dd40be9773f644952b7d8dd50ac8dabaee268f69babc80039158b758d3e9a8c2"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41002/A-Z-parameters.json",
+      "source_sha256": "6e2ee0f2998ff1574bf41e58d64bb7638b2579a71bde5ccefecde33ca2d443b5",
+      "export": "calibration/comparisons/41002/A-Z-parameters.json",
+      "export_sha256": "6e2ee0f2998ff1574bf41e58d64bb7638b2579a71bde5ccefecde33ca2d443b5"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41002/B-Z-gradients.json",
+      "source_sha256": "b14e5948032d18d2843d59f11118829a96baa159f129b702125e4e996f472b2c",
+      "export": "calibration/comparisons/41002/B-Z-gradients.json",
+      "export_sha256": "b14e5948032d18d2843d59f11118829a96baa159f129b702125e4e996f472b2c"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41002/A-Z-gradients.json",
+      "source_sha256": "834ea384fcc15bc5f36c30a8710bdfc2a6628e44d8c9f205f5ea9c6e4f59598e",
+      "export": "calibration/comparisons/41002/A-Z-gradients.json",
+      "export_sha256": "834ea384fcc15bc5f36c30a8710bdfc2a6628e44d8c9f205f5ea9c6e4f59598e"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41002/B-Z-parameters.json",
+      "source_sha256": "26ab01c0cfc4100dd7fad30242d62d80e4aac1889838bfb2a804ec96cea12b94",
+      "export": "calibration/comparisons/41002/B-Z-parameters.json",
+      "export_sha256": "26ab01c0cfc4100dd7fad30242d62d80e4aac1889838bfb2a804ec96cea12b94"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41002/A-B-parameters.json",
+      "source_sha256": "ec5ffe847adf624d164f70255328949071ac870f1af44f7382f612786bd433fb",
+      "export": "calibration/comparisons/41002/A-B-parameters.json",
+      "export_sha256": "ec5ffe847adf624d164f70255328949071ac870f1af44f7382f612786bd433fb"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41002/result.json",
+      "source_sha256": "bfaa310875aab646ba78268d2ebe0e2218608116f8da6e5148ed55e02308d096",
+      "export": "calibration/comparisons/41002/result.json",
+      "export_sha256": "bfaa310875aab646ba78268d2ebe0e2218608116f8da6e5148ed55e02308d096"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41002/A-B-gradients.json",
+      "source_sha256": "8ed8526d7854bef899ea3815bb9ab7ae5670175284d9ae004ae191ea0a3a1da3",
+      "export": "calibration/comparisons/41002/A-B-gradients.json",
+      "export_sha256": "8ed8526d7854bef899ea3815bb9ab7ae5670175284d9ae004ae191ea0a3a1da3"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41001/A-Z-parameters.json",
+      "source_sha256": "8449ba4ac0d6b9b864dfa84c88a693c08d5fa57173618541a1b5ce917e308636",
+      "export": "calibration/comparisons/41001/A-Z-parameters.json",
+      "export_sha256": "8449ba4ac0d6b9b864dfa84c88a693c08d5fa57173618541a1b5ce917e308636"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41001/B-Z-gradients.json",
+      "source_sha256": "649ac575334e73d517945a50dc106caafef1afc1e104c1f00123d6102a53c94c",
+      "export": "calibration/comparisons/41001/B-Z-gradients.json",
+      "export_sha256": "649ac575334e73d517945a50dc106caafef1afc1e104c1f00123d6102a53c94c"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41001/A-Z-gradients.json",
+      "source_sha256": "a4790910735bfcd4b6fd01d1f99b86db2b0225d126285997033820c58489c30c",
+      "export": "calibration/comparisons/41001/A-Z-gradients.json",
+      "export_sha256": "a4790910735bfcd4b6fd01d1f99b86db2b0225d126285997033820c58489c30c"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41001/B-Z-parameters.json",
+      "source_sha256": "6edadba466b23279e96364317ceceee8dfa27050b122af54b115e8d38ce2dfbe",
+      "export": "calibration/comparisons/41001/B-Z-parameters.json",
+      "export_sha256": "6edadba466b23279e96364317ceceee8dfa27050b122af54b115e8d38ce2dfbe"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41001/A-B-parameters.json",
+      "source_sha256": "8ebeebd72318853abe87694e47201089daa38a51f5d6bccabb424590804816cc",
+      "export": "calibration/comparisons/41001/A-B-parameters.json",
+      "export_sha256": "8ebeebd72318853abe87694e47201089daa38a51f5d6bccabb424590804816cc"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41001/result.json",
+      "source_sha256": "1524a5f3de75f5c094ed3fabcba5e8db95de029fccd7150e44eedfd0a48d4d22",
+      "export": "calibration/comparisons/41001/result.json",
+      "export_sha256": "1524a5f3de75f5c094ed3fabcba5e8db95de029fccd7150e44eedfd0a48d4d22"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41001/A-B-gradients.json",
+      "source_sha256": "37ffd62494bcc5ddbbd61d193950eeeee816d06a5646246fd85ff19e27839e84",
+      "export": "calibration/comparisons/41001/A-B-gradients.json",
+      "export_sha256": "37ffd62494bcc5ddbbd61d193950eeeee816d06a5646246fd85ff19e27839e84"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41003/A-Z-parameters.json",
+      "source_sha256": "411fb74e885af4a75362a39e287015681f804f39de144bc88842ff4edeae9cb6",
+      "export": "calibration/comparisons/41003/A-Z-parameters.json",
+      "export_sha256": "411fb74e885af4a75362a39e287015681f804f39de144bc88842ff4edeae9cb6"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41003/B-Z-gradients.json",
+      "source_sha256": "ce827b0dfbb10e35e57cedae7c92bc5a051588f8f816a9e608d16edae8d53b7f",
+      "export": "calibration/comparisons/41003/B-Z-gradients.json",
+      "export_sha256": "ce827b0dfbb10e35e57cedae7c92bc5a051588f8f816a9e608d16edae8d53b7f"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41003/A-Z-gradients.json",
+      "source_sha256": "da823d670434a242eb01dd3aa4cac43b5ded2ecc798463d8453f4b125d2da1b4",
+      "export": "calibration/comparisons/41003/A-Z-gradients.json",
+      "export_sha256": "da823d670434a242eb01dd3aa4cac43b5ded2ecc798463d8453f4b125d2da1b4"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41003/B-Z-parameters.json",
+      "source_sha256": "4235851e2c80c1e619dd2d4817b7ee57abf4ac353a4ee28c52e57df38868a0b9",
+      "export": "calibration/comparisons/41003/B-Z-parameters.json",
+      "export_sha256": "4235851e2c80c1e619dd2d4817b7ee57abf4ac353a4ee28c52e57df38868a0b9"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41003/A-B-parameters.json",
+      "source_sha256": "63d5597f0ed8e3a294645a72ed317abbd1eb1629646993ead4b032ed1b57078a",
+      "export": "calibration/comparisons/41003/A-B-parameters.json",
+      "export_sha256": "63d5597f0ed8e3a294645a72ed317abbd1eb1629646993ead4b032ed1b57078a"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41003/result.json",
+      "source_sha256": "3720e8a3781175fe8710c017886518db7dc588914cfe95858e80c0ae4e46688e",
+      "export": "calibration/comparisons/41003/result.json",
+      "export_sha256": "3720e8a3781175fe8710c017886518db7dc588914cfe95858e80c0ae4e46688e"
+    },
+    {
+      "source": "gb10-qat-nonstrict-calibration-v1/comparisons/41003/A-B-gradients.json",
+      "source_sha256": "01635c7fbc18b46b2dd6ba22817a4011fb403dd9dd2d17b521ad34a889bdea90",
+      "export": "calibration/comparisons/41003/A-B-gradients.json",
+      "export_sha256": "01635c7fbc18b46b2dd6ba22817a4011fb403dd9dd2d17b521ad34a889bdea90"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/result.json",
+      "source_sha256": "975ba7925e704b4cb60b408e8ca30c7cd5f2fcf45c867d22f245b4fc9f5c27b2",
+      "export": "fa2-lifecycle/result.json",
+      "export_sha256": "d6ecaa75ed3956e76f7a68ecc06afa052c276a97fe349b06f2228c5e804ed716"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/state.json",
+      "source_sha256": "aaf527a5c583c8ac67afd623d67f352357cdca7f9415c09c831596815543796a",
+      "export": "fa2-lifecycle/state.json",
+      "export_sha256": "e14aa1fa3bc93ab4f409dfb68f365f79dccd22fb5c63f16dadc117078b5944e5"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/memory.csv",
+      "source_sha256": "f78e2ef771d28570caeebc4dcc3e29746b82abee828d4a9e8dc70e034a83bf4d",
+      "export": "fa2-lifecycle/memory.csv",
+      "export_sha256": "7248e46f020a78a2e80af5f384ef533c8f00eaa9325ec4ba8e6ac7f6a2b01496"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/memory.png",
+      "source_sha256": "1a1167b8f10c9ba1565ac15869a14c6dd1f7b4ef657e0c10dcd514941558b3ef",
+      "export": "fa2-lifecycle/memory.png",
+      "export_sha256": "1a1167b8f10c9ba1565ac15869a14c6dd1f7b4ef657e0c10dcd514941558b3ef"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/cpu-tests.log",
+      "source_sha256": "3785147541629311f98a1c93730f4f25caa03811e654c39934d769d8c8357ad1",
+      "export": "fa2-lifecycle/cpu-tests.log",
+      "export_sha256": "3785147541629311f98a1c93730f4f25caa03811e654c39934d769d8c8357ad1"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/lifetime-tests.log",
+      "source_sha256": "37e2c24eb510129d6240b6c2587c752689d4ea36eae25e466fd39a3d948a393d",
+      "export": "fa2-lifecycle/lifetime-tests.log",
+      "export_sha256": "37e2c24eb510129d6240b6c2587c752689d4ea36eae25e466fd39a3d948a393d"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/original-tests.log",
+      "source_sha256": "3fe9a7b9efccb51217516fef92677f4e2a7ee9c8faead0dcc88ebe659d10e3b6",
+      "export": "fa2-lifecycle/original-tests.log",
+      "export_sha256": "3fe9a7b9efccb51217516fef92677f4e2a7ee9c8faead0dcc88ebe659d10e3b6"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/precommit.log",
+      "source_sha256": "742015d61a9397207f31f805eb063a0ba6515cdea689674332b4cd36f3989404",
+      "export": "fa2-lifecycle/precommit.log",
+      "export_sha256": "742015d61a9397207f31f805eb063a0ba6515cdea689674332b4cd36f3989404"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/8192-dense/result.json",
+      "source_sha256": "c0679a4fa43959d0a3fc0cd34caab2ec809f2a42ea26ccc2226a0ae8ac22c7b0",
+      "export": "fa2-lifecycle/8192-dense/result.json",
+      "export_sha256": "c0679a4fa43959d0a3fc0cd34caab2ec809f2a42ea26ccc2226a0ae8ac22c7b0"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/8192-dense.log",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "export": "fa2-lifecycle/8192-dense.log",
+      "export_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/8192-Z/result.json",
+      "source_sha256": "815ce9a0c26a4d8f6467a96a40bd8399f81062266dcdcea44184c1f47e8e0fdf",
+      "export": "fa2-lifecycle/8192-Z/result.json",
+      "export_sha256": "815ce9a0c26a4d8f6467a96a40bd8399f81062266dcdcea44184c1f47e8e0fdf"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/8192-Z.log",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "export": "fa2-lifecycle/8192-Z.log",
+      "export_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/31200-dense/result.json",
+      "source_sha256": "e31cfb1cad68144e4d42f2b9033acc72495377abcf30b4b6a3087bfa2085b198",
+      "export": "fa2-lifecycle/31200-dense/result.json",
+      "export_sha256": "e31cfb1cad68144e4d42f2b9033acc72495377abcf30b4b6a3087bfa2085b198"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/31200-dense.log",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "export": "fa2-lifecycle/31200-dense.log",
+      "export_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/results/31200-Z/result.json",
+      "source_sha256": "db4143f7ef44dab933c9adebce847cdf90b7b1612b334cd806e824b81176d651",
+      "export": "fa2-lifecycle/31200-Z/result.json",
+      "export_sha256": "db4143f7ef44dab933c9adebce847cdf90b7b1612b334cd806e824b81176d651"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/stages/fa2-replay-gpu-v3/31200-Z.log",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "export": "fa2-lifecycle/31200-Z.log",
+      "export_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "gb10-qat-local-replay-v1/stages/performance-recovery-v2/result.json",
+      "source_sha256": "c8413ff5c38215b9f4f5a2adb2f77f32474ce8a8856ee2e281c73ace0a11dc21",
+      "export": "historical-L64/performance-failed.json",
+      "export_sha256": "c8413ff5c38215b9f4f5a2adb2f77f32474ce8a8856ee2e281c73ace0a11dc21"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/queue-state.json",
+      "source_sha256": "2cc4fce925a98a9f84f5db29b2a28059810cbdd23ad9e7d0f8d43128b914db3a",
+      "export": "strict-Z/queue-state.json",
+      "export_sha256": "6fa337a2bb6ec0dc680a8f084abbc4fd6e3f369ce908cacf1857f0a9d5b39908"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/selection.json",
+      "source_sha256": "c00376f843ad067edba12b1a3fc48de87d0c13cdb9a4a171eb8150a0b8769b23",
+      "export": "strict-Z/selection.json",
+      "export_sha256": "134879485f118aa09c295c5f0d077473176d89a10c6377fc8d968c3a449b9ac4"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-31200-P64-G4-1792764076267846933/output/data/result.json",
+      "source_sha256": "9a60f51732644eb4becd141d05c7bee88d47600d60fd13ef7bbbb67b2cf885c0",
+      "export": "strict-Z/results/windows-31200-P64-G4-1792764076267846933.json",
+      "export_sha256": "c58154715b65111d80f397809414ef94f0adc7303bbaf33d4508fc5d0e6aa00c"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r1-8192-G1-1792857128038476194/output/data/result.json",
+      "source_sha256": "7e1ecd78f5ce2061ecf73b58f5609d07577168498033a865f9ddcc3a5955c0a6",
+      "export": "strict-Z/results/performance-r1-8192-G1-1792857128038476194.json",
+      "export_sha256": "8eca16b6cb386374ee8cd94a6d570c7e18647c7fc3c5da97b32b2e5d34d95d37"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-8192-P64-G1-1792778919931626860/output/data/result.json",
+      "source_sha256": "fa98816a993647f2ead8172c5cec94a76a2cc5222b797d58c8ae57b0ff2ba3d3",
+      "export": "strict-Z/results/twenty-8192-P64-G1-1792778919931626860.json",
+      "export_sha256": "ed58b2ffec2f25991b38af373b78e2a7b06005c5d868db4b211b3278a4b2e15d"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r2-8192-G4-1792859620498968381/output/data/result.json",
+      "source_sha256": "7bd843a218edbb5ddd64ef2158fe3f56ea987f6c8a006528bd91f834a31f4c03",
+      "export": "strict-Z/results/performance-r2-8192-G4-1792859620498968381.json",
+      "export_sha256": "8d3034142e99ca8cb8507c870a861b3c8e315c61fdefb68d3da481e2442d96f6"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-paired-stream-31200-P64-1792764986551854712/output/data/result.json",
+      "source_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122",
+      "export": "strict-Z/results/windows-paired-stream-31200-P64-1792764986551854712.json",
+      "export_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/pilot-8192-G4-1792766034006332112/output/data/result.json",
+      "source_sha256": "b2601be07bd4ff079c78e32b6e67fc29fe60f7029b4964a0440ac3c7d3556bbe",
+      "export": "strict-Z/results/pilot-8192-G4-1792766034006332112.json",
+      "export_sha256": "38cc1727a10072f8bbb5bf2b69ed7fc4e665153458589164fb183fcf0833184c"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-31200-P64-G1-1792762509758330357/output/data/result.json",
+      "source_sha256": "2b489860a0388e86240f892f107b8aaf51a3dca627b5d9efad87565471771226",
+      "export": "strict-Z/results/windows-31200-P64-G1-1792762509758330357.json",
+      "export_sha256": "c7b7ac58ee57ff4b35d0438217b7b622acdb6c73308f87ee6a2e7b7361165869"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-8192-P64-p1-1792756013362436529/output/data/result.json",
+      "source_sha256": "807fbba09b9870ab43828fd7a1e95436b85c172f755c2b2d1c43e7342e9b18df",
+      "export": "strict-Z/results/first-8192-P64-p1-1792756013362436529.json",
+      "export_sha256": "8534bb780b68a1ec1c2bd9c93a9373e1d6d790006bf4968ce5bbe5017ca34e74"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-paired-stream-8192-dense-1792761553300084070/output/data/result.json",
+      "source_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122",
+      "export": "strict-Z/results/windows-paired-stream-8192-dense-1792761553300084070.json",
+      "export_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-P64-p2-1792757592485889999/output/data/result.json",
+      "source_sha256": "9c6b50ab1abfa7afc0b35b6bbf8257708554b06afc73f7f6cfa3339091091984",
+      "export": "strict-Z/results/first-31200-P64-p2-1792757592485889999.json",
+      "export_sha256": "78889717e445ce06e1890e87d3f99601e9dedbbb2a878d15a40c183e37ec4d6a"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-compare-8192-1792756359872897803/output/data/result.json",
+      "source_sha256": "12a4304788a60d72fa600616763a487a3a1d5c5ffe70f730264be61dd6bb8d97",
+      "export": "strict-Z/results/first-compare-8192-1792756359872897803.json",
+      "export_sha256": "12a4304788a60d72fa600616763a487a3a1d5c5ffe70f730264be61dd6bb8d97"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-31200-P64-G1-1792791302753613016/output/data/result.json",
+      "source_sha256": "0b2aa4852ff06c2127dcb93b0b626a35f41fbca59dbe65003c19cb34e8cafc39",
+      "export": "strict-Z/results/twenty-31200-P64-G1-1792791302753613016.json",
+      "export_sha256": "12f64057ea2d77ea006b9cb3b431510369ea7e60d085b6349b1e239881cb6a7c"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-compare-8192-G4-1792761453439563762/output/data/result.json",
+      "source_sha256": "30ed94b2e279cba6e3f0cc84886e2843dac36f1ddbf25254a118d1209d7b959e",
+      "export": "strict-Z/results/windows-compare-8192-G4-1792761453439563762.json",
+      "export_sha256": "30ed94b2e279cba6e3f0cc84886e2843dac36f1ddbf25254a118d1209d7b959e"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r1-31200-G1-1792823391203321757/output/data/result.json",
+      "source_sha256": "7d1cfd28d4a46beb16315f407b3f2d4fac740bf8aa95af93f29539af94c4061c",
+      "export": "strict-Z/results/performance-r1-31200-G1-1792823391203321757.json",
+      "export_sha256": "41f5ce1e6cce8d11b0969a072fc0e60f3b0a9c17bc4f7544ad87bb2b9af9f123"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1011-31200-dense-1792758362989825174/output/data/result.json",
+      "source_sha256": "14c381491b5068a54be371dcd1209cc3b6234fa33211c9d675479797bea563c2",
+      "export": "strict-Z/results/screen-1011-31200-dense-1792758362989825174.json",
+      "export_sha256": "dba2dac3792fd3c604775774c889db669daa84a3a987c53f5dfd4dc24719b88f"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1042-31200-P64-1792759624211599634/output/data/result.json",
+      "source_sha256": "fdeb25338f1d0b932098cf70b02e29b488bd15ad17d8c7977bac902cc979a17b",
+      "export": "strict-Z/results/screen-1042-31200-P64-1792759624211599634.json",
+      "export_sha256": "671593aa7e4286ee5459c524c323e8895b15944a5338db9e0efc8498ea72f052"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-paired-stream-31200-dense-1792764886497227565/output/data/result.json",
+      "source_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122",
+      "export": "strict-Z/results/windows-paired-stream-31200-dense-1792764886497227565.json",
+      "export_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r4-31200-G4-1792953987731775043/output/data/result.json",
+      "source_sha256": "0330b05a2f66108cc08ec0bb4790c564ed0d8a88ff0bbf42226536c46c331324",
+      "export": "strict-Z/results/performance-r4-31200-G4-1792953987731775043.json",
+      "export_sha256": "fc70188911a8adc1bf07c5f4d049d2c517741f519861e53aa9bce74012de4a20"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r4-8192-G4-1792940334955775163/output/data/result.json",
+      "source_sha256": "aaa267d4fe5f61ece8352aa3aa43ddfbf9f765a16252b5e0192fdb6d980fb71a",
+      "export": "strict-Z/results/performance-r4-8192-G4-1792940334955775163.json",
+      "export_sha256": "fb6c1c637d8a0a2c2affb68efe61ea4b6dc14a806c3a9f341f07fcadf32714f5"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1011-8192-P64-1792758110557285249/output/data/result.json",
+      "source_sha256": "45cdc512709b61fd391382e15a48e2cbc954ae150ec86072a8eb785c66a93f59",
+      "export": "strict-Z/results/screen-1011-8192-P64-1792758110557285249.json",
+      "export_sha256": "25e76018a03159561a4b277e03f366fb7561ba6b217f29703219061141a57aaa"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1042-31200-dense-1792759373642048956/output/data/result.json",
+      "source_sha256": "f87ac4b252abac4493271ca778e32bd2ec956058e1f6eea1994fe3798cafc72d",
+      "export": "strict-Z/results/screen-1042-31200-dense-1792759373642048956.json",
+      "export_sha256": "5c9868c73405b25f69bb3507e8f4dc5a05e6197c35c0d883bc2db8e30629fbe3"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-compare-31200-1792757850446560766/output/data/result.json",
+      "source_sha256": "12a4304788a60d72fa600616763a487a3a1d5c5ffe70f730264be61dd6bb8d97",
+      "export": "strict-Z/results/first-compare-31200-1792757850446560766.json",
+      "export_sha256": "12a4304788a60d72fa600616763a487a3a1d5c5ffe70f730264be61dd6bb8d97"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r2-31200-G1-1792863823093690326/output/data/result.json",
+      "source_sha256": "7d0b6555f976fc4afeb67fd7f56f9819877eebbef66a5a67bdc9e1d73beadfb7",
+      "export": "strict-Z/results/performance-r2-31200-G1-1792863823093690326.json",
+      "export_sha256": "b5f104cb32f52f9a61fb8cca2c1a9432dae61c930142dd4d71c126d72447c94e"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r3-8192-G4-1792902515559628264/output/data/result.json",
+      "source_sha256": "54a935b87a4ad3e3f985f345475042e77181c40e4379163060c65e017deb38df",
+      "export": "strict-Z/results/performance-r3-8192-G4-1792902515559628264.json",
+      "export_sha256": "65111ceb74ea84ea8142457ce4f4ac641e65f7cf90afe48d4209f858b98a8c61"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1042-8192-P64-1792759121154333516/output/data/result.json",
+      "source_sha256": "b683427b0927eeffaff35cd92995cb4c9a006a05ae0c69fede2a7be8c078983e",
+      "export": "strict-Z/results/screen-1042-8192-P64-1792759121154333516.json",
+      "export_sha256": "359baf065079bd2db2759bb4e020846a18e8be0785e56a5096aabe06030c049f"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r4-8192-G1-1792951506009660200/output/data/result.json",
+      "source_sha256": "10ede33c741633d8d4534818e2623d82990914146c000c754bbe443904618801",
+      "export": "strict-Z/results/performance-r4-8192-G1-1792951506009660200.json",
+      "export_sha256": "5f5e5ccd78734519a54a0f651d6b9d9921fc3d1ba0cc7937827fd3e88365bbe0"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-compare-8192-G1-1792760722764561624/output/data/result.json",
+      "source_sha256": "47a20e4fb79a2f364cda87e3368f61c2d7046971760fca52ed65c36f03e496df",
+      "export": "strict-Z/results/windows-compare-8192-G1-1792760722764561624.json",
+      "export_sha256": "47a20e4fb79a2f364cda87e3368f61c2d7046971760fca52ed65c36f03e496df"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-compare-31200-G1-1792763273868981047/output/data/result.json",
+      "source_sha256": "47a20e4fb79a2f364cda87e3368f61c2d7046971760fca52ed65c36f03e496df",
+      "export": "strict-Z/results/windows-compare-31200-G1-1792763273868981047.json",
+      "export_sha256": "47a20e4fb79a2f364cda87e3368f61c2d7046971760fca52ed65c36f03e496df"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-compare-1011-8192-1792758263123695417/output/data/result.json",
+      "source_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383",
+      "export": "strict-Z/results/screen-compare-1011-8192-1792758263123695417.json",
+      "export_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1011-31200-P64-1792758612559923934/output/data/result.json",
+      "source_sha256": "cb097f612f9bec048f302a633742eb87853a73a589faa016dc012b7c16ea3255",
+      "export": "strict-Z/results/screen-1011-31200-P64-1792758612559923934.json",
+      "export_sha256": "72a9bd59fbdd79eb5a891c3c6a39d4c21ad83823df1af57f560ed14477c9db17"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-paired-stream-8192-dense-1792787749239352677/output/data/result.json",
+      "source_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305",
+      "export": "strict-Z/results/twenty-paired-stream-8192-dense-1792787749239352677.json",
+      "export_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-8192-P64-p2-1792756205187517080/output/data/result.json",
+      "source_sha256": "d0faa6830eedfc8e0e1b87a244475247cfc80f8c866bd091a0985a58e3aed8da",
+      "export": "strict-Z/results/first-8192-P64-p2-1792756205187517080.json",
+      "export_sha256": "f96e5db32563936f1b25425d4fe62f054ffd513c5edfcdf49a400c62055a23db"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r1-31200-G4-1792830401829983119/output/data/result.json",
+      "source_sha256": "f684ca275c2f644ca7e68c3e84ee4ecb38e860218b203436f20e30ebe181cad5",
+      "export": "strict-Z/results/performance-r1-31200-G4-1792830401829983119.json",
+      "export_sha256": "31550a2c63fae71041f2ccf50e3ae8a50e2eede7fc07a3c6b8d57bbceed303e3"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-paired-stream-8192-P64-1792761653287553644/output/data/result.json",
+      "source_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122",
+      "export": "strict-Z/results/windows-paired-stream-8192-P64-1792761653287553644.json",
+      "export_sha256": "582dd648e1a5b07fb7e885fd3916d101eb16fe722d8b32f5d4a0e3895bbf3122"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-paired-stream-31200-dense-1792819031091907306/output/data/result.json",
+      "source_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305",
+      "export": "strict-Z/results/twenty-paired-stream-31200-dense-1792819031091907306.json",
+      "export_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-31200-dense-G1-1792761753051931945/output/data/result.json",
+      "source_sha256": "f4d5d82153e6000331aac1e8b3b9479f488123bac5e6a0c05e42c4314fe1a2ca",
+      "export": "strict-Z/results/windows-31200-dense-G1-1792761753051931945.json",
+      "export_sha256": "9d33a247d40e47251d18ca16fb6f87e5bb0bd729d120d198f2c2142a397137d2"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/kernel-screen-gate-1792755461837238663/output/data/result.json",
+      "source_sha256": "43aadc9016124d5ece65c5b92a13429a37dc3d9e2c41b2a9ef2c92f52f496901",
+      "export": "strict-Z/results/kernel-screen-gate-1792755461837238663.json",
+      "export_sha256": "43aadc9016124d5ece65c5b92a13429a37dc3d9e2c41b2a9ef2c92f52f496901"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/pilot-8192-G1-1792765086443244935/output/data/result.json",
+      "source_sha256": "73301f938cb1880682a6e656f4a0b5af9bcf22d23ddb91618d32b41833064a66",
+      "export": "strict-Z/results/pilot-8192-G1-1792765086443244935.json",
+      "export_sha256": "e2691fbf0627fc12a16939d316e7a09c6938d05c3959cbd9b46186b903d40d89"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-8192-dense-G4-1792780301877520600/output/data/result.json",
+      "source_sha256": "c7f8372e41dca3cf0ac0017a60cb2a15463456f99ac7d178dfc3d953a27c2964",
+      "export": "strict-Z/results/twenty-8192-dense-G4-1792780301877520600.json",
+      "export_sha256": "d1def0711f2c7d019d78d1fac33445e9f458eceeb71a8bc3d7d571396dea8671"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/pilot-31200-G4-1792769685514348269/output/data/result.json",
+      "source_sha256": "c49a249c0ee0999a5758d8ef6df5d4ac1a9611a29bcd6f2c0386b0130dc9db8e",
+      "export": "strict-Z/results/pilot-31200-G4-1792769685514348269.json",
+      "export_sha256": "5178015b3180e29b31658b9beea139dbf4ddd5e873e492d8a59c9a31e6057ed7"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-8192-dense-p2-1792755756297115805/output/data/result.json",
+      "source_sha256": "3055e6fa1f2e0714ff38ab835311c9451d51912e4feea9d5b8052b1be83d3aaf",
+      "export": "strict-Z/results/first-8192-dense-p2-1792755756297115805.json",
+      "export_sha256": "a42221ed10996c17f56eb3bdb0b47b9d43ee905ae7121b3a6f118fe539f9d019"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-31200-dense-G4-1792794776696934946/output/data/result.json",
+      "source_sha256": "b1cc07ef3ff46f8309c48f329ebb850e815e55b3511deacc08b277219c0eaa23",
+      "export": "strict-Z/results/twenty-31200-dense-G4-1792794776696934946.json",
+      "export_sha256": "72a4ff7419931002c8af9c5cefac3cd830801d4609c89bf0bb416a9ea1581137"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r2-8192-G1-1792870878286549371/output/data/result.json",
+      "source_sha256": "9120d6e13b0c2de8d3fd3e2d15017671b594aa82f08cf677d1ccaf5de7a25b59",
+      "export": "strict-Z/results/performance-r2-8192-G1-1792870878286549371.json",
+      "export_sha256": "8313546560f82be3bd8a0c4c8d9dd7ace919bdc082d70e94b29d849e79c05676"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/dense-repeat-8192-1792755913516879544/output/data/result.json",
+      "source_sha256": "acecc40bf2cd9ea8ddc1ef1e1ccc9732fa3d5e087b4fa0723d24f61a0973abb9",
+      "export": "strict-Z/results/dense-repeat-8192-1792755913516879544.json",
+      "export_sha256": "acecc40bf2cd9ea8ddc1ef1e1ccc9732fa3d5e087b4fa0723d24f61a0973abb9"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-8192-dense-G4-1792760822010800382/output/data/result.json",
+      "source_sha256": "1f4a1ada8a5a6f629059499c46f3e880d45b42d12a9d72cf3bb7d881ad90528c",
+      "export": "strict-Z/results/windows-8192-dense-G4-1792760822010800382.json",
+      "export_sha256": "f5c4d7be1dbedeecd878c0604b11c75bb12d49f6f44b2d67c51d85af400633f7"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-8192-dense-G1-1792777581775427632/output/data/result.json",
+      "source_sha256": "a6edd4fc400a2d4330cecea03d913af3421fc472137e0e695d4093d35c3c2702",
+      "export": "strict-Z/results/twenty-8192-dense-G1-1792777581775427632.json",
+      "export_sha256": "4ee958bd56d7ab77c3d14a6de424ffaa3cbe0a7f6742431db39a9a65a59cb42a"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-compare-31200-G4-1792764779833019518/output/data/result.json",
+      "source_sha256": "30ed94b2e279cba6e3f0cc84886e2843dac36f1ddbf25254a118d1209d7b959e",
+      "export": "strict-Z/results/windows-compare-31200-G4-1792764779833019518.json",
+      "export_sha256": "30ed94b2e279cba6e3f0cc84886e2843dac36f1ddbf25254a118d1209d7b959e"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-dense-p1-1792756460122690749/output/data/result.json",
+      "source_sha256": "79c71848e888a8fc61c7bcdc79419dfcacdacedcb380a70da0c6f3879b2a5caa",
+      "export": "strict-Z/results/first-31200-dense-p1-1792756460122690749.json",
+      "export_sha256": "c3e78dbc07116eeb101c4d85c8c71e94508a63a2afe9627ba7540edb192f3fa4"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-compare-31200-G4-1792818921024791454/output/data/result.json",
+      "source_sha256": "f24f7690f6e77e38dc1bd400cb6bb32f053fc40b173936ce3c9bc1d342f10bc6",
+      "export": "strict-Z/results/twenty-compare-31200-G4-1792818921024791454.json",
+      "export_sha256": "f24f7690f6e77e38dc1bd400cb6bb32f053fc40b173936ce3c9bc1d342f10bc6"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-P64-p1-1792757204741197267/output/data/result.json",
+      "source_sha256": "afb9a40f0de52f2778ed683edfcf0967113261b22ac803eca0d836f99ba5ec50",
+      "export": "strict-Z/results/first-31200-P64-p1-1792757204741197267.json",
+      "export_sha256": "2f0383953b7906b996da0a3e0405b1f5b30e676387f9a359037537ff5d769cab"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-paired-stream-8192-P64-1792787848772389815/output/data/result.json",
+      "source_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305",
+      "export": "strict-Z/results/twenty-paired-stream-8192-P64-1792787848772389815.json",
+      "export_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-8192-P64-G4-1792784059456922656/output/data/result.json",
+      "source_sha256": "7cd4b249ae7564ce132bb15f108a5385325ecfb8ac3b1c67b38d970836fd414c",
+      "export": "strict-Z/results/twenty-8192-P64-G4-1792784059456922656.json",
+      "export_sha256": "a1cda1178c94392ce9b662b18247230726184dfec34aa8e104c6d23b6a35c8b9"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/pilot-31200-G1-1792767401167732595/output/data/result.json",
+      "source_sha256": "6b6f0ec566f66890dfaf1f0ba2c44d3a279556e2371c065cfe52626098dbd876",
+      "export": "strict-Z/results/pilot-31200-G1-1792767401167732595.json",
+      "export_sha256": "6c86d1d5c6fc5e3cdfe4afac6a1e66d29619efeb90e8bed7d41ec2421ebabc50"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-8192-P64-G1-1792760355600243778/output/data/result.json",
+      "source_sha256": "723ceb8d06f34fce729d5b963811b903ae20cc1e178b5e1639500e0a1dd669c1",
+      "export": "strict-Z/results/windows-8192-P64-G1-1792760355600243778.json",
+      "export_sha256": "df9c5d31cfee489a84fb04c2179941aa936cf8e45e5cefee4db5b633f72a4b26"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/final-report-1793020962778856775/output/data/result.json",
+      "source_sha256": "18326a9f07bb9509bab68b29918766e917f1b84e678ac99886121bfce87a6463",
+      "export": "strict-Z/results/final-report-1793020962778856775.json",
+      "export_sha256": "18326a9f07bb9509bab68b29918766e917f1b84e678ac99886121bfce87a6463"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r3-31200-G4-1792913722480113068/output/data/result.json",
+      "source_sha256": "da0b6c824128497681e0a15846668b04c0454c8d76c3848056dfa7775e3ae810",
+      "export": "strict-Z/results/performance-r3-31200-G4-1792913722480113068.json",
+      "export_sha256": "5d6fc86450c63338292a02bff8d4a7ca71f6a1fc696b6da6f75d59915a666aa7"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-8192-P64-G4-1792761142006867449/output/data/result.json",
+      "source_sha256": "ae3150ef4fbd06c4562e234ffafd037831c7000ca15a1ea7de81fb2cd97af39e",
+      "export": "strict-Z/results/windows-8192-P64-G4-1792761142006867449.json",
+      "export_sha256": "c6f8eea9e520474e1e664c66597941731d3a4ba0f187f62cfc1f201280f2fed4"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-paired-stream-31200-P64-1792819131299191996/output/data/result.json",
+      "source_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305",
+      "export": "strict-Z/results/twenty-paired-stream-31200-P64-1792819131299191996.json",
+      "export_sha256": "27b6748e688fa3d9a9fc939565f84abf149698786dc79eb48355f3ddc0bae305"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-compare-8192-G1-1792780201905601753/output/data/result.json",
+      "source_sha256": "42c6cd1f5e7debebd96241cd1e8f680885e8307cb5978cddb1049e7bf9892b7e",
+      "export": "strict-Z/results/twenty-compare-8192-G1-1792780201905601753.json",
+      "export_sha256": "42c6cd1f5e7debebd96241cd1e8f680885e8307cb5978cddb1049e7bf9892b7e"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r2-31200-G4-1792873383549403506/output/data/result.json",
+      "source_sha256": "4a7ef6efc4b6a797e0444ec36dc5d3bf1cd0c785addfbfc1bf93e8a1ba0ca28a",
+      "export": "strict-Z/results/performance-r2-31200-G4-1792873383549403506.json",
+      "export_sha256": "31b93ac85ffb444f6a6c2b7953ef534ed826a4ad85d236013abf72180e21a3ea"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-compare-31200-G1-1792794676708766596/output/data/result.json",
+      "source_sha256": "42c6cd1f5e7debebd96241cd1e8f680885e8307cb5978cddb1049e7bf9892b7e",
+      "export": "strict-Z/results/twenty-compare-31200-G1-1792794676708766596.json",
+      "export_sha256": "42c6cd1f5e7debebd96241cd1e8f680885e8307cb5978cddb1049e7bf9892b7e"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r5-8192-G1-1792980703878705985/output/data/result.json",
+      "source_sha256": "108d99a48855850cbf0c94b56b3ecaaf8511fa8420eff222d83f85bd59361044",
+      "export": "strict-Z/results/performance-r5-8192-G1-1792980703878705985.json",
+      "export_sha256": "e8b81868274dbcd16f2d7c05a15554157317623dd83ad339e3f3c3c665b20a55"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r5-31200-G4-1792994360471854615/output/data/result.json",
+      "source_sha256": "7958cf426b3922c50c405667f6291251d9cf905d0bad1f07d90c5a9ce56bcb8f",
+      "export": "strict-Z/results/performance-r5-31200-G4-1792994360471854615.json",
+      "export_sha256": "f52d0411d345c917e617a6f70582a15aaaa77cd099985f1449b1f766c6a6cd86"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-31200-dense-p2-1792756846404569320/output/data/result.json",
+      "source_sha256": "267c5c01fbe5ad0a6fd55348f2026c2284ae733884dcb5585c39f06e332438d8",
+      "export": "strict-Z/results/first-31200-dense-p2-1792756846404569320.json",
+      "export_sha256": "37f61188679884a167ed9ac52a18e4a98338bf28dfa07ca3baf4a11e4d693d58"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r5-31200-G1-1792983175134022150/output/data/result.json",
+      "source_sha256": "42b323eb7755eecac263f972fe547ab8a81f5bac90c5633cbbf7de35488de156",
+      "export": "strict-Z/results/performance-r5-31200-G1-1792983175134022150.json",
+      "export_sha256": "4f77086c7f541cc9bf3c2c6bb8dfb10c5151e598b0aaa80b189b549fdf39ffb8"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-compare-1011-31200-1792758866192560621/output/data/result.json",
+      "source_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383",
+      "export": "strict-Z/results/screen-compare-1011-31200-1792758866192560621.json",
+      "export_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1042-8192-dense-1792758967113257665/output/data/result.json",
+      "source_sha256": "16381037428eb23f617495943ff1b0e2b15e9e3d146cfaa38d0947395050cac3",
+      "export": "strict-Z/results/screen-1042-8192-dense-1792758967113257665.json",
+      "export_sha256": "54e1d3001d16b82c55e61784ebd2c150ef4986529b060953e8db511ca51af6c0"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r5-8192-G4-1792990168172194673/output/data/result.json",
+      "source_sha256": "b4c7f833ad3fc3a8c33a40c7db23d95f8a4d836dd7440f13e0397d11ecea19c3",
+      "export": "strict-Z/results/performance-r5-8192-G4-1792990168172194673.json",
+      "export_sha256": "09a47e9df083321521e0fbcb00aeec1ac29c2e99423757ee43aaa64d5ae86461"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-compare-1042-31200-1792759878173368112/output/data/result.json",
+      "source_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383",
+      "export": "strict-Z/results/screen-compare-1042-31200-1792759878173368112.json",
+      "export_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r1-8192-G4-1792819231423724510/output/data/result.json",
+      "source_sha256": "9a11172643c7be6acba2855e7577226f69f762ced2a73cf2d88ae29cd921354f",
+      "export": "strict-Z/results/performance-r1-8192-G4-1792819231423724510.json",
+      "export_sha256": "2cf587bfec97d845ef35738996384f47c5b50c909d0b411327a1109eebd43586"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-31200-dense-G4-1792763373183240245/output/data/result.json",
+      "source_sha256": "7b2dd88d5919560ba765f179fa7ecfbef9f4af58d18cdab18ae52976b515ae22",
+      "export": "strict-Z/results/windows-31200-dense-G4-1792763373183240245.json",
+      "export_sha256": "b84265ac62a41b61f70fb98996ad1bc0d8be7d5acad0f65f5cf812fdbfc6d53a"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/windows-8192-dense-G1-1792759979025378624/output/data/result.json",
+      "source_sha256": "41ce3262364acd0b4d5df3869b6d12c63572657d53b8305b9e9ae03322b4f0b7",
+      "export": "strict-Z/results/windows-8192-dense-G1-1792759979025378624.json",
+      "export_sha256": "613774d44c9863cfa9f4d5e103c8404a1603d55941a093933211c8832bdecd37"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/first-8192-dense-p1-1792755561579745925/output/data/result.json",
+      "source_sha256": "2be4971f1db45a3aca1e370c602636bc0f7c63035ad2fabe96efa888000384a4",
+      "export": "strict-Z/results/first-8192-dense-p1-1792755561579745925.json",
+      "export_sha256": "1ff5c430b212b6c3ad4c2955cf7e21ce19c15bc16a165757a7cc91b3fdfa6350"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/dense-repeat-31200-1792757102830745081/output/data/result.json",
+      "source_sha256": "acecc40bf2cd9ea8ddc1ef1e1ccc9732fa3d5e087b4fa0723d24f61a0973abb9",
+      "export": "strict-Z/results/dense-repeat-31200-1792757102830745081.json",
+      "export_sha256": "acecc40bf2cd9ea8ddc1ef1e1ccc9732fa3d5e087b4fa0723d24f61a0973abb9"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-31200-P64-G4-1792806776353294899/output/data/result.json",
+      "source_sha256": "16a93c98435cd19f1ccaaa9576c85a2a659454c7a0677bda79341fe950ce81a5",
+      "export": "strict-Z/results/twenty-31200-P64-G4-1792806776353294899.json",
+      "export_sha256": "79214b5a155c103e9741a4f459c1ad8a2afba556aef9566bbc4a77bcb7881b86"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-31200-dense-G1-1792787948231529524/output/data/result.json",
+      "source_sha256": "9a26604f9ddbaaa9b37a6959b6fa79de8a0afd28c4eb62e1ac51de5fb36a8c2e",
+      "export": "strict-Z/results/twenty-31200-dense-G1-1792787948231529524.json",
+      "export_sha256": "3960e9c75a4856eb9cd681529c57e66f2ac91a43e578eacb9c85816b4df5f6fd"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-compare-8192-G4-1792787647045753164/output/data/result.json",
+      "source_sha256": "f24f7690f6e77e38dc1bd400cb6bb32f053fc40b173936ce3c9bc1d342f10bc6",
+      "export": "strict-Z/results/twenty-compare-8192-G4-1792787647045753164.json",
+      "export_sha256": "f24f7690f6e77e38dc1bd400cb6bb32f053fc40b173936ce3c9bc1d342f10bc6"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r3-8192-G1-1792900032790878771/output/data/result.json",
+      "source_sha256": "0e75ed4de64138fc967389d960284d85f8333e6f0f2e6959313c8e2099eaae71",
+      "export": "strict-Z/results/performance-r3-8192-G1-1792900032790878771.json",
+      "export_sha256": "695d1dd137360bc29e6845043d8519716812cf2af0bdb66b6d0ff4660eca53cf"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r4-31200-G1-1792944520608347559/output/data/result.json",
+      "source_sha256": "73909498a758da26a6f3f9bdf7050b710c244e923d32279fc4016ef4d3048fcb",
+      "export": "strict-Z/results/performance-r4-31200-G1-1792944520608347559.json",
+      "export_sha256": "81c389fc90dde5da30efe221de0783a8e24ae9ae08b95baee0ba54494db07037"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/performance-r3-31200-G1-1792906732093103287/output/data/result.json",
+      "source_sha256": "2e316abd43f03209d9f836161ca25162d581a1f7936fc052410cbae3052c0e6f",
+      "export": "strict-Z/results/performance-r3-31200-G1-1792906732093103287.json",
+      "export_sha256": "692b7acfaeb2ce7ebe04d1af4e865a5c7fed5de9cf26cd948593d5581790cd1b"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-compare-1042-8192-1792759273861794996/output/data/result.json",
+      "source_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383",
+      "export": "strict-Z/results/screen-compare-1042-8192-1792759273861794996.json",
+      "export_sha256": "2183f8c61991a62dc96a124edb8dec58ea800c77aa24ddff43431aa3f4bfd383"
+    },
+    {
+      "source": "gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/screen-1011-8192-dense-1792757955547255211/output/data/result.json",
+      "source_sha256": "f861595bc408d3256c67565118c13549f9f7bd4e62fdcedffd88182189b43729",
+      "export": "strict-Z/results/screen-1011-8192-dense-1792757955547255211.json",
+      "export_sha256": "5a5cc6567362913d15a0defc1fa2118926c4c4beda143cf51ab5b6f036ae110b"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/queue-state.json",
+      "source_sha256": "9f24406c2e3fb110c7eee70f65d9f509b56f48dc3e7cb2df5d214d2e242c2146",
+      "export": "ordinary-diagnostics/queue-state.json",
+      "export_sha256": "8e851b02028138018b78efd3310e98ec7cbdc16624b55840e69a2ef1b830fb23"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/attempts/compare-31200-1793052366872189675/output/data/result.json",
+      "source_sha256": "4f4858e6254234d16fc09a9ea8241b0502ba59544123d20ed2c274ce3b8472f9",
+      "export": "ordinary-diagnostics/compare-31200-1793052366872189675.json",
+      "export_sha256": "dff5ce6bda2b39805e83ab339e0cbd9980e840247e61416c5c6985b9fd2036e6"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/attempts/compare-8192-1793048037553242424/output/data/result.json",
+      "source_sha256": "ab039387050daee1d061e8108e2c247d8dd29f6f22cf31f45c012e748c28036f",
+      "export": "ordinary-diagnostics/compare-8192-1793048037553242424.json",
+      "export_sha256": "46f1b6f6402024578db0918122b801cd8ecc24b21da43f4405dd00aca469de02"
+    },
+    {
+      "source": "gb10-qat-nonstrict-v1/attempts/compare-8192-1793038796114625713/output/data/result.json",
+      "source_sha256": "5550d65cc9ea73387c6cfc2a152be7820f9805d29e2f370314163eda6052c01f",
+      "export": "ordinary-diagnostics/compare-8192-1793038796114625713.json",
+      "export_sha256": "5550d65cc9ea73387c6cfc2a152be7820f9805d29e2f370314163eda6052c01f"
+    }
+  ]
+}

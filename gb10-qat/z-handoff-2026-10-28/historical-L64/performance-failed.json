@@ -1,0 +1,127 @@
+{
+  "execution_complete": true,
+  "performance_accepted": false,
+  "groups": [
+    {
+      "tokens": 8192,
+      "factor": 1,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 14230.588436999824,
+        "candidate": 17032.989542502037
+      },
+      "samples_per_second": {
+        "dense": 0.07027116302513389,
+        "candidate": 0.058709599833001856
+      },
+      "overhead": 0.1969279849465615,
+      "median_peak_allocated_bytes": {
+        "dense": 29535849984.0,
+        "candidate": 29534801408.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 32709279744,
+        "candidate": 32711376896
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 29535849984,
+        "candidate": 29534801408
+      },
+      "actual_compact_calls": 4500,
+      "minimum_cache_saving": 0.6136916342412451,
+      "performance_qualified": false
+    },
+    {
+      "tokens": 8192,
+      "factor": 4,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 55261.922639008844,
+        "candidate": 66387.74955249391
+      },
+      "samples_per_second": {
+        "dense": 0.07238257029400638,
+        "candidate": 0.060252080044333065
+      },
+      "overhead": 0.20132898716107017,
+      "median_peak_allocated_bytes": {
+        "dense": 31008647680.0,
+        "candidate": 30948727296.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 38658899968,
+        "candidate": 38579208192
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 31008647680,
+        "candidate": 30948727296
+      },
+      "actual_compact_calls": 18000,
+      "minimum_cache_saving": 0.6136916342412451,
+      "performance_qualified": false
+    },
+    {
+      "tokens": 31200,
+      "factor": 1,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 93032.22411349998,
+        "candidate": 131109.97483950632
+      },
+      "samples_per_second": {
+        "dense": 0.010748963700792457,
+        "candidate": 0.007627184744899196
+      },
+      "overhead": 0.4092963603616657,
+      "median_peak_allocated_bytes": {
+        "dense": 32409723392.0,
+        "candidate": 31660797440.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 43241177088,
+        "candidate": 42458939392
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 32409723392,
+        "candidate": 31660797440
+      },
+      "actual_compact_calls": 4500,
+      "minimum_cache_saving": 0.8830788332370043,
+      "performance_qualified": false
+    },
+    {
+      "tokens": 31200,
+      "factor": 4,
+      "samples_per_format": 150,
+      "median_ms": {
+        "dense": 370470.5408300215,
+        "candidate": 522678.8475269932
+      },
+      "samples_per_second": {
+        "dense": 0.010797079819189379,
+        "candidate": 0.0076528828723902475
+      },
+      "overhead": 0.4108513091377153,
+      "median_peak_allocated_bytes": {
+        "dense": 38115081728.0,
+        "candidate": 36804851456.0
+      },
+      "maximum_peak_reserved_bytes": {
+        "dense": 50295996416,
+        "candidate": 48937041920
+      },
+      "maximum_peak_allocated_bytes": {
+        "dense": 38115081728,
+        "candidate": 36806931456
+      },
+      "actual_compact_calls": 18000,
+      "minimum_cache_saving": 0.8828226774861636,
+      "performance_qualified": false
+    }
+  ],
+  "numerical_training_accepted": true,
+  "original_tma_certified": false,
+  "default_model_acceptance": false,
+  "no_convergence_or_video_quality_claim": true,
+  "recovery_seal": "173708df097e59ebd0ea13a5645efd63b253d6598020afe6813f618fa08a95ee"
+}

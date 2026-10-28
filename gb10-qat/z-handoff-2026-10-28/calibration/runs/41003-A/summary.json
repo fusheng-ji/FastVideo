@@ -1,0 +1,65 @@
+{
+  "variant": "save",
+  "tokens": 8192,
+  "seed": 41003,
+  "steps": 20,
+  "optimizer_steps": 20,
+  "samples_seen": 20,
+  "grad_accum_steps": 1,
+  "lr": 1e-06,
+  "real_pretrained_model": "Wan2.1-T2V-1.3B",
+  "initial_full_parameter_sha256": "72fb71f0b57c3badbdf4d3466738fcfe21ba4d78788270862923b5205318bc31",
+  "evaluations": {
+    "0": {
+      "fixed_heldout_mean": 0.20839796750806272
+    },
+    "10": {
+      "fixed_heldout_mean": 0.2002940489910543
+    },
+    "20": {
+      "fixed_heldout_mean": 0.1961325091542676
+    }
+  },
+  "updates": {
+    "blocks.0._checkpoint_wrapped_module.to_v.weight": {
+      "relative_l2": 0.00017860907246358693,
+      "initial_sha256": "093d19bd74ea1c229a1c0875f349fa5885e47a4d02df2700f8b65547f99328dd",
+      "final_sha256": "924d4674af2b4f740bc45431b1fadb1ae7e7f8595e7d0e85a4cff98d928bc848"
+    },
+    "blocks.15._checkpoint_wrapped_module.to_v.weight": {
+      "relative_l2": 0.0001591465261299163,
+      "initial_sha256": "8aecd345d0a50438d9d7ccb5221ffb6dbe61259a393da2f51dda6a9804587d70",
+      "final_sha256": "ffc6ede2d1d293987ffffb8c9bc4f00a59d831943a9ef8c7151cf75b27feaf2f"
+    },
+    "blocks.29._checkpoint_wrapped_module.to_v.weight": {
+      "relative_l2": 0.00019288463226985186,
+      "initial_sha256": "5567e852606278c6ce86f1ead519dacd9f2413d7f1f7f4e0885b14240741c5b0",
+      "final_sha256": "59febabbd33b12923b0de7a39f4e0e40b78e1fecad7a31e3cfae29ca558f85ae"
+    }
+  },
+  "launch_shapes": {
+    "(12, 8192, 8192, 128)": 4080
+  },
+  "elapsed_training_sec": 1299.459105014801,
+  "grad_norm_median": 0.3498310148715973,
+  "store_mode": "tma",
+  "stats_format": "dense",
+  "event_capacity": 32,
+  "evaluation_role": "reused validation split; not an independent heldout test",
+  "active_training_seconds_raw": 1134.3449561595917,
+  "saved_statistics_cache_totals": {
+    "attention_forward_calls": 600,
+    "saved_statistics_calls": 600,
+    "saved_cache_bytes": 60633907200,
+    "dense_cache_bytes": 60633907200,
+    "overflow_fallback_calls": 0,
+    "formats": {
+      "dense": 600
+    },
+    "maximum_saved_cache_bytes_per_attention": 101056512,
+    "maximum_dense_cache_bytes_per_attention": 101056512,
+    "minimum_saved_cache_reduction_per_attention": 0.0,
+    "saved_cache_reduction": 0.0
+  },
+  "scope": "early full-parameter training on real MixKit latents; not long-term convergence or video quality"
+}

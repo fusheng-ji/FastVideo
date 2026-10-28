@@ -1,0 +1,62 @@
+{
+  "status": "complete",
+  "execution_complete": true,
+  "jobs": {
+    "41001-A": {
+      "execution_complete": true,
+      "elapsed_seconds": 1413.8513320359634,
+      "admission_seconds": 81.20821808604524,
+      "audit_sha256": "9d7e4904665f385243dab60c10eae55694d46c8c10a6493ff5d711f517242498"
+    },
+    "41001-B": {
+      "execution_complete": true,
+      "elapsed_seconds": 1404.6801316849887,
+      "admission_seconds": 89.36571259610355,
+      "audit_sha256": "e7af46afb8831cf955551ab67341665cca8041a81db95818f88f2b4009f8ed5a"
+    },
+    "41001-Z": {
+      "execution_complete": true,
+      "elapsed_seconds": 1409.3889944150578,
+      "admission_seconds": 93.66643010010011,
+      "audit_sha256": "24fe8c50f342161d793f95e47586c93a486d7cb74821f3462ff63de80bf2a5d1"
+    },
+    "41002-B": {
+      "execution_complete": true,
+      "elapsed_seconds": 1404.2417317200452,
+      "admission_seconds": 98.04492041503545,
+      "audit_sha256": "6d706bf5cf1fe2e303d57d8dfccdfda26ed9ad51abaf7d5cbdc2ecfba65b9d25"
+    },
+    "41002-Z": {
+      "execution_complete": true,
+      "elapsed_seconds": 1418.8197963690618,
+      "admission_seconds": 112.4811733950628,
+      "audit_sha256": "ac942ab75fd4fe37b7fbe0bd4b0b77ceb50c25c42b727b4c9421c136bdd02b83"
+    },
+    "41002-A": {
+      "execution_complete": true,
+      "elapsed_seconds": 1414.8750289650634,
+      "admission_seconds": 100.57368550996762,
+      "audit_sha256": "fbc35b4769accb5ce1e6797cb5dc383fd4ae249b26ece318d0817fe748137e6d"
+    },
+    "41003-Z": {
+      "execution_complete": true,
+      "elapsed_seconds": 1419.6737148480024,
+      "admission_seconds": 110.16393993597012,
+      "audit_sha256": "42c8d4afe2c9064d020af754ccbc1493d32091225924985ebd994ed05c902c59"
+    },
+    "41003-A": {
+      "execution_complete": true,
+      "elapsed_seconds": 1424.5779801449971,
+      "admission_seconds": 107.86270364793018,
+      "audit_sha256": "843e5d677c550218894ec6645504f1762fae3cb3e231bccde8a1bc75e67dd7d9"
+    },
+    "41003-B": {
+      "execution_complete": true,
+      "elapsed_seconds": 1410.1461575400317,
+      "admission_seconds": 113.32661170593929,
+      "audit_sha256": "f0d1f6b70e826c69db5d5bdae2515d4ca5c93084ea12c3e9ce72757cbc1e1f29"
+    }
+  },
+  "statistical_equivalence": null,
+  "current_job": "41003-B"
+}

@@ -1,0 +1,50 @@
+{
+  "acceptance_scope": "gb10-packed-tuning-v1-production-torch-determinism",
+  "accepted": true,
+  "artifact_sha256": {
+    "application.log": "d42378e9ab9c52d541ee0ba0316580a58947d2e089b6dfd2d6446a86d127e875",
+    "audit/audit-microsteps.jsonl": "2c02d14fadc885c818af34e2ed4105aaf7b95378c6504136f4206cddbb756cce",
+    "audit/audit-updates.jsonl": "e9f3873c7fea534d6720849fbcbbe22cc0c594cb0e7641aab79aaac2cb777379",
+    "audit/audit.json": "3814f40aa543d4cfec9f89b94a6d7ddeecd847881ab7373149a1a53cb63f4214",
+    "audit/distributed-rendezvous": "056e60b9e5949cc533d6ede48b9074e593d5c1ecfbda79d871300774d554bba6",
+    "audit/metrics.jsonl": "de6923fc84cad77bb4c5dca305d1efc38ac0f5d93dd331cf25f2f5261adb38be",
+    "audit/monitored-v-weights.pt": "f2267409ef50946f65aee5d0305865eb5724c14489b36d651f9e6fda28ed79da",
+    "audit/private-training-source.json": "ea2cc88f2d01e0797758b57997df46e9e52e75b4cb8f277c43511cf988bd6242",
+    "audit/private-training-source.py": "86da26b56e35c2536a57855495e5160aaaac597d8eadeb564c7b9f235fb76c9d",
+    "audit/summary.json": "82334b6bbd3cb8ddd182d352d04b16d968a49bb4d31cd08767ed350131e084d3"
+  },
+  "command": [
+    "${SOURCE_CHECKOUT}/.venv/bin/python",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-acceptance-v1/code/bootstrap.py",
+    "--snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-stats-overflow-v2/snapshot",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-acceptance-v1/code/control_train.py",
+    "--script",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-acceptance-v1/code/train_accum.py",
+    "--run-dir",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-8192-P64-G1-1792778919931626860/output/data/audit",
+    "--artifact-root",
+    "${RECOVERY_ROOT}/diagnostics/artifact",
+    "--policy",
+    "P64",
+    "--tokens",
+    "8192",
+    "--factor",
+    "1",
+    "--samples",
+    "20",
+    "--reference",
+    "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-8192-dense-G1-1792777581775427632/output/data/audit"
+  ],
+  "execution_complete": true,
+  "kind": "train",
+  "report": "${RECOVERY_ROOT}/gb10-qat-packed-tuning-v1/stages/model-coordinator-v1/attempts/twenty-8192-P64-G1-1792778919931626860/output/data/audit/audit.json",
+  "returncode": 0,
+  "source_fingerprint": "87d8427401fc7595a8ad521c18505e6b35edbad5996b508089041a03606fcc0f",
+  "status": "complete",
+  "verdict": {
+    "accepted": true,
+    "microbatches": 20,
+    "optimizer_updates": 20
+  }
+}
