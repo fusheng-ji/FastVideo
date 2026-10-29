@@ -1,0 +1,18 @@
+--- a/fastvideo-kernel/experiments/gb10_z/code/spark_measure.py
++++ b/fastvideo-kernel/experiments/gb10_z/code/spark_measure.py
+@@ -211,7 +211,14 @@
+     from fastvideo.dataset.utils import collate_rows_from_parquet_schema
+     from fastvideo.dataset.dataloader.schema import pyarrow_schema_t2v
+     assert a.model and a.data, 'Explicit model and parquet paths are required'
+-    cfg = load_run_config(str(CODE.parent / 'configs/calibration-8192.yaml'))
++    import yaml
++    config = yaml.safe_load((CODE.parent / 'configs/calibration-8192.yaml').read_text())
++    config['models']['student']['init_from'] = str(a.model)
++    config['training']['data']['data_path'] = str(a.data.parent)
++    config['training']['checkpoint']['output_dir'] = str(a.output)
++    config_path = a.output / 'resolved-config.yaml'
++    config_path.write_text(yaml.safe_dump(config))
++    cfg = load_run_config(str(config_path))
+     cfg.models['student']['init_from'] = str(a.model)
+     cfg.training.data.data_path = str(a.data.parent)
+     cfg.training.checkpoint.output_dir = str(a.output)

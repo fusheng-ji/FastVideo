@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "scope": "CPU evaluation of actual source host dispatch, not an end-to-end GPU run with two million KV tokens",
+  "cases": [
+    {
+      "kv_tiles": 65534,
+      "packed_enabled": true,
+      "fallback": null
+    },
+    {
+      "kv_tiles": 65535,
+      "packed_enabled": true,
+      "fallback": null
+    },
+    {
+      "kv_tiles": 65536,
+      "packed_enabled": false,
+      "fallback": "dense"
+    },
+    {
+      "kv_tiles": 65537,
+      "packed_enabled": false,
+      "fallback": "dense"
+    }
+  ],
+  "force_short_cannot_bypass_limit": true,
+  "tests": 8,
+  "remaining_risk": "Dense fallback retains quadratic allocation; very large shapes may OOM. No bounded-memory guarantee."
+}

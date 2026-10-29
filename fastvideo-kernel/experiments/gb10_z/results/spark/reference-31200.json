@@ -1,0 +1,137 @@
+{
+  "domain": "spark-new-replication-v1",
+  "replication_label": "new replication on new hardware",
+  "kind": "reference",
+  "policy": "dense",
+  "tokens": 31200,
+  "heads": 1,
+  "warmup": 1,
+  "measurements": 1,
+  "status": "completed",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "0d34fc5afc495d54195870c6939d88d581660844968ff7006dd9d3a1ab1d199a",
+  "seed": 1000,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12",
+    "numpy": "2.5.3",
+    "device": "NVIDIA GB10",
+    "capability": [
+      12,
+      1
+    ],
+    "cuda": "13.0"
+  },
+  "strict_determinism": true,
+  "historical_acceptance_inherited": false,
+  "steps": [
+    {
+      "step": 0,
+      "warmup": true,
+      "wall_seconds": 0.4208248379873112,
+      "cuda_ms": 420.78582763671875,
+      "before": {
+        "allocated": 31948800,
+        "reserved": 41943040,
+        "peak_allocated": 31948800,
+        "peak_reserved": 41943040
+      },
+      "after_forward": {
+        "allocated": 193815040,
+        "reserved": 230686720,
+        "peak_allocated": 193815040,
+        "peak_reserved": 230686720
+      },
+      "after_backward": {
+        "allocated": 217776640,
+        "reserved": 251658240,
+        "peak_allocated": 217901568,
+        "peak_reserved": 251658240
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 121804800,
+        "forward_consistent_dv": true,
+        "stats_mode": "save",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 121804800,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 1,
+      "warmup": false,
+      "wall_seconds": 0.14243429305497557,
+      "cuda_ms": 142.38966369628906,
+      "before": {
+        "allocated": 31948800,
+        "reserved": 272629760,
+        "peak_allocated": 31948800,
+        "peak_reserved": 272629760
+      },
+      "after_forward": {
+        "allocated": 193815040,
+        "reserved": 272629760,
+        "peak_allocated": 193815040,
+        "peak_reserved": 272629760
+      },
+      "after_backward": {
+        "allocated": 217776640,
+        "reserved": 272629760,
+        "peak_allocated": 217901568,
+        "peak_reserved": 272629760
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 121804800,
+        "forward_consistent_dv": true,
+        "stats_mode": "save",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 121804800,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    }
+  ],
+  "tensor_sha256": {
+    "O": "b21f8999cfa96325f6ee350564a707c5aecec62ba6f835d3d4cafa38004146a6",
+    "dQ": "316eb250dae142248292ead38be21afc659c6c620ac4e9fbbda0f2cb5cb58182",
+    "dK": "10eea09dc811d851e3f492be93e610ef6e6072093ac64152696f006a71f0a282",
+    "dV": "b72b2eb3d018e05d8ea513e20728d2908c00da911ee75793635be3df3845a474"
+  },
+  "reference": {
+    "scope": "blocked dV only, conditioned on saved quantized Q/K and online maxima/denominator",
+    "relative_l2_per_head": [
+      [
+        0.0006180699837580572
+      ]
+    ],
+    "threshold": 0.001,
+    "passed": true
+  },
+  "median_wall_seconds": 0.14243429305497557,
+  "median_cuda_ms": 142.38966369628906,
+  "peak_allocated": 217901568,
+  "peak_reserved": 272629760,
+  "timing_scope": "attention forward + backward, allocations and synchronization; no optimizer",
+  "original_result_sha256": "d3e1f1eae4475790d24e4c4e4b508271b30d3af4252027dfaa0015aacbc66017",
+  "physical_hardware_distinct_from_history_verified": false
+}

@@ -1,0 +1,68 @@
+{
+  "domain": "spark-new-replication-v1",
+  "kind": "overflow",
+  "scope": "all-tiles",
+  "status": "completed",
+  "source_sha256": "a5571ced59585badfce60eb3112c926766e85f014daa22132398a3acbc97eb86",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "rows": [
+    {
+      "policy": "dense",
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 8421376,
+        "forward_consistent_dv": true,
+        "stats_mode": "save",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 8421376,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      },
+      "tensor_sha256": {
+        "O": "74f1bad5dd3fb3961bccd3cb12e788a66dfb910a78de98185e884fc607fdcda1",
+        "dQ": "38d0b31cdf415aad098846c65c1f013a4d65cef8832fbe9985331ef262d8d249",
+        "dK": "6715e9dca5d8200ee5525135fe1d1d15d6ae8157b2ae22d1e88fbf4d778ccfa0",
+        "dV": "5db1aa710c7aab68be7d61873faf64914ee6a38f9b54ec7548d43908d248e47e"
+      }
+    },
+    {
+      "policy": "Z",
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": true,
+        "storage_bytes": 8421376,
+        "forward_consistent_dv": true,
+        "stats_mode": "save",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 256,
+        "fallback_reason": "cache_not_smaller",
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 8421376,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      },
+      "tensor_sha256": {
+        "O": "74f1bad5dd3fb3961bccd3cb12e788a66dfb910a78de98185e884fc607fdcda1",
+        "dQ": "38d0b31cdf415aad098846c65c1f013a4d65cef8832fbe9985331ef262d8d249",
+        "dK": "6715e9dca5d8200ee5525135fe1d1d15d6ae8157b2ae22d1e88fbf4d778ccfa0",
+        "dV": "5db1aa710c7aab68be7d61873faf64914ee6a38f9b54ec7548d43908d248e47e"
+      }
+    }
+  ],
+  "bitwise_equal": true,
+  "original_result_sha256": "88aff0487ad636c6f6d2dcf6a3a786167ae352088b041476ee71b8a48f366d6c",
+  "physical_hardware_distinct_from_history_verified": false,
+  "historical_acceptance_inherited": false
+}

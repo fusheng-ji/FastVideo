@@ -1,0 +1,92 @@
+[
+  {
+    "name": "model-v2-8192-dense",
+    "busy_samples": 27,
+    "sm_MHz_quantiles": {
+      "0.1": 1794.0,
+      "0.5": 1794.0,
+      "0.9": 1794.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-8192-recompute",
+    "busy_samples": 29,
+    "sm_MHz_quantiles": {
+      "0.1": 1794.0,
+      "0.5": 1794.0,
+      "0.9": 1794.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-8192-Z",
+    "busy_samples": 32,
+    "sm_MHz_quantiles": {
+      "0.1": 1794.0,
+      "0.5": 1794.0,
+      "0.9": 1794.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-16384-dense",
+    "busy_samples": 64,
+    "sm_MHz_quantiles": {
+      "0.1": 1592.0,
+      "0.5": 1794.0,
+      "0.9": 1794.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-16384-recompute",
+    "busy_samples": 73,
+    "sm_MHz_quantiles": {
+      "0.1": 1391.0,
+      "0.5": 1592.0,
+      "0.9": 1592.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-16384-Z",
+    "busy_samples": 72,
+    "sm_MHz_quantiles": {
+      "0.1": 1391.0,
+      "0.5": 1391.0,
+      "0.9": 1391.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-31200-dense",
+    "busy_samples": 228,
+    "sm_MHz_quantiles": {
+      "0.1": 981.0,
+      "0.5": 1391.0,
+      "0.9": 1391.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-31200-recompute",
+    "busy_samples": 309,
+    "sm_MHz_quantiles": {
+      "0.1": 981.0,
+      "0.5": 981.0,
+      "0.9": 981.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  },
+  {
+    "name": "model-v2-31200-Z",
+    "busy_samples": 273,
+    "sm_MHz_quantiles": {
+      "0.1": 981.0,
+      "0.5": 981.0,
+      "0.9": 981.0
+    },
+    "scope": "whole process, includes warmup; descriptive, not a paired-clock acceptance"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "current_measurement_harness_sha256": "0d34fc5afc495d54195870c6939d88d581660844968ff7006dd9d3a1ab1d199a",
+  "initial_kernel_measurement_harness_sha256": "996f3a8541d3d7c9ced1e0260d1043dab8daca60858e284e3932f31dd23f4451",
+  "runtime_hashes_match": true,
+  "tools": {
+    "spark_measure.py": "0d34fc5afc495d54195870c6939d88d581660844968ff7006dd9d3a1ab1d199a",
+    "spark_overflow.py": "a5571ced59585badfce60eb3112c926766e85f014daa22132398a3acbc97eb86",
+    "spark_plot.py": "590a69df79884016999f14a3475f3199f48776afeb4c1c646bd8e77ea5b068fa",
+    "spark_report.py": "76efd3f3c7fc84f74e94a00dce65b36ccc1deda3aab9fbbe9a2688b9fa10a990"
+  }
+}

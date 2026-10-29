@@ -1,0 +1,32 @@
+{
+  "domain": "spark-new-replication-v1",
+  "replication_label": "new replication on new hardware",
+  "kind": "model",
+  "policy": "dense",
+  "tokens": 8192,
+  "heads": 12,
+  "warmup": 1,
+  "measurements": 2,
+  "status": "failed",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "996f3a8541d3d7c9ced1e0260d1043dab8daca60858e284e3932f31dd23f4451",
+  "seed": 1000,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12",
+    "numpy": "2.5.3",
+    "device": "NVIDIA GB10",
+    "capability": [
+      12,
+      1
+    ],
+    "cuda": "13.0"
+  },
+  "strict_determinism": true,
+  "historical_acceptance_inherited": false,
+  "error_type": "ValueError",
+  "error": "Failed to download or parse a Diffusers manifest for MODEL_PATH_FROM_CLI: Using SOCKS proxy, but the 'socksio' package is not installed. Make sure to install httpx using `pip install httpx[socks]`.",
+  "original_result_sha256": "c6368d480ffc829a265e50db5a38830c317b04db1d33a27c39e67a6aa8aa10cf",
+  "physical_hardware_distinct_from_history_verified": false
+}

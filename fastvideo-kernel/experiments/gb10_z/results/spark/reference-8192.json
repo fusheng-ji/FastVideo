@@ -1,0 +1,137 @@
+{
+  "domain": "spark-new-replication-v1",
+  "replication_label": "new replication on new hardware",
+  "kind": "reference",
+  "policy": "dense",
+  "tokens": 8192,
+  "heads": 1,
+  "warmup": 1,
+  "measurements": 1,
+  "status": "completed",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "0d34fc5afc495d54195870c6939d88d581660844968ff7006dd9d3a1ab1d199a",
+  "seed": 1000,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12",
+    "numpy": "2.5.3",
+    "device": "NVIDIA GB10",
+    "capability": [
+      12,
+      1
+    ],
+    "cuda": "13.0"
+  },
+  "strict_determinism": true,
+  "historical_acceptance_inherited": false,
+  "steps": [
+    {
+      "step": 0,
+      "warmup": true,
+      "wall_seconds": 0.39853738504461944,
+      "cuda_ms": 398.4852294921875,
+      "before": {
+        "allocated": 8388608,
+        "reserved": 20971520,
+        "peak_allocated": 8388608,
+        "peak_reserved": 20971520
+      },
+      "after_forward": {
+        "allocated": 27328512,
+        "reserved": 44040192,
+        "peak_allocated": 27328512,
+        "peak_reserved": 44040192
+      },
+      "after_backward": {
+        "allocated": 33619968,
+        "reserved": 44040192,
+        "peak_allocated": 33652736,
+        "peak_reserved": 44040192
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 8421376,
+        "forward_consistent_dv": true,
+        "stats_mode": "save",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 8421376,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 1,
+      "warmup": false,
+      "wall_seconds": 0.010789580992422998,
+      "cuda_ms": 10.748703956604004,
+      "before": {
+        "allocated": 8388608,
+        "reserved": 46137344,
+        "peak_allocated": 8388608,
+        "peak_reserved": 46137344
+      },
+      "after_forward": {
+        "allocated": 27328512,
+        "reserved": 46137344,
+        "peak_allocated": 27328512,
+        "peak_reserved": 46137344
+      },
+      "after_backward": {
+        "allocated": 33619968,
+        "reserved": 46137344,
+        "peak_allocated": 33652736,
+        "peak_reserved": 46137344
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 8421376,
+        "forward_consistent_dv": true,
+        "stats_mode": "save",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 8421376,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    }
+  ],
+  "tensor_sha256": {
+    "O": "a4f1a5f5fcb113958409fee028786712022d85b036d02f511d3bf10418099fd3",
+    "dQ": "d1ef3280919764a92ac8ea2da87043a43e53f538f6d6fb901e8e1646ef6476be",
+    "dK": "59e1e8d0561d6285bb7e1fd79d638055bd159351603cfe7d1cae00b92b053ffc",
+    "dV": "dde23544fd17f9c7f6f6e41567a084c7c1c5b370db199a0583069658299b61c8"
+  },
+  "reference": {
+    "scope": "blocked dV only, conditioned on saved quantized Q/K and online maxima/denominator",
+    "relative_l2_per_head": [
+      [
+        0.00031050818990600604
+      ]
+    ],
+    "threshold": 0.001,
+    "passed": true
+  },
+  "median_wall_seconds": 0.010789580992422998,
+  "median_cuda_ms": 10.748703956604004,
+  "peak_allocated": 33652736,
+  "peak_reserved": 46137344,
+  "timing_scope": "attention forward + backward, allocations and synchronization; no optimizer",
+  "original_result_sha256": "37489d9385e7af89edec54a6a7f361e70eae03ef957a251156c15eb8292d3a30",
+  "physical_hardware_distinct_from_history_verified": false
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "cuda_initialized_by_tests": false,
+  "initial_cpu_tests": 111,
+  "fa2_policy_cpu_tests": 18,
+  "expanded_cpu_tests": 123,
+  "new_tests": 12,
+  "asset_commit": "94eb140ffd359f8546868c938853971167f7f6ff",
+  "asset_files_verified": 192,
+  "handoff_commit": "283871a024f9e94bdc8f263b0866e59f21bbed3d",
+  "checks": [
+    "python -m pytest fastvideo-kernel/experiments/gb10_z/tests -q --confcutdir=fastvideo-kernel/experiments/gb10_z",
+    "python -m pytest fastvideo/tests/attention/test_fa2_determinism_policy.py -q --confcutdir=fastvideo/tests/attention"
+  ],
+  "precommit": "passed; repository intentionally excludes fastvideo-kernel from lint hooks",
+  "cuda_initialization_guard_verified": true
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "model-v2-8192-dense",
+    "returncode": 0,
+    "started": 1793236797.253303,
+    "ended": 1793236854.081271
+  },
+  {
+    "name": "model-v2-8192-recompute",
+    "returncode": 0,
+    "started": 1793236854.1225796,
+    "ended": 1793236910.6862304
+  },
+  {
+    "name": "model-v2-8192-Z",
+    "returncode": 0,
+    "started": 1793236910.7269893,
+    "ended": 1793236966.1293972
+  },
+  {
+    "name": "model-v2-16384-dense",
+    "returncode": 0,
+    "started": 1793236966.1717658,
+    "ended": 1793237056.702664
+  },
+  {
+    "name": "model-v2-16384-recompute",
+    "returncode": 0,
+    "started": 1793237056.7466578,
+    "ended": 1793237174.2741609
+  },
+  {
+    "name": "model-v2-16384-Z",
+    "returncode": 0,
+    "started": 1793237174.316399,
+    "ended": 1793237287.1232
+  },
+  {
+    "name": "model-v2-31200-dense",
+    "returncode": 0,
+    "started": 1793237287.1666715,
+    "ended": 1793237551.7405
+  },
+  {
+    "name": "model-v2-31200-recompute",
+    "returncode": 0,
+    "started": 1793237551.78214,
+    "ended": 1793237904.1357398
+  },
+  {
+    "name": "model-v2-31200-Z",
+    "returncode": 0,
+    "started": 1793237904.180513,
+    "ended": 1793238218.8713505
+  }
+]

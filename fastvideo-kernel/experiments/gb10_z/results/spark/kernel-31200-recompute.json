@@ -1,0 +1,337 @@
+{
+  "domain": "spark-new-replication-v1",
+  "replication_label": "new replication on new hardware",
+  "kind": "kernel",
+  "policy": "recompute",
+  "tokens": 31200,
+  "heads": 12,
+  "warmup": 2,
+  "measurements": 5,
+  "status": "completed",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "996f3a8541d3d7c9ced1e0260d1043dab8daca60858e284e3932f31dd23f4451",
+  "seed": 1000,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12",
+    "numpy": "2.5.3",
+    "device": "NVIDIA GB10",
+    "capability": [
+      12,
+      1
+    ],
+    "cuda": "13.0"
+  },
+  "strict_determinism": true,
+  "historical_acceptance_inherited": false,
+  "steps": [
+    {
+      "step": 0,
+      "warmup": true,
+      "wall_seconds": 1.5010860740439966,
+      "cuda_ms": 1501.0015869140625,
+      "before": {
+        "allocated": 385875968,
+        "reserved": 385875968,
+        "peak_allocated": 385875968,
+        "peak_reserved": 385875968
+      },
+      "after_forward": {
+        "allocated": 869718528,
+        "reserved": 889192448,
+        "peak_allocated": 869718528,
+        "peak_reserved": 889192448
+      },
+      "after_backward": {
+        "allocated": 868220928,
+        "reserved": 2833252352,
+        "peak_allocated": 2816773632,
+        "peak_reserved": 2833252352
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 0,
+        "forward_consistent_dv": true,
+        "stats_mode": "recompute",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 1461657600,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 1,
+      "warmup": true,
+      "wall_seconds": 1.213428777991794,
+      "cuda_ms": 1213.354736328125,
+      "before": {
+        "allocated": 385875968,
+        "reserved": 2835349504,
+        "peak_allocated": 385875968,
+        "peak_reserved": 2835349504
+      },
+      "after_forward": {
+        "allocated": 869718528,
+        "reserved": 2835349504,
+        "peak_allocated": 869718528,
+        "peak_reserved": 2835349504
+      },
+      "after_backward": {
+        "allocated": 868220928,
+        "reserved": 2835349504,
+        "peak_allocated": 2816773632,
+        "peak_reserved": 2835349504
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 0,
+        "forward_consistent_dv": true,
+        "stats_mode": "recompute",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 1461657600,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 2,
+      "warmup": false,
+      "wall_seconds": 1.2216539239743724,
+      "cuda_ms": 1221.6044921875,
+      "before": {
+        "allocated": 385875968,
+        "reserved": 2835349504,
+        "peak_allocated": 385875968,
+        "peak_reserved": 2835349504
+      },
+      "after_forward": {
+        "allocated": 869718528,
+        "reserved": 2835349504,
+        "peak_allocated": 869718528,
+        "peak_reserved": 2835349504
+      },
+      "after_backward": {
+        "allocated": 868220928,
+        "reserved": 2835349504,
+        "peak_allocated": 2816773632,
+        "peak_reserved": 2835349504
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 0,
+        "forward_consistent_dv": true,
+        "stats_mode": "recompute",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 1461657600,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 3,
+      "warmup": false,
+      "wall_seconds": 1.2169685019180179,
+      "cuda_ms": 1216.88818359375,
+      "before": {
+        "allocated": 385875968,
+        "reserved": 2835349504,
+        "peak_allocated": 385875968,
+        "peak_reserved": 2835349504
+      },
+      "after_forward": {
+        "allocated": 869718528,
+        "reserved": 2835349504,
+        "peak_allocated": 869718528,
+        "peak_reserved": 2835349504
+      },
+      "after_backward": {
+        "allocated": 868220928,
+        "reserved": 2835349504,
+        "peak_allocated": 2816773632,
+        "peak_reserved": 2835349504
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 0,
+        "forward_consistent_dv": true,
+        "stats_mode": "recompute",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 1461657600,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 4,
+      "warmup": false,
+      "wall_seconds": 1.2126706279814243,
+      "cuda_ms": 1212.614501953125,
+      "before": {
+        "allocated": 385875968,
+        "reserved": 2835349504,
+        "peak_allocated": 385875968,
+        "peak_reserved": 2835349504
+      },
+      "after_forward": {
+        "allocated": 869718528,
+        "reserved": 2835349504,
+        "peak_allocated": 869718528,
+        "peak_reserved": 2835349504
+      },
+      "after_backward": {
+        "allocated": 868220928,
+        "reserved": 2835349504,
+        "peak_allocated": 2816773632,
+        "peak_reserved": 2835349504
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 0,
+        "forward_consistent_dv": true,
+        "stats_mode": "recompute",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 1461657600,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 5,
+      "warmup": false,
+      "wall_seconds": 1.2183348159305751,
+      "cuda_ms": 1218.2825927734375,
+      "before": {
+        "allocated": 385875968,
+        "reserved": 2835349504,
+        "peak_allocated": 385875968,
+        "peak_reserved": 2835349504
+      },
+      "after_forward": {
+        "allocated": 869718528,
+        "reserved": 2835349504,
+        "peak_allocated": 869718528,
+        "peak_reserved": 2835349504
+      },
+      "after_backward": {
+        "allocated": 868220928,
+        "reserved": 2835349504,
+        "peak_allocated": 2816773632,
+        "peak_reserved": 2835349504
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 0,
+        "forward_consistent_dv": true,
+        "stats_mode": "recompute",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 1461657600,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    },
+    {
+      "step": 6,
+      "warmup": false,
+      "wall_seconds": 1.2219886829843745,
+      "cuda_ms": 1221.9365234375,
+      "before": {
+        "allocated": 385875968,
+        "reserved": 2835349504,
+        "peak_allocated": 385875968,
+        "peak_reserved": 2835349504
+      },
+      "after_forward": {
+        "allocated": 869718528,
+        "reserved": 2835349504,
+        "peak_allocated": 869718528,
+        "peak_reserved": 2835349504
+      },
+      "after_backward": {
+        "allocated": 868220928,
+        "reserved": 2835349504,
+        "peak_allocated": 2816773632,
+        "peak_reserved": 2835349504
+      },
+      "statistics": {
+        "format": "dense",
+        "capacity": 0,
+        "overflow_fallback": false,
+        "storage_bytes": 0,
+        "forward_consistent_dv": true,
+        "stats_mode": "recompute",
+        "local_replay": false,
+        "spill_tile_count": 0,
+        "attempted_spill_tile_count": 0,
+        "fallback_reason": null,
+        "replay_scratch_bytes": 0,
+        "dense_storage_bytes": 1461657600,
+        "candidate": "Z",
+        "tiled_values": false,
+        "zero_spill_fastpath": false,
+        "has_spill_launch": false
+      }
+    }
+  ],
+  "tensor_sha256": {
+    "O": "90dd934a2b1a6d6ce0c2b92b336d1c04202c107489bf083b48ec967c7d364afe",
+    "dQ": "44f4bd38763ee6f373fac7303f631d6f3ac51b436c28a01355cca0fbcf48ec86",
+    "dK": "b84e693722e92bcc135116b0edf8906a2a149124f5cb17c906a7742b870d8522",
+    "dV": "ddd706692834a6d5bb01a71b7851c53f871686137b52a8e425a9446f95308980"
+  },
+  "median_wall_seconds": 1.2183348159305751,
+  "median_cuda_ms": 1218.2825927734375,
+  "peak_allocated": 2816773632,
+  "peak_reserved": 2835349504,
+  "timing_scope": "attention forward + backward, allocations and synchronization; no optimizer",
+  "original_result_sha256": "3d4616758d32c8f569e56123beb13707000eb9acdf948d6fc4496ec3d5e39df9",
+  "physical_hardware_distinct_from_history_verified": false
+}
