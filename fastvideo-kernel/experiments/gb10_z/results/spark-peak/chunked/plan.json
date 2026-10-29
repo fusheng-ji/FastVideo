@@ -1,0 +1,34 @@
+{
+  "seed": 20261030,
+  "runs": [
+    {
+      "round": 0,
+      "variant": "optimizer-chunk64"
+    },
+    {
+      "round": 0,
+      "variant": "baseline"
+    },
+    {
+      "round": 1,
+      "variant": "baseline"
+    },
+    {
+      "round": 1,
+      "variant": "optimizer-chunk64"
+    },
+    {
+      "round": 2,
+      "variant": "baseline"
+    },
+    {
+      "round": 2,
+      "variant": "optimizer-chunk64"
+    }
+  ],
+  "source": {
+    "spark_peak.py": "7c8a32e1c312cfdcb7094658508b4bfd2fa0cbb9b4a00671cdbe0e3a43f15b40",
+    "peak_memory.py": "8b2b0bc91247aafc19ddad326328aeed73b1c63fef3bcd14132d9f1ed4cfe0a3",
+    "peak_chunked.py": "b8d56ec24c5a7bf8bdadadcf84cd8f037c01b26097c5073c92d489380c5a39bd"
+  }
+}

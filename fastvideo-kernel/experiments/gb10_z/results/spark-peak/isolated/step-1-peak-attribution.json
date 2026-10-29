@@ -1,0 +1,18 @@
+{
+  "other_allocation_origins": {
+    "module.py:1369:convert": 302073856,
+    "unrecorded:0:unrecorded": 33554432,
+    "linear.py:153:apply": 33554432
+  },
+  "category_bytes": {
+    "parameters_master_fp32": 5675987200,
+    "allocator_rounding": 32804096,
+    "other_live_tensors": 369182720,
+    "optimizer_state": 11351974400,
+    "adam_sqrt_temporaries": 5675987200,
+    "gradients": 5675987200
+  },
+  "allocated": 28781922816,
+  "peak_allocated": 28781922816,
+  "step": 1
+}

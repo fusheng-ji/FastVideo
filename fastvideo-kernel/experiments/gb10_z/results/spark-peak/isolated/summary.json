@@ -1,0 +1,365 @@
+[
+  {
+    "run": "0-baseline",
+    "variant": "baseline",
+    "round": 0,
+    "status": "completed",
+    "wall_seconds": 10.040145940030925,
+    "cuda_ms": 10040.158203125,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": 0.0,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "0-clip-foreach",
+    "variant": "clip-foreach",
+    "round": 0,
+    "status": "completed",
+    "wall_seconds": 10.03215323004406,
+    "cuda_ms": 10032.1591796875,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": -0.07960750804425487,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "0-clip-loop",
+    "variant": "clip-loop",
+    "round": 0,
+    "status": "completed",
+    "wall_seconds": 9.99140818498563,
+    "cuda_ms": 9991.4169921875,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": -0.48542875109985895,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "0-optimizer-fused",
+    "variant": "optimizer-fused",
+    "round": 0,
+    "status": "completed",
+    "wall_seconds": 9.717733775964007,
+    "cuda_ms": 9717.0791015625,
+    "peak_allocated": 25310239232,
+    "peak_reserved": 27839692800,
+    "parameters_identical": false,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": -3.2112298565445507,
+    "paired_peak_reduction_percent": 12.06202798261301,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "0-optimizer-loop",
+    "variant": "optimizer-loop",
+    "round": 0,
+    "status": "completed",
+    "wall_seconds": 9.900593863916583,
+    "cuda_ms": 9899.861328125,
+    "peak_allocated": 25309816832,
+    "peak_reserved": 27858567168,
+    "parameters_identical": false,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": -1.3899407134903785,
+    "paired_peak_reduction_percent": 12.063495570455219,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "1-baseline",
+    "variant": "baseline",
+    "round": 1,
+    "status": "completed",
+    "wall_seconds": 10.595931716961786,
+    "cuda_ms": 10595.4326171875,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": 0.0,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "1-clip-foreach",
+    "variant": "clip-foreach",
+    "round": 1,
+    "status": "completed",
+    "wall_seconds": 10.593246449017897,
+    "cuda_ms": 10592.796875,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": -0.025342442888631744,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "1-clip-loop",
+    "variant": "clip-loop",
+    "round": 1,
+    "status": "completed",
+    "wall_seconds": 9.994833417003974,
+    "cuda_ms": 9994.2978515625,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": -5.6729159456132,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.12688442211055276,
+      0.12688442211055276,
+      0.12688442211055276
+    ]
+  },
+  {
+    "run": "1-optimizer-fused",
+    "variant": "optimizer-fused",
+    "round": 1,
+    "status": "completed",
+    "wall_seconds": 9.645410386030562,
+    "cuda_ms": 9644.837890625,
+    "peak_allocated": 25310239232,
+    "peak_reserved": 27839692800,
+    "parameters_identical": false,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": -8.970625295835433,
+    "paired_peak_reduction_percent": 12.06202798261301,
+    "paired_clock_relative_differences": [
+      0.12688442211055276,
+      0.12688442211055276,
+      0.12688442211055276
+    ]
+  },
+  {
+    "run": "1-optimizer-loop",
+    "variant": "optimizer-loop",
+    "round": 1,
+    "status": "completed",
+    "wall_seconds": 10.55036169104278,
+    "cuda_ms": 10549.9306640625,
+    "peak_allocated": 25309816832,
+    "peak_reserved": 27858567168,
+    "parameters_identical": false,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": -0.43007096625639063,
+    "paired_peak_reduction_percent": 12.063495570455219,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "2-baseline",
+    "variant": "baseline",
+    "round": 2,
+    "status": "completed",
+    "wall_seconds": 10.664539446006529,
+    "cuda_ms": 10664.23828125,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": 0.0,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "2-clip-foreach",
+    "variant": "clip-foreach",
+    "round": 2,
+    "status": "completed",
+    "wall_seconds": 10.632705172058195,
+    "cuda_ms": 10632.349609375,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": -0.29850584837262106,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "2-clip-loop",
+    "variant": "clip-loop",
+    "round": 2,
+    "status": "completed",
+    "wall_seconds": 10.585904015926644,
+    "cuda_ms": 10585.595703125,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": -0.7373542052894866,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "2-optimizer-fused",
+    "variant": "optimizer-fused",
+    "round": 2,
+    "status": "completed",
+    "wall_seconds": 10.273144574952312,
+    "cuda_ms": 10272.771484375,
+    "peak_allocated": 25310239232,
+    "peak_reserved": 27839692800,
+    "parameters_identical": false,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": -3.6700588247228993,
+    "paired_peak_reduction_percent": 12.06202798261301,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "2-optimizer-loop",
+    "variant": "optimizer-loop",
+    "round": 2,
+    "status": "completed",
+    "wall_seconds": 10.579427888034843,
+    "cuda_ms": 10579.17578125,
+    "peak_allocated": 25309816832,
+    "peak_reserved": 27858567168,
+    "parameters_identical": false,
+    "clock_p10_p50_p90": [
+      1592.0,
+      1592.0,
+      1592.0
+    ],
+    "paired_time_change_percent": -0.7980800146372702,
+    "paired_peak_reduction_percent": 12.063495570455219,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "safety-grad-bf16",
+    "variant": "grad-bf16",
+    "status": "failed",
+    "error_type": "RuntimeError",
+    "error": "attempting to assign a gradient with dtype 'c10::BFloat16' to a tensor with grad_dtype 'Float'. The gradient must match the tensor's grad_dtype (defaults to the tensor's dtype). You can set the tensor's grad_dtype attribute with a specific dtype, or None to allow any dtype. Set grad_dtype with caution. Diverging the dtypes of a tensor and its gradient may break downstream systems that assume they match.",
+    "completed_step_timing_available": false,
+    "parameters_identical": null
+  },
+  {
+    "run": "safety-release-grad",
+    "variant": "release-grad",
+    "status": "failed",
+    "error_type": "AssertionError",
+    "error": "Missing/nonfinite gradient",
+    "completed_step_timing_available": false,
+    "parameters_identical": null
+  }
+]

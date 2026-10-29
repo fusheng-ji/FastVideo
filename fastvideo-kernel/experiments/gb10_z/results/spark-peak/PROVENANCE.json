@@ -1,0 +1,25 @@
+{
+  "base_commit": "4d515657f40397c59df775e1175e79bdf8a202b6",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "source_sha256": {
+    "fastvideo-kernel/experiments/gb10_z/code/peak_suite.py": "43a0556809b86cfe002f50ad60360ad2bcc0ffc7c9f12803659f0249b4b6b5ea",
+    "fastvideo-kernel/experiments/gb10_z/code/peak_followup.py": "a5e1615cf0f37af53b59390d013ccd3e2e73b11a9ad1d696d4c7c3e33b03fdf6",
+    "fastvideo-kernel/experiments/gb10_z/code/peak_trace.py": "6bf24e8cca38c8b8ef8b338ba46ce7eef5e029fc49ccbb8825403e2009598846",
+    "fastvideo-kernel/experiments/gb10_z/code/peak_memory.py": "8b2b0bc91247aafc19ddad326328aeed73b1c63fef3bcd14132d9f1ed4cfe0a3",
+    "fastvideo-kernel/experiments/gb10_z/code/peak_chunked.py": "b8d56ec24c5a7bf8bdadadcf84cd8f037c01b26097c5073c92d489380c5a39bd",
+    "fastvideo-kernel/experiments/gb10_z/code/peak_report.py": "2d72c713454c1d0a1a8207c7aafd779127c97b62aa77bb62a0a0ded3301adb0b",
+    "fastvideo-kernel/experiments/gb10_z/code/peak_capture.py": "79536ffa04bb12e2f4ccc4076b90645777310d02b7940311d197c6c7a017c56d",
+    "fastvideo-kernel/experiments/gb10_z/code/spark_peak.py": "7c8a32e1c312cfdcb7094658508b4bfd2fa0cbb9b4a00671cdbe0e3a43f15b40",
+    "fastvideo-kernel/experiments/gb10_z/tests/test_peak_trace.py": "580a907284fb734c7ee5643a91ee8084887e58fa4059f99c7eb2cb721d34b88a"
+  },
+  "adapted_model_harness_origin_commit": "e30fc1214821ce7e0f4326881ef509650e6e114d",
+  "profiling_observer_final_parameter_hashes_identical": true,
+  "unwrapped_profile_raw_result_sha256": "df8e96fd3668313f6a2cbe50575a84f4f4bbb690bddae543c753fcc3fa453468",
+  "exact_profile_raw_result_sha256": "c2cde9837ebc6cef08e36c5b1dcee65187701da3285979db41dea7cc4bb529b0",
+  "cpu_tests": {
+    "experiment_suite": 120,
+    "fa2_policy": 18
+  },
+  "production_files_changed": false,
+  "GPU_experiments_retried": false
+}

@@ -1,0 +1,71 @@
+{
+  "domain": "spark-peak-profile-v1",
+  "variant": "grad-bf16",
+  "history": false,
+  "replication_label": "new replication on new hardware",
+  "kind": "model",
+  "policy": "dense",
+  "tokens": 8192,
+  "heads": 12,
+  "warmup": 1,
+  "measurements": 1,
+  "status": "failed",
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "7c8a32e1c312cfdcb7094658508b4bfd2fa0cbb9b4a00671cdbe0e3a43f15b40",
+  "seed": 1000,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12",
+    "numpy": "2.5.3",
+    "device": "NVIDIA GB10",
+    "capability": [
+      12,
+      1
+    ],
+    "cuda": "13.0"
+  },
+  "strict_determinism": true,
+  "historical_acceptance_inherited": false,
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": null,
+      "capturable": false
+    }
+  ],
+  "input": {
+    "parquet_sha256": "94275e366c8ef81b08f76691ff0396fb5c0daf0ed98d9a9e846707c32b3dad6e",
+    "latent_sha256": "13b43aa7590a1011a1ebf306213182cab4af81d801d582a9c41de4d763d1f46f",
+    "latent_shape": [
+      1,
+      16,
+      16,
+      32,
+      64
+    ],
+    "preprocessing": "original cached latent",
+    "repeated_batch": true
+  },
+  "model": {
+    "name": "Wan2.1-T2V-1.3B",
+    "checkpoint": "full",
+    "G": 1,
+    "lr": 1e-06,
+    "clip": 1.0,
+    "parameter_count": 1418996800,
+    "trainable_tensors": 825
+  },
+  "error_type": "RuntimeError",
+  "error": "attempting to assign a gradient with dtype 'c10::BFloat16' to a tensor with grad_dtype 'Float'. The gradient must match the tensor's grad_dtype (defaults to the tensor's dtype). You can set the tensor's grad_dtype attribute with a specific dtype, or None to allow any dtype. Set grad_dtype with caution. Diverging the dtypes of a tensor and its gradient may break downstream systems that assume they match.",
+  "raw_result_sha256": "ed37e05698f2a362c7f488f0da6efaa747f07f4c600c127af686d79b60366995",
+  "receipt": {
+    "round": "safety",
+    "variant": "grad-bf16",
+    "warmup": 1,
+    "measure": 1,
+    "returncode": 1,
+    "started_unix": 1793292091.0120718,
+    "ended_unix": 1793292113.883994
+  }
+}

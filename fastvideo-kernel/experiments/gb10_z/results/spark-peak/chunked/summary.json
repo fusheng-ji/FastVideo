@@ -1,0 +1,140 @@
+[
+  {
+    "run": "0-baseline",
+    "variant": "baseline",
+    "round": 0,
+    "status": "completed",
+    "wall_seconds": 10.00668235507328,
+    "cuda_ms": 10006.5068359375,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": 0.0,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "0-optimizer-chunk64",
+    "variant": "optimizer-chunk64",
+    "round": 0,
+    "status": "completed",
+    "wall_seconds": 9.991470020962879,
+    "cuda_ms": 9991.28515625,
+    "peak_allocated": 25308768256,
+    "peak_reserved": 28114419712,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": -0.15202175476959345,
+    "paired_peak_reduction_percent": 12.067138746092587,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "1-baseline",
+    "variant": "baseline",
+    "round": 1,
+    "status": "completed",
+    "wall_seconds": 9.98157172196079,
+    "cuda_ms": 9981.416015625,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": 0.0,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "1-optimizer-chunk64",
+    "variant": "optimizer-chunk64",
+    "round": 1,
+    "status": "completed",
+    "wall_seconds": 9.995174912037328,
+    "cuda_ms": 9995.0263671875,
+    "peak_allocated": 25308768256,
+    "peak_reserved": 28114419712,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": 0.13628304695350035,
+    "paired_peak_reduction_percent": 12.067138746092587,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "2-baseline",
+    "variant": "baseline",
+    "round": 2,
+    "status": "completed",
+    "wall_seconds": 9.992244089953601,
+    "cuda_ms": 9992.1064453125,
+    "peak_allocated": 28781922816,
+    "peak_reserved": 31622955008,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": 0.0,
+    "paired_peak_reduction_percent": 0.0,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  {
+    "run": "2-optimizer-chunk64",
+    "variant": "optimizer-chunk64",
+    "round": 2,
+    "status": "completed",
+    "wall_seconds": 9.994365099002607,
+    "cuda_ms": 9994.2392578125,
+    "peak_allocated": 25308768256,
+    "peak_reserved": 28114419712,
+    "parameters_identical": true,
+    "clock_p10_p50_p90": [
+      1794.0,
+      1794.0,
+      1794.0
+    ],
+    "paired_time_change_percent": 0.021226553614095423,
+    "paired_peak_reduction_percent": 12.067138746092587,
+    "paired_clock_relative_differences": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+]

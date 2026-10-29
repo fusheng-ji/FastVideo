@@ -1,0 +1,18 @@
+{
+  "step-0-zero_grad.pickle": "8e139db4b71b46cc770dd366e3e2e06083a89c80f404a538ee16de23b8f2ce87",
+  "step-0-forward.pickle": "5038a2f0254298c0718253e52d4bff1865627a3cd2fae7e311c5ff71a863e878",
+  "step-1-start.pickle": "0d856563e967c9f4ffd90ecc7781e3742495243751ee1f12eb2cfbb9162fff41",
+  "step-0-finite.pickle": "cc86a0289752ba26cd9741313c79f3409da1f19200bb3ac3552bb0d8f09247ce",
+  "step-0-clip.pickle": "e82a68f5e292b1056de85940c409e7aa2b5e0569db4aaa52bc3665f660e375f7",
+  "step-1-clip.pickle": "c7f3e789c37bfda26f0d07f61bae1364fad4a7031fbc36f4b7e26a40382ac17b",
+  "step-1-optimizer.pickle": "73e1daf85f99a61b461e103bba71b34a77af0bb51d9ef77bd0965e43bcfbc9d7",
+  "step-1-finite.pickle": "2b6b08c19b33d87524497de5a273963288cc8c2822886f958c23e316330fde59",
+  "step-0-start.pickle": "a746aafc6c4185f0721e07f6746faa3d36c0a562e53dc9168df8dc48e4204745",
+  "step-0-optimizer.pickle": "365ce1b01012795d2f8c738a346a236d810922ebab099548fa40439f3cf661f4",
+  "step-1-zero_grad.pickle": "3d46d0141a654651b2d0452d07b6a556149ad22a0ba258f92bfcd3f1aa583b4e",
+  "step-1-actual-peak.pickle": "f004029216297a7e39d724edb0fb9a03dd3b4c080ead30f8ab800d2c096e7c75",
+  "step-1-backward.pickle": "ec4a4bcf6fa808b4706c00288e7dc7f41d454b72daa183abbbb82f1f8e4ff137",
+  "step-0-backward.pickle": "cf63ef3c7c1e49662ff661b86e1fe3a44422d23652fac625fad59e32c638c679",
+  "step-0-actual-peak.pickle": "1f168522c2b16a6ce2562af9f1a3b9c254f600eb750089fe76ca03cecac67c20",
+  "step-1-forward.pickle": "1dbffb628f0843ba5f465d0cedd4d42dce5d3a71de097b0f7886ad69c2c95977"
+}

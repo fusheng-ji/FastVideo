@@ -1,0 +1,111 @@
+{
+  "seed": 20261029,
+  "runs": [
+    {
+      "round": 0,
+      "variant": "clip-foreach",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 0,
+      "variant": "clip-loop",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 0,
+      "variant": "baseline",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 0,
+      "variant": "optimizer-loop",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 0,
+      "variant": "optimizer-fused",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 1,
+      "variant": "optimizer-fused",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 1,
+      "variant": "clip-loop",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 1,
+      "variant": "baseline",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 1,
+      "variant": "clip-foreach",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 1,
+      "variant": "optimizer-loop",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 2,
+      "variant": "optimizer-fused",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 2,
+      "variant": "clip-foreach",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 2,
+      "variant": "clip-loop",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 2,
+      "variant": "baseline",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": 2,
+      "variant": "optimizer-loop",
+      "warmup": 1,
+      "measure": 3
+    },
+    {
+      "round": "safety",
+      "variant": "grad-bf16",
+      "warmup": 1,
+      "measure": 1
+    },
+    {
+      "round": "safety",
+      "variant": "release-grad",
+      "warmup": 1,
+      "measure": 1
+    }
+  ],
+  "source": {
+    "spark_peak.py": "7c8a32e1c312cfdcb7094658508b4bfd2fa0cbb9b4a00671cdbe0e3a43f15b40",
+    "peak_memory.py": "8b2b0bc91247aafc19ddad326328aeed73b1c63fef3bcd14132d9f1ed4cfe0a3"
+  }
+}
