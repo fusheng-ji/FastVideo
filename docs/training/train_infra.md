@@ -153,6 +153,7 @@ training:
     weight_decay: 0.01
     lr_scheduler: constant  # constant, linear, cosine, polynomial
     lr_warmup_steps: 0
+    foreach_chunk_size: 0   # N>0: run AdamW's foreach update on lists of N tensors to cap temporary memory
 
   loop:
     max_train_steps: 4000
