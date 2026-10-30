@@ -1,0 +1,113 @@
+{
+  "status": "passed",
+  "scope": "8192 tokens, G1, repeated historical first sample, three pairs of four updates; not 200-step acceptance",
+  "pairs": [
+    {
+      "status": "passed",
+      "failures": [],
+      "round": 0
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "round": 1
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "round": 2
+    }
+  ],
+  "runs": [
+    {
+      "round": 0,
+      "requested_chunk": 64,
+      "effective_chunk": 64,
+      "optimizer_class": "_ChunkedForeachAdamW",
+      "updates": 4,
+      "peak_allocated": 48789711360,
+      "peak_reserved": 51533316096,
+      "median_steps_2_to_4_seconds": 9.807643920881674,
+      "busy_clock_samples_entire_process": 40,
+      "busy_clock_min_mhz": 1794.0,
+      "busy_clock_median_mhz": 1794.0,
+      "busy_clock_max_mhz": 2398.0
+    },
+    {
+      "round": 0,
+      "requested_chunk": 0,
+      "effective_chunk": 0,
+      "optimizer_class": "AdamW",
+      "updates": 4,
+      "peak_allocated": 52261589504,
+      "peak_reserved": 53619982336,
+      "median_steps_2_to_4_seconds": 9.857046405086294,
+      "busy_clock_samples_entire_process": 41,
+      "busy_clock_min_mhz": 1794.0,
+      "busy_clock_median_mhz": 1794.0,
+      "busy_clock_max_mhz": 1794.0
+    },
+    {
+      "round": 1,
+      "requested_chunk": 0,
+      "effective_chunk": 0,
+      "optimizer_class": "AdamW",
+      "updates": 4,
+      "peak_allocated": 52261589504,
+      "peak_reserved": 53619982336,
+      "median_steps_2_to_4_seconds": 9.847238565096632,
+      "busy_clock_samples_entire_process": 40,
+      "busy_clock_min_mhz": 1794.0,
+      "busy_clock_median_mhz": 1794.0,
+      "busy_clock_max_mhz": 1794.0
+    },
+    {
+      "round": 1,
+      "requested_chunk": 64,
+      "effective_chunk": 64,
+      "optimizer_class": "_ChunkedForeachAdamW",
+      "updates": 4,
+      "peak_allocated": 48789711360,
+      "peak_reserved": 51533316096,
+      "median_steps_2_to_4_seconds": 9.838593923021108,
+      "busy_clock_samples_entire_process": 38,
+      "busy_clock_min_mhz": 1794.0,
+      "busy_clock_median_mhz": 1794.0,
+      "busy_clock_max_mhz": 1794.0
+    },
+    {
+      "round": 2,
+      "requested_chunk": 0,
+      "effective_chunk": 0,
+      "optimizer_class": "AdamW",
+      "updates": 4,
+      "peak_allocated": 52261589504,
+      "peak_reserved": 53619982336,
+      "median_steps_2_to_4_seconds": 9.855082530993968,
+      "busy_clock_samples_entire_process": 39,
+      "busy_clock_min_mhz": 1794.0,
+      "busy_clock_median_mhz": 1794.0,
+      "busy_clock_max_mhz": 1794.0
+    },
+    {
+      "round": 2,
+      "requested_chunk": 64,
+      "effective_chunk": 64,
+      "optimizer_class": "_ChunkedForeachAdamW",
+      "updates": 4,
+      "peak_allocated": 48789711360,
+      "peak_reserved": 51533316096,
+      "median_steps_2_to_4_seconds": 9.82914344384335,
+      "busy_clock_samples_entire_process": 38,
+      "busy_clock_min_mhz": 1794.0,
+      "busy_clock_median_mhz": 1794.0,
+      "busy_clock_max_mhz": 1794.0
+    }
+  ],
+  "timing_scope": "Trainer step_time_sec; first update excluded from median. Observer hashes excluded but measurement remains diagnostic; no CUDA-event or phase allocation attribution.",
+  "memory_saved_bytes_each_pair": [
+    3471878144,
+    3471878144,
+    3471878144
+  ]
+}

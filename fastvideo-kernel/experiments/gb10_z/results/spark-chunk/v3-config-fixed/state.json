@@ -1,0 +1,57 @@
+{
+  "status": "completed",
+  "completed": [
+    {
+      "round": 0,
+      "chunk": 64,
+      "name": "round-0-chunk-64"
+    },
+    {
+      "round": 0,
+      "chunk": 0,
+      "name": "round-0-chunk-0"
+    },
+    {
+      "round": 1,
+      "chunk": 0,
+      "name": "round-1-chunk-0"
+    },
+    {
+      "round": 1,
+      "chunk": 64,
+      "name": "round-1-chunk-64"
+    },
+    {
+      "round": 2,
+      "chunk": 0,
+      "name": "round-2-chunk-0"
+    },
+    {
+      "round": 2,
+      "chunk": 64,
+      "name": "round-2-chunk-64"
+    }
+  ],
+  "pairs": [
+    {
+      "status": "passed",
+      "failures": [],
+      "round": 0
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "round": 1
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "round": 2
+    }
+  ],
+  "current": {
+    "round": 2,
+    "chunk": 64,
+    "name": "round-2-chunk-64"
+  }
+}
