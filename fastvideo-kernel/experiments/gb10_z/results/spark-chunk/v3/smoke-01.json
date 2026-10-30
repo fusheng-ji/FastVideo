@@ -1,0 +1,67 @@
+{
+  "domain": "spark-chunk-validation-v3",
+  "experiment": "8192-token-one-update-smoke",
+  "base_commit": "49ed5c8f91a5207852c180d8fc37485156a40718",
+  "status": "blocked_before_entrypoint",
+  "launcher_exit_code": 2,
+  "failure_reason": "GPU remained occupied by VLLM::EngineCore after the known compatibility service and training hold were stopped. The launcher refused to start training.",
+  "requested": {
+    "tokens": 8192,
+    "foreach_chunk_size": 0,
+    "max_train_steps": 1,
+    "seed": 1000,
+    "trackers": [
+      "none"
+    ]
+  },
+  "environment_from_v2": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12"
+  },
+  "prerequisites_repeated": false,
+  "cpu_self_checks_repeated": false,
+  "smoke_attempts": 1,
+  "training_process_launches": 0,
+  "automatic_retry": false,
+  "optimizer_updates": 0,
+  "loss": null,
+  "gradient_norm": null,
+  "parameter_sha256": null,
+  "peak_allocated": null,
+  "peak_reserved": null,
+  "frequency_telemetry": null,
+  "frequency_telemetry_reason": "The occupancy guard exited before telemetry or the training process started.",
+  "gpu_workload_observed": "VLLM::EngineCore",
+  "gpu_workload_terminated": false,
+  "external_authentication_requested": false,
+  "tracker_configuration_runtime_verified": false,
+  "services": {
+    "compatibility_service": {
+      "before": "active",
+      "after": "active"
+    },
+    "manual_training_hold": {
+      "before": "active",
+      "after": "active"
+    },
+    "gpu_temperature_guard": {
+      "before": "active",
+      "after": "active",
+      "temporarily_stopped": false
+    },
+    "ollama": {
+      "before": "inactive",
+      "temporarily_stopped": false
+    },
+    "duty": {
+      "process_present": false
+    }
+  },
+  "production_files_modified": false,
+  "optimizer_code_modified": false,
+  "kernel_defaults_modified": false,
+  "command": "python fastvideo-kernel/experiments/gb10_z/code/chunk_entry_preflight.py --model \"$MODEL\" --data \"$TRAIN_DIRECTORY\" --output \"$NEW_OUTPUT\" --lock \"$LOCK_A\" --lock \"$LOCK_B\"",
+  "command_executed": false,
+  "conclusions_accepted": false
+}

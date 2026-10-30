@@ -1,0 +1,7 @@
+{
+  "experiment": "200-step-consistency",
+  "status": "not_run",
+  "reason": "The only v3 smoke launch was blocked by a competing GPU process; the stop rule was applied without retry.",
+  "parameter_hash_equality": null,
+  "performance_accepted": false
+}

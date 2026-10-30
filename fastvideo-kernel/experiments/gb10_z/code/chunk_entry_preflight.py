@@ -21,7 +21,7 @@ def main():
     if a.output.exists() or len(set(a.lock)) != 2:
         p.error('Require a fresh output directory and two distinct locks')
     a.output.mkdir(parents=True)
-    report = {'domain': 'spark-chunk-validation-v2', 'experiment': 'formal-entrypoint-preflight',
+    report = {'domain': 'spark-chunk-validation-v3', 'experiment': 'formal-entrypoint-preflight',
               'status': 'started', 'tokens': 8192, 'chunk_size': 0, 'steps_requested': 1,
               'kernel_sha256': digest(REPO / 'fastvideo-kernel/python/fastvideo_kernel/triton_kernels/attn_qat_train.py'),
               'harness_sha256': digest(Path(__file__)), 'historical_acceptance_inherited': False}
@@ -52,13 +52,18 @@ def main():
             config['training']['optimizer']['foreach_chunk_size'] = 0
             config['training']['loop']['max_train_steps'] = 1
             config['training']['checkpoint']['output_dir'] = str(a.output)
-            config['training']['tracker'] = {'project_name': '', 'trackers': []}
+            config['training']['tracker'] = {'project_name': 'gb10-chunk-validation', 'trackers': ['none']}
+            config['callbacks']['smoke_observer'] = {'_target_': 'chunk_observer.SmokeObserver'}
+            report['external_trackers'] = ['none']
             path = a.output / 'run.yaml'
             path.write_text(yaml.safe_dump(config))
             init_distributed_environment(distributed_init_method='file://' + str(a.output / 'rendezvous'))
             initialize_model_parallel()
             try:
                 run_training_from_config(str(path))
+                observation = json.loads((a.output / 'observation.json').read_text())
+                assert observation['status'] == 'completed' and len(observation['updates']) == 1
+                report['updates_completed'] = 1
                 report['status'] = 'completed'
             finally:
                 if torch.distributed.is_initialized():
