@@ -1,0 +1,12 @@
+{
+  "status": "failed",
+  "failure": "Assertion that CUDA remained uninitialized after package import failed",
+  "source_checks": {
+    "fastvideo_from_current_checkout": true,
+    "optimizer_from_current_checkout": true
+  },
+  "cuda_initialized_after_import": true,
+  "training_started": false,
+  "interpretation": "Package import has CUDA initialization side effects. Subsequent preflight uses stdlib-only AST and metadata inspection. This does not show a model training failure.",
+  "command": "$PY -c \"import torch, fastvideo; import fastvideo.train.utils.optimizer as opt; from pathlib import Path; assert Path(fastvideo.__file__).resolve().is_relative_to(Path.cwd()); assert Path(opt.__file__).resolve() == Path.cwd()/'fastvideo/train/utils/optimizer.py'; assert not torch.cuda.is_initialized()\""
+}

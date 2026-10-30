@@ -1,0 +1,65 @@
+{
+  "domain": "spark-production-chunk-preflight-v1",
+  "target_commit": "ce33886087f5aa3db0283c90e993adcba29259e3",
+  "historical_reference_commit": "cf6327b7f4d8f1326717f5be9ef9da74fb067560",
+  "status": "blocked",
+  "basis": "source compatibility, not a GPU runtime failure",
+  "target_kernel": {
+    "sha256": "1481f97d2d4a7f74a87e1532e89c1af1a99d33a56c8f6cb65ff5d8d61b2c437e",
+    "required_definitions": {
+      "_sm121_forward_consistent_dv_enabled": null,
+      "_sm121_dv_stats_mode": null,
+      "_sm121_dv_stats_shape": null,
+      "_attn_bwd_dv_forward_weights": null
+    },
+    "context_saves": [
+      {
+        "line": 1324,
+        "arguments": [
+          "q",
+          "k",
+          "v",
+          "o_for_bwd",
+          "M"
+        ]
+      }
+    ],
+    "contains_dv_maxima": false
+  },
+  "historical_kernel": {
+    "sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+    "required_definitions": {
+      "_sm121_forward_consistent_dv_enabled": 108,
+      "_sm121_dv_stats_mode": 126,
+      "_sm121_dv_stats_shape": 135,
+      "_attn_bwd_dv_forward_weights": 1572
+    },
+    "context_saves": [
+      {
+        "line": 2339,
+        "arguments": [
+          "*saved"
+        ]
+      }
+    ],
+    "contains_dv_maxima": true
+  },
+  "fa2_backward_calls": [
+    {
+      "line": 156,
+      "deterministic": "False"
+    }
+  ],
+  "fa2_global_determinism_policy_present": false,
+  "historical_experiment_scripts_present": false,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12",
+    "numpy": "2.5.3"
+  },
+  "gpu_training_runs": 0,
+  "services_changed": false,
+  "production_patches_applied": false,
+  "next_action": "Obtain an explicitly approved baseline with GB10 saved dense statistics and the FA2 determinism policy; do not transplant automatically"
+}

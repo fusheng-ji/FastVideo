@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "passed": 6,
+  "warnings": 14,
+  "warning_type": "Torch script_method deprecation",
+  "command": "$PY -m pytest fastvideo/tests/train/utils/test_optimizer_foreach_chunk.py -q --confcutdir=fastvideo/tests/train/utils",
+  "scope": "CPU optimizer unit tests; not full-model GPU validation"
+}

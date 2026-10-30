@@ -1,0 +1,11 @@
+{
+  "experiment": "8192-paired",
+  "status": "not_run",
+  "reason": "Required historical GB10 dense/save and strict FA2 baseline absent at ce3388608; stop requested on incompatible prerequisite",
+  "peak_allocated": null,
+  "peak_reserved": null,
+  "step_seconds": null,
+  "parameter_hashes_equal": null,
+  "first_differing_step": null,
+  "gpu_attempts": 0
+}
