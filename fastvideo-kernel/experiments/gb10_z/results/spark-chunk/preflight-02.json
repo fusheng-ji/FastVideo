@@ -1,0 +1,15 @@
+{
+  "domain": "spark-chunk-validation-v2",
+  "experiment": "formal-entrypoint-preflight",
+  "status": "failed",
+  "tokens": 8192,
+  "chunk_size": 0,
+  "steps_requested": 1,
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "a4c6a5e4683f7d8d9e7ac68ba8100112956163494b62b366bd2dad3a5f23c95b",
+  "historical_acceptance_inherited": false,
+  "error_type": "AttributeError",
+  "error": "'str' object has no attribute 'open'",
+  "attempt": 2,
+  "automatic_retry": false
+}

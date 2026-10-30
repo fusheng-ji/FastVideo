@@ -1,0 +1,7 @@
+{
+  "experiment": "chunk-size-scan",
+  "status": "not_run",
+  "reason": "Formal entrypoint preflight failed during tracker initialization; no optimizer update executed.",
+  "parameter_hash_equality": null,
+  "performance_accepted": false
+}

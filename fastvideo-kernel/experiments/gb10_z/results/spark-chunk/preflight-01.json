@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "phase": "harness_metadata_before_cuda",
+  "error_type": "AttributeError",
+  "error": "digest received str instead of Path",
+  "training_started": false,
+  "attempt": 1,
+  "automatic_retry": false
+}
