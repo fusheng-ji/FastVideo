@@ -13,6 +13,7 @@ from portable import CODE, REPO, configure, digest
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--chunk', type=int, choices=(0, 64), default=0)
     p.add_argument('--steps', type=int, choices=(1, 4), default=1)
     p.add_argument('--model', type=Path, required=True)
     p.add_argument('--data', type=Path, required=True)
@@ -23,7 +24,7 @@ def main():
         p.error('Require a fresh output directory and two distinct locks')
     a.output.mkdir(parents=True)
     report = {'domain': 'spark-chunk-validation-v3', 'experiment': 'formal-entrypoint-preflight',
-              'status': 'started', 'tokens': 8192, 'chunk_size': 0, 'steps_requested': a.steps,
+              'status': 'started', 'tokens': 8192, 'chunk_size': a.chunk, 'steps_requested': a.steps,
               'kernel_sha256': digest(REPO / 'fastvideo-kernel/python/fastvideo_kernel/triton_kernels/attn_qat_train.py'),
               'harness_sha256': digest(Path(__file__)), 'historical_acceptance_inherited': False}
     try:
@@ -50,7 +51,7 @@ def main():
             config = yaml.safe_load((CODE.parent / 'configs/calibration-8192.yaml').read_text())
             config['models']['student']['init_from'] = str(a.model)
             config['training']['data']['data_path'] = str(a.data)
-            config['training']['optimizer']['foreach_chunk_size'] = 0
+            config['training']['optimizer']['foreach_chunk_size'] = a.chunk
             config['training']['loop']['max_train_steps'] = a.steps
             config['training']['checkpoint']['output_dir'] = str(a.output)
             config['training']['tracker'] = {'project_name': 'gb10-chunk-validation', 'trackers': ['none']}
@@ -58,6 +59,10 @@ def main():
             report['external_trackers'] = ['none']
             path = a.output / 'run.yaml'
             path.write_text(yaml.safe_dump(config))
+            from fastvideo.train.utils.config import load_run_config
+            resolved = load_run_config(str(path))
+            report['resolved_chunk_size'] = resolved.training.optimizer.foreach_chunk_size
+            assert report['resolved_chunk_size'] == a.chunk, 'YAML chunk size was not preserved by config loader'
             init_distributed_environment(distributed_init_method='file://' + str(a.output / 'rendezvous'))
             initialize_model_parallel()
             try:

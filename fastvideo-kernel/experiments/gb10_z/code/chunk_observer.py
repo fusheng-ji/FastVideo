@@ -32,6 +32,9 @@ class SmokeObserver(Callback):
         self.report['parameter_tensors'] = len(self.parameters)
         assert len(self.parameters) == 825, 'Expected 825 parameter tensors'
         self.report['initial_parameter_sha256'] = parameter_hashes(self.parameters)
+        self.report['initial_method_rng_sha256'] = parameter_hashes([method.cuda_generator.get_state()])
+        self.report['initial_cpu_rng_sha256'] = parameter_hashes([torch.get_rng_state()])
+        self.report['initial_cuda_rng_sha256'] = parameter_hashes([torch.cuda.get_rng_state()])
         optimizer = method.get_optimizers(iteration)[0]
         self.report['optimizer_class'] = type(optimizer).__name__
         self.report['optimizer_chunk_size'] = getattr(optimizer, '_foreach_chunk_size', 0)
@@ -55,6 +58,7 @@ class SmokeObserver(Callback):
         changed = sum(hashes[key] != value for key, value in self.report['initial_parameter_sha256'].items())
         row = {'step': iteration, 'metrics': metrics, 'parameter_sha256': hashes,
                'parameters_changed_from_initial': changed,
+               'method_rng_sha256': parameter_hashes([method.cuda_generator.get_state()]),
                'peak_allocated': torch.cuda.max_memory_allocated(),
                'peak_reserved': torch.cuda.max_memory_reserved()}
         self.report['updates'].append(row)

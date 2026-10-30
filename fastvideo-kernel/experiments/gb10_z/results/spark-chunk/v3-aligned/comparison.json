@@ -1,0 +1,32 @@
+{
+  "historical_final_hashes_identical": true,
+  "parameter_count": 825,
+  "new_runs_all_step_hashes_identical": true,
+  "losses": [
+    0.0868588387966156,
+    0.08840402215719223,
+    0.1797984391450882,
+    0.2647973299026489
+  ],
+  "gradient_norms": {
+    "1": {
+      "grad_norm/student": 0.48990559577941895
+    },
+    "2": {
+      "grad_norm/student": 0.3220910429954529
+    },
+    "3": {
+      "grad_norm/student": 1.4921125173568726
+    },
+    "4": {
+      "grad_norm/student": 2.849712371826172
+    }
+  },
+  "pair_acceptance": {
+    "status": "failed",
+    "failures": [
+      "chunk_optimizer_selection"
+    ]
+  },
+  "interpretation": "Data aligned and dense historical endpoint matches. Requested chunk64 is still plain AdamW with effective chunk0; not a valid optimizer comparison."
+}

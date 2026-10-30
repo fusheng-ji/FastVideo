@@ -1,0 +1,22 @@
+{
+  "status": "blocked",
+  "completed": [
+    {
+      "round": 0,
+      "chunk": 64,
+      "name": "round-0-chunk-64"
+    },
+    {
+      "round": 0,
+      "chunk": 0,
+      "name": "round-0-chunk-0"
+    }
+  ],
+  "pairs": [],
+  "current": {
+    "round": 0,
+    "chunk": 0,
+    "name": "round-0-chunk-0"
+  },
+  "error": "Requested chunk64 resolved to 0; no valid chunked-optimizer comparison"
+}

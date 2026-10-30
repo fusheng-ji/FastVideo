@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "reason": "YAML foreach_chunk_size is not passed into OptimizerConfig by config loader",
+  "cases": [
+    {
+      "requested": 0,
+      "resolved": 0
+    },
+    {
+      "requested": 64,
+      "resolved": 0
+    }
+  ],
+  "cuda_initialized": true
+}
