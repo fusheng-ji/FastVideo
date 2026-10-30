@@ -75,6 +75,7 @@ def test_minimal_yaml_applies_all_defaults(tmp_path: Path) -> None:
     assert t.optimizer.lr_milestones == ()
     assert t.optimizer.lr_gamma == pytest.approx(0.1)
     assert t.optimizer.fused is False
+    assert t.optimizer.foreach_chunk_size == 0
 
     assert t.loop.max_train_steps == 0
     assert t.loop.gradient_accumulation_steps == 1
@@ -440,3 +441,23 @@ def test_callbacks_passed_through_when_present(tmp_path: Path) -> None:
     cfg = load_run_config(_write_yaml(tmp_path, data))
     assert "grad_clip" in cfg.callbacks
     assert cfg.callbacks["grad_clip"]["max_grad_norm"] == 1.0
+
+
+@pytest.mark.parametrize("chunk", [0, 64])
+def test_yaml_foreach_chunk_selects_optimizer(tmp_path: Path, chunk: int) -> None:
+    import torch
+    from fastvideo.train.utils.optimizer import build_optimizer_and_scheduler
+
+    data = _minimal_yaml()
+    data["training"] = {"optimizer": {"foreach_chunk_size": chunk}}
+    cfg = load_run_config(_write_yaml(tmp_path, data))
+    assert cfg.training.optimizer.foreach_chunk_size == chunk
+    optimizer, _ = build_optimizer_and_scheduler(
+        params=[torch.nn.Parameter(torch.ones(2))],
+        optimizer_config=cfg.training.optimizer,
+        loop_config=cfg.training.loop,
+        learning_rate=1e-6,
+        betas=(0.9, 0.999),
+        scheduler_name="constant",
+    )
+    assert type(optimizer).__name__ == ("_ChunkedForeachAdamW" if chunk else "AdamW")
