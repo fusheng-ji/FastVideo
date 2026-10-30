@@ -1,0 +1,6 @@
+{
+  "experiment": "8192-paired",
+  "status": "not_run",
+  "reason": "Single smoke failed before first update: missing text_encoder weights.",
+  "accepted": false
+}

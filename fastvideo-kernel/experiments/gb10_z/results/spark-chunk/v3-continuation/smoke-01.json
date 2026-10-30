@@ -1,0 +1,31 @@
+{
+  "domain": "spark-chunk-validation-v3",
+  "experiment": "formal-entrypoint-preflight",
+  "status": "failed",
+  "tokens": 8192,
+  "chunk_size": 0,
+  "steps_requested": 1,
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "5dea9eff46137e88157a8289d55db9ad3970d95d2b3a0a4e2c76ce55d18df340",
+  "historical_acceptance_inherited": false,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12"
+  },
+  "external_trackers": [
+    "none"
+  ],
+  "error_type": "RuntimeError",
+  "error": "Cannot find any model weights with `<MODEL>/text_encoder`",
+  "optimizer_updates": 0,
+  "loss": null,
+  "parameter_sha256": null,
+  "automatic_retry": false,
+  "tracker_initialization_passed": true,
+  "stop_phase": "Trainer.run -> method.on_train_start -> student.ensure_negative_conditioning -> encode_negative_prompt",
+  "services_restored": true,
+  "prerequisites_repeated": false,
+  "cpu_self_checks_repeated": false,
+  "production_files_modified": false
+}

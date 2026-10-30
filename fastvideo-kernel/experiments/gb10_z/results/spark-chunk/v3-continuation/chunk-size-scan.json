@@ -1,0 +1,6 @@
+{
+  "experiment": "chunk-size-scan",
+  "status": "not_run",
+  "reason": "Single smoke failed before first update: missing text_encoder weights.",
+  "accepted": false
+}
