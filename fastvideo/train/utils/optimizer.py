@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import inspect
 from typing import TYPE_CHECKING
 
 import torch
+import torch.optim.adam as _torch_adam
 
 from fastvideo.training.training_utils import (
     clip_grad_norm_while_handling_failing_dtensor_cases,
@@ -16,6 +18,46 @@ if TYPE_CHECKING:
         OptimizerConfig,
         TrainingLoopConfig,
     )
+
+_FOREACH_ARGS = ("params", "grads", "exp_avgs", "exp_avg_sqs", "max_exp_avg_sqs", "state_steps")
+
+
+def _chunked_multi_tensor_adam(original, chunk_size: int):
+    """Run ``original`` on consecutive tensor lists of at most ``chunk_size``; the per-tensor math is unchanged."""
+
+    def run(*args, **kwargs):
+        lists, rest = args[:len(_FOREACH_ARGS)], args[len(_FOREACH_ARGS):]
+        for offset in range(0, len(lists[0]), chunk_size):
+            original(*(x[offset:offset + chunk_size] for x in lists), *rest, **kwargs)
+
+    return run
+
+
+class _ChunkedForeachAdamW(torch.optim.AdamW):
+    """AdamW whose foreach update is split into bounded lists to cap its temporary tensors.
+
+    PyTorch's foreach AdamW materializes parameter-sized temporaries for every tensor at once. Chunking keeps
+    the foreach arithmetic and results unchanged while lowering the peak. It relies on the private
+    ``torch.optim.adam._multi_tensor_adam``; the swap is scoped to this optimizer's ``step``.
+    """
+
+    def __init__(self, params, *, foreach_chunk_size: int, **kwargs):
+        if foreach_chunk_size <= 0:
+            raise ValueError(f"foreach_chunk_size must be positive, got {foreach_chunk_size}")
+        original = getattr(_torch_adam, "_multi_tensor_adam", None)
+        if original is None or tuple(inspect.signature(original).parameters)[:len(_FOREACH_ARGS)] != _FOREACH_ARGS:
+            raise RuntimeError("foreach_chunk_size needs torch.optim.adam._multi_tensor_adam with the expected "
+                               f"signature; unsupported torch {torch.__version__}")
+        self._foreach_chunk_size = foreach_chunk_size
+        super().__init__(params, **kwargs)
+
+    def step(self, closure=None):
+        original = _torch_adam._multi_tensor_adam
+        _torch_adam._multi_tensor_adam = _chunked_multi_tensor_adam(original, self._foreach_chunk_size)
+        try:
+            return super().step(closure)
+        finally:
+            _torch_adam._multi_tensor_adam = original
 
 
 def build_optimizer_and_scheduler(
@@ -36,13 +78,19 @@ def build_optimizer_and_scheduler(
         raise ValueError("No trainable parameters passed to "
                          "build_optimizer_and_scheduler")
 
-    optimizer = torch.optim.AdamW(
-        params,
+    adamw_kwargs = dict(
         lr=float(learning_rate),
         betas=betas,
         weight_decay=float(optimizer_config.weight_decay),
         eps=1e-8,
     )
+    chunk_size = int(optimizer_config.foreach_chunk_size)
+    if chunk_size < 0:
+        raise ValueError(f"optimizer.foreach_chunk_size must be >= 0, got {chunk_size}")
+    if chunk_size:
+        optimizer = _ChunkedForeachAdamW(params, foreach_chunk_size=chunk_size, **adamw_kwargs)
+    else:
+        optimizer = torch.optim.AdamW(params, **adamw_kwargs)
 
     scheduler = get_scheduler(
         str(scheduler_name),

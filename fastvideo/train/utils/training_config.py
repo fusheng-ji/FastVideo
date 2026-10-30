@@ -44,6 +44,8 @@ class OptimizerConfig:
     lr_num_cycles: int = 0
     lr_power: float = 0.0
     min_lr_ratio: float = 0.5
+    # 0 keeps PyTorch's single foreach call; N>0 runs the same foreach AdamW update on lists of at most N tensors.
+    foreach_chunk_size: int = 0
 
 
 @dataclass(slots=True)
