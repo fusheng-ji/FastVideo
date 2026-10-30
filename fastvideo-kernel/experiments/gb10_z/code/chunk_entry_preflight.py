@@ -13,6 +13,7 @@ from portable import CODE, REPO, configure, digest
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--steps', type=int, choices=(1, 4), default=1)
     p.add_argument('--model', type=Path, required=True)
     p.add_argument('--data', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
@@ -22,7 +23,7 @@ def main():
         p.error('Require a fresh output directory and two distinct locks')
     a.output.mkdir(parents=True)
     report = {'domain': 'spark-chunk-validation-v3', 'experiment': 'formal-entrypoint-preflight',
-              'status': 'started', 'tokens': 8192, 'chunk_size': 0, 'steps_requested': 1,
+              'status': 'started', 'tokens': 8192, 'chunk_size': 0, 'steps_requested': a.steps,
               'kernel_sha256': digest(REPO / 'fastvideo-kernel/python/fastvideo_kernel/triton_kernels/attn_qat_train.py'),
               'harness_sha256': digest(Path(__file__)), 'historical_acceptance_inherited': False}
     try:
@@ -50,7 +51,7 @@ def main():
             config['models']['student']['init_from'] = str(a.model)
             config['training']['data']['data_path'] = str(a.data)
             config['training']['optimizer']['foreach_chunk_size'] = 0
-            config['training']['loop']['max_train_steps'] = 1
+            config['training']['loop']['max_train_steps'] = a.steps
             config['training']['checkpoint']['output_dir'] = str(a.output)
             config['training']['tracker'] = {'project_name': 'gb10-chunk-validation', 'trackers': ['none']}
             config['callbacks']['smoke_observer'] = {'_target_': 'chunk_observer.SmokeObserver'}
@@ -62,8 +63,8 @@ def main():
             try:
                 run_training_from_config(str(path))
                 observation = json.loads((a.output / 'observation.json').read_text())
-                assert observation['status'] == 'completed' and len(observation['updates']) == 1
-                report['updates_completed'] = 1
+                assert observation['status'] == 'completed' and len(observation['updates']) == a.steps
+                report['updates_completed'] = a.steps
                 report['status'] = 'completed'
             finally:
                 if torch.distributed.is_initialized():

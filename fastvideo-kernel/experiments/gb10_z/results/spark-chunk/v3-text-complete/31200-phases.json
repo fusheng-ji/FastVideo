@@ -1,0 +1,4 @@
+{
+  "status": "not_run",
+  "reason": "Historical chunk0 endpoint hash mismatch; comparison has input-stream confounding. Stop rule retained."
+}
