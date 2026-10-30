@@ -432,6 +432,7 @@ def _build_training_config(
             lr_milestones=tuple(int(step) for step in (o.get("lr_milestones", []) or [])),
             lr_gamma=float(o.get("lr_gamma", 0.1) or 0.1),
             fused=bool(o.get("fused", False)),
+            foreach_chunk_size=int(o.get("foreach_chunk_size", 0) or 0),
         ),
         loop=TrainingLoopConfig(
             max_train_steps=int(lo.get("max_train_steps", 0) or 0),
