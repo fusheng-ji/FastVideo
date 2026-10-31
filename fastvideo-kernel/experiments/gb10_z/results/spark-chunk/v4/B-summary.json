@@ -1,0 +1,71 @@
+{
+  "numerical_pairs": "3 passed; two updates per run",
+  "runs": [
+    {
+      "run": "B-round-0-chunk-64",
+      "effective_chunk": 64,
+      "peak_allocated_bytes": 58027737600,
+      "peak_reserved_bytes": 63203966976,
+      "peak_first_observed_after": "backward_end",
+      "peak_step": 2,
+      "final_encoder_tensor_refs": 194,
+      "final_encoder_storage_bytes": 22723641344
+    },
+    {
+      "run": "B-round-0-chunk-0",
+      "effective_chunk": 0,
+      "peak_allocated_bytes": 54392877568,
+      "peak_reserved_bytes": 55322869760,
+      "peak_first_observed_after": "optimizer_end",
+      "peak_step": 1,
+      "final_encoder_tensor_refs": 0,
+      "final_encoder_storage_bytes": 0
+    },
+    {
+      "run": "B-round-1-chunk-0",
+      "effective_chunk": 0,
+      "peak_allocated_bytes": 54392877568,
+      "peak_reserved_bytes": 55322869760,
+      "peak_first_observed_after": "optimizer_end",
+      "peak_step": 1,
+      "final_encoder_tensor_refs": 0,
+      "final_encoder_storage_bytes": 0
+    },
+    {
+      "run": "B-round-1-chunk-64",
+      "effective_chunk": 64,
+      "peak_allocated_bytes": 58027737600,
+      "peak_reserved_bytes": 63203966976,
+      "peak_first_observed_after": "backward_end",
+      "peak_step": 2,
+      "final_encoder_tensor_refs": 194,
+      "final_encoder_storage_bytes": 22723641344
+    },
+    {
+      "run": "B-round-2-chunk-0",
+      "effective_chunk": 0,
+      "peak_allocated_bytes": 54392877568,
+      "peak_reserved_bytes": 55322869760,
+      "peak_first_observed_after": "optimizer_end",
+      "peak_step": 1,
+      "final_encoder_tensor_refs": 0,
+      "final_encoder_storage_bytes": 0
+    },
+    {
+      "run": "B-round-2-chunk-64",
+      "effective_chunk": 64,
+      "peak_allocated_bytes": 58027737600,
+      "peak_reserved_bytes": 63203966976,
+      "peak_first_observed_after": "backward_end",
+      "peak_step": 2,
+      "final_encoder_tensor_refs": 194,
+      "final_encoder_storage_bytes": 22723641344
+    }
+  ],
+  "chunk64_peak_change_bytes_each_pair": [
+    3634860032,
+    3634860032,
+    3634860032
+  ],
+  "memory_conclusion": "No end-to-end peak savings in this batch; encoder storage lifetime differs between configurations. Do not attribute difference solely to optimizer temporaries."
+}

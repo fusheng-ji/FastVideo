@@ -1,0 +1,5 @@
+{
+  "status": "not_run",
+  "reason": "Optional chunk sweep deferred while A attribution remains unresolved.",
+  "trend_claim": false
+}

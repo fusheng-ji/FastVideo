@@ -1,0 +1,8 @@
+{
+  "new_comparator_tests_passed": 4,
+  "precommit": "passed; repository exclusions respected",
+  "production_source_diff": "empty against 45f25e5c",
+  "A_snapshot_certified": false,
+  "C_200_step_certified": false,
+  "service_restore_receipts": "Per-run services-after logs record active hold, compatibility and guard. At later inspection the hold unit was absent; no claim about its subsequent lifecycle."
+}

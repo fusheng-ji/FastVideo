@@ -1,0 +1,15 @@
+{
+  "status": "partial_observation_not_peak_certification",
+  "encoder_parameters_buffers_bytes_after_encoding": 22723641344,
+  "encoder_object_alive_after_encoding": false,
+  "encoder_tensor_refs_alive_after_encoding": 194,
+  "negative_cache_bytes": 4194500,
+  "vae_bytes": 293186636,
+  "historical_formal_peak_bytes": 52261589504,
+  "historical_private_peak_bytes": 28781922816,
+  "gap_bytes": 23479666688,
+  "gap_after_subtracting_encoder_bytes": 756025344,
+  "conditional_estimated_formal_peak_if_encoder_storage_released_bytes": 29537948160,
+  "estimate_scope": "Arithmetic subtraction from historical formal peak, not measured release; actual peak may move. No release performed.",
+  "failure": "Snapshot active-allocated category sum did not equal memory_allocated. Neither differing totals nor the snapshot were persisted before assertion; exact peak attribution is unavailable."
+}

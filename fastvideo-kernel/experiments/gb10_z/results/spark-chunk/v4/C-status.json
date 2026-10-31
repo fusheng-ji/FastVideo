@@ -1,0 +1,5 @@
+{
+  "status": "not_run",
+  "reason": "A failed its snapshot accounting invariant; long training deferred under the explicitly permitted A/B failure gate.",
+  "updates_executed": 0
+}

@@ -1,0 +1,161 @@
+{
+  "phases": [
+    {
+      "phase": "model_loaded",
+      "step": 0,
+      "allocated": 5675987456,
+      "reserved": 6157238272,
+      "peak_allocated": 5732610560,
+      "peak_reserved": 6157238272,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "preprocessors_loaded",
+      "step": 0,
+      "allocated": 5978061312,
+      "reserved": 6333399040,
+      "peak_allocated": 5978061312,
+      "peak_reserved": 6333399040,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "text_encoder_loaded",
+      "step": 0,
+      "allocated": 28701702656,
+      "reserved": 33728495616,
+      "peak_allocated": 32969406976,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": true,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "negative_encoding_returned",
+      "step": 0,
+      "allocated": 28739451904,
+      "reserved": 33728495616,
+      "peak_allocated": 32969406976,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344,
+        "text_encoder_outputs_not_cache": 4194500
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "negative_condition_cached",
+      "step": 0,
+      "allocated": 28739451904,
+      "reserved": 33728495616,
+      "peak_allocated": 32969406976,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "zero_grad_end",
+      "step": 0,
+      "allocated": 28739451904,
+      "reserved": 33728495616,
+      "peak_allocated": 28739451904,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "before_forward",
+      "step": 1,
+      "allocated": 28739451904,
+      "reserved": 33728495616,
+      "peak_allocated": 28739451904,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "forward_end",
+      "step": 1,
+      "allocated": 30400758784,
+      "reserved": 33734787072,
+      "peak_allocated": 31070498304,
+      "peak_reserved": 33734787072,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "backward_end",
+      "step": 1,
+      "allocated": 35232577536,
+      "reserved": 39439040512,
+      "peak_allocated": 36679091712,
+      "peak_reserved": 39439040512,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "clip_end",
+      "step": 1,
+      "allocated": 35232578560,
+      "reserved": 39439040512,
+      "peak_allocated": 36679091712,
+      "peak_reserved": 39439040512,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 194
+    }
+  ],
+  "peak_snapshots": []
+}
