@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING, Any
 
 import torch
 import torch.optim.adam as _torch_adam
+from torch.distributed.tensor import DTensor
 
 from fastvideo.training.training_utils import (
     clip_grad_norm_while_handling_failing_dtensor_cases,
@@ -68,6 +69,7 @@ def build_optimizer_and_scheduler(
     learning_rate: float,
     betas: tuple[float, float],
     scheduler_name: str,
+    weight_decay: float | None = None,
 ) -> tuple[torch.optim.Optimizer, object]:
     """Build an AdamW optimizer and LR scheduler.
 
@@ -78,15 +80,14 @@ def build_optimizer_and_scheduler(
         raise ValueError("No trainable parameters passed to "
                          "build_optimizer_and_scheduler")
 
-    adamw_kwargs: dict[str, Any] = {}
-    if bool(getattr(optimizer_config, "fused", False)):
-        adamw_kwargs["fused"] = True
-    adamw_kwargs.update(
+    adamw_kwargs: dict[str, Any] = dict(
         lr=float(learning_rate),
         betas=betas,
-        weight_decay=float(optimizer_config.weight_decay),
+        weight_decay=float(optimizer_config.weight_decay if weight_decay is None else weight_decay),
         eps=float(optimizer_config.eps),
     )
+    if bool(getattr(optimizer_config, "fused", False)):
+        adamw_kwargs["fused"] = True
     chunk_size = int(optimizer_config.foreach_chunk_size)
     if chunk_size < 0:
         raise ValueError(f"optimizer.foreach_chunk_size must be >= 0, got {chunk_size}")
@@ -171,3 +172,47 @@ def clip_grad_norm_if_needed(
         foreach=None,
     ))
     return (float(grad_norm.item()) if grad_norm is not None else 0.0)
+
+
+@torch.no_grad()
+def measure_grad_norm(module: torch.nn.Module) -> float:
+    """Measure the global L2 gradient norm without changing gradients.
+
+    This uses the same DTensor-aware reduction as gradient clipping, but it
+    deliberately does not apply a clip coefficient. In particular, an
+    overflowing norm must remain diagnostic evidence rather than multiplying
+    otherwise-finite gradients by ``inf / inf``.
+    """
+    gradients = [parameter.grad for parameter in module.parameters() if parameter.grad is not None]
+    if not gradients:
+        return 0.0
+    grad_norm = torch.nn.utils.get_total_norm(
+        gradients,
+        norm_type=2.0,
+        error_if_nonfinite=False,
+        foreach=None,
+    )
+    if isinstance(grad_norm, DTensor):
+        grad_norm = grad_norm.full_tensor()
+    return float(grad_norm.item())
+
+
+@torch.no_grad()
+def sanitize_non_finite_gradients(module: torch.nn.Module) -> int:
+    """Replace non-finite local gradient values using ``torch.nan_to_num``.
+
+    FSDP2 exposes gradients as DTensors. Mutating their local tensor avoids a
+    collective while applying the same per-rank sanitation as FastGen's
+    gradient callback.
+    """
+    non_finite_count = 0
+    for parameter in module.parameters():
+        grad = parameter.grad
+        if grad is None:
+            continue
+        local_grad = grad._local_tensor if isinstance(grad, DTensor) else grad
+        count = int((~torch.isfinite(local_grad)).sum().item())
+        if count:
+            non_finite_count += count
+            torch.nan_to_num_(local_grad)
+    return non_finite_count
