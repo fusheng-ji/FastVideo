@@ -11,6 +11,7 @@ sidesteps the deadlock entirely.
 
 from __future__ import annotations
 
+import gc
 import os
 from typing import TYPE_CHECKING
 
@@ -24,6 +25,17 @@ from fastvideo.utils import maybe_download_model
 
 if TYPE_CHECKING:
     from fastvideo.train.utils.training_config import TrainingConfig
+
+
+def _release_encoder_memory() -> None:
+    """Free the just-deleted text encoder's weights now instead of whenever the garbage collector runs.
+
+    Encoder modules can sit in reference cycles, so ``del`` alone leaves their GPU storage alive for the
+    rest of training (about 21 GiB for the Wan2.1 UMT5 encoder, measured on GB10).
+    """
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 
 def encode_negative_prompt(
@@ -94,6 +106,7 @@ def encode_negative_prompt(
         embeds = postprocess_text(outputs).to(device=device, dtype=dtype)
         mask = text_inputs["attention_mask"].to(device=device, dtype=dtype)
 
-    del text_encoder, tokenizer
+    del text_encoder, tokenizer, outputs, text_inputs
+    _release_encoder_memory()
 
     return embeds, mask
