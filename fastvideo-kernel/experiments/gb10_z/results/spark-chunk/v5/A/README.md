@@ -1,3 +1,3 @@
-# A: 8192, two updates, chunk=0
+# A-started
 
-Encoding and two updates completed. See the parent README for environment and reproduction. `memory.json` records the weak-reference count and each memory phase.
+Completed 2 updates, 8192 tokens, chunk 0. See parent README for reproduction and controls. Scalar results, allocation phases, parameter hashes, and clock telemetry are in this directory.

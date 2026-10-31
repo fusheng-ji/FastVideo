@@ -1,0 +1,286 @@
+{
+  "phases": [
+    {
+      "phase": "model_loaded",
+      "step": 0,
+      "allocated": 5675987456,
+      "reserved": 6157238272,
+      "peak_allocated": 5732610560,
+      "peak_reserved": 6157238272,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "preprocessors_loaded",
+      "step": 0,
+      "allocated": 5978061312,
+      "reserved": 6333399040,
+      "peak_allocated": 5978061312,
+      "peak_reserved": 6333399040,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "text_encoder_loaded",
+      "step": 0,
+      "allocated": 28701702656,
+      "reserved": 33728495616,
+      "peak_allocated": 32969406976,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "vae": 293186636,
+        "text_encoder_parameters_buffers": 22723641344
+      },
+      "text_encoder_object_alive": true,
+      "live_encoder_tensor_refs": 194
+    },
+    {
+      "phase": "negative_encoding_returned",
+      "step": 0,
+      "allocated": 6015810560,
+      "reserved": 6400507904,
+      "peak_allocated": 32969406976,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "vae": 293186636,
+        "text_encoder_outputs_not_cache": 4194500
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "negative_condition_cached",
+      "step": 0,
+      "allocated": 6015810560,
+      "reserved": 6400507904,
+      "peak_allocated": 32969406976,
+      "peak_reserved": 33728495616,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "zero_grad_end",
+      "step": 0,
+      "allocated": 6015810560,
+      "reserved": 6400507904,
+      "peak_allocated": 6015810560,
+      "peak_reserved": 6400507904,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "before_forward",
+      "step": 1,
+      "allocated": 6015810560,
+      "reserved": 6400507904,
+      "peak_allocated": 6015810560,
+      "peak_reserved": 6400507904,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "forward_end",
+      "step": 1,
+      "allocated": 12321711104,
+      "reserved": 15682502656,
+      "peak_allocated": 14778482176,
+      "peak_reserved": 15682502656,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "backward_end",
+      "step": 1,
+      "allocated": 14635243520,
+      "reserved": 26067599360,
+      "peak_allocated": 21062557184,
+      "peak_reserved": 26067599360,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "clip_end",
+      "step": 1,
+      "allocated": 14635244544,
+      "reserved": 26067599360,
+      "peak_allocated": 21062557184,
+      "peak_reserved": 26067599360,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "optimizer_end",
+      "step": 1,
+      "allocated": 25988464640,
+      "reserved": 27137146880,
+      "peak_allocated": 26498493440,
+      "peak_reserved": 27137146880,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "zero_grad_end",
+      "step": 1,
+      "allocated": 20285965824,
+      "reserved": 27137146880,
+      "peak_allocated": 26498493440,
+      "peak_reserved": 27137146880,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "before_forward",
+      "step": 2,
+      "allocated": 20285964800,
+      "reserved": 27137146880,
+      "peak_allocated": 26498493440,
+      "peak_reserved": 27137146880,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "forward_end",
+      "step": 2,
+      "allocated": 26591787520,
+      "reserved": 36192649216,
+      "peak_allocated": 29049648128,
+      "peak_reserved": 36192649216,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "backward_end",
+      "step": 2,
+      "allocated": 28871916544,
+      "reserved": 40485519360,
+      "peak_allocated": 35299881472,
+      "peak_reserved": 40485519360,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "clip_end",
+      "step": 2,
+      "allocated": 25988538368,
+      "reserved": 40485519360,
+      "peak_allocated": 35299881472,
+      "peak_reserved": 40485519360,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "optimizer_end",
+      "step": 2,
+      "allocated": 25988538368,
+      "reserved": 40485519360,
+      "peak_allocated": 35299881472,
+      "peak_reserved": 40485519360,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "gradients": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    },
+    {
+      "phase": "zero_grad_end",
+      "step": 2,
+      "allocated": 20286039552,
+      "reserved": 40485519360,
+      "peak_allocated": 35299881472,
+      "peak_reserved": 40485519360,
+      "known_storage_bytes": {
+        "parameters_master_fp32": 5675987200,
+        "optimizer_state": 11351974400,
+        "negative_condition_cache": 4194500,
+        "vae": 293186636
+      },
+      "text_encoder_object_alive": false,
+      "live_encoder_tensor_refs": 0
+    }
+  ],
+  "peak_snapshots": []
+}
