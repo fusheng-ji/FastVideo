@@ -34,7 +34,7 @@ Initial setup failures are preserved in preflight.json: no pytest ran before the
 
 The upstream test marks the two joined-P@V cases xfail on GB10. The split PR changes those SM120-only cases to skipped on GB10 and adds separate SM121 split-path cases; skipped cases are not counted as passes. Per-case IDs from verbose runs are preserved where available.
 
-Transformer failure-ID sets identical across four refs: True; per-ref outcomes and limitations are in step5-comparison.json. Equality alone does not establish identical collection or coverage.
+Transformer suites on all four refs failed in collection because three model assets were not present locally and their Hugging Face download attempted to use a SOCKS proxy without `socksio`. No transformer cases were executed to completion. Transformer failure-ID sets identical across four refs: True; per-ref outcomes and limitations are in step5-comparison.json. Equality alone does not establish identical collection or coverage.
 
 Bitwise comparison 2112 tokens: input hashes equal: True; five-preserved-tensor check: failed; output byte-hash equality: {'O': False, 'M': False, 'dQ': False, 'dK': False, 'STE': False, 'dV': False}.
 
@@ -55,6 +55,8 @@ $PYTHON bitwise.py 2112 "$OUTPUT_JSON"
 $PYTHON bitwise.py 31200 "$OUTPUT_JSON"
 ```
 
-Verbose output was enabled for the standalone dV and VSA tests to retain parameter IDs. The dV-only test file does not exist on upstream main. Bitwise evidence uses SHA256 of raw tensor bytes from separately executed, fixed-seed inputs; raw tensors, weights, videos and host-specific paths are excluded. The main and dV scripts use their default routes. `FASTVIDEO_ATTN_QAT_SM121_FWD_DV=0` is checked by check-route.py on the dV branch.
+Verbose output was enabled for the standalone dV and VSA tests to retain parameter IDs. The dV-only test file does not exist on upstream main. Bitwise evidence uses SHA256 of raw tensor bytes from separately executed, fixed-seed inputs; raw tensors, weights, videos and host-specific paths are excluded. The main and dV scripts use their default routes: main selects joined P@V on GB10, while the stacked PR selects split P@V. The cross-branch comparison therefore changes the forward route as well and cannot isolate dV. The dV branch standalone tests separately compare its own legacy and corrected paths. `FASTVIDEO_ATTN_QAT_SM121_FWD_DV=0` is checked by check-route.py on the dV branch.
 
 Per-item JSON files preserve status, commands, test summaries, observed IDs and failure identifiers. Raw full logs remain local. Verify exported artifacts with `sha256sum -c SHA256SUMS`.
+
+Collection-only verification is recorded in collection-evidence.json: the VSA suite includes `sm100` and `gb10` routing IDs and both real-device parity cases; all 20 cases passed in its original run. The dV suite includes both `save` and `recompute` IDs; all 42 cases passed. The split suite collected two SM120 joined cases and three SM121 split cases; the two SM120 cases were skipped on GB10.
