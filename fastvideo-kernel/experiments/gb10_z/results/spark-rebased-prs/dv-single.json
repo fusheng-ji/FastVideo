@@ -1,0 +1,17 @@
+{
+  "ref": "dv",
+  "name": "dv-single",
+  "exit_code": 0,
+  "args": [
+    "-m",
+    "pytest",
+    "fastvideo-kernel/tests/test_attn_qat_sm121_dv.py",
+    "-q",
+    "-v"
+  ],
+  "summary": [
+    "============================== 42 passed in 6.21s =============================="
+  ],
+  "failed_ids": [],
+  "observed_case_ids": []
+}

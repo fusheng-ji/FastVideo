@@ -1,0 +1,15 @@
+{
+  "ref": "dv",
+  "name": "dv-legacy-route",
+  "exit_code": 0,
+  "args": [
+    "<SCRIPTS>/check-route.py"
+  ],
+  "summary": [],
+  "failed_ids": [],
+  "observed_case_ids": [],
+  "route": {
+    "override_zero_forward_consistent": false,
+    "override_one_forward_consistent": true
+  }
+}

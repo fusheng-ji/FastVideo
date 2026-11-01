@@ -1,0 +1,873 @@
+{
+  "execution_status": "completed",
+  "controller_error": null,
+  "refs": {
+    "main": "4d0a10d98914b6f0110454a8dc4ef89662fc3ac0",
+    "split": "08e5dd90fa351bc7f2716858ac78549a96a9a383",
+    "dv": "dcfd77fd4cd0469226a72e729bfcef40fb38e1b3",
+    "vsa": "bd6b4413dd042e82fa54c8c78a52c6ff862852d1"
+  },
+  "verified_environments": {
+    "main": {
+      "commit": "4d0a10d98914b6f0110454a8dc4ef89662fc3ac0",
+      "kernel_editable": true,
+      "kernel_source_sha256": "ec155dfc6e3183b0beea72b2903e08f144f011c3c73efdb9dadfdd48c9cbe10c",
+      "torch": "2.12.0+cu130",
+      "triton": "3.7.0",
+      "flash_attn": "2.8.3+cu130torch2.12",
+      "cuda": "13.0",
+      "capability": [
+        12,
+        1
+      ]
+    },
+    "split": {
+      "commit": "08e5dd90fa351bc7f2716858ac78549a96a9a383",
+      "kernel_editable": true,
+      "kernel_source_sha256": "2c745adf56be3be4bb4ccfe8e4f1aa47fbe47a7440d3ca194b9cdd07c697fbc8",
+      "torch": "2.12.0+cu130",
+      "triton": "3.7.0",
+      "flash_attn": "2.8.3+cu130torch2.12",
+      "cuda": "13.0",
+      "capability": [
+        12,
+        1
+      ]
+    },
+    "dv": {
+      "commit": "dcfd77fd4cd0469226a72e729bfcef40fb38e1b3",
+      "kernel_editable": true,
+      "kernel_source_sha256": "3c533ec41f1844287653e63080f8fbfb6abe629b58a139057a002667bbcbc678",
+      "torch": "2.12.0+cu130",
+      "triton": "3.7.0",
+      "flash_attn": "2.8.3+cu130torch2.12",
+      "cuda": "13.0",
+      "capability": [
+        12,
+        1
+      ]
+    },
+    "vsa": {
+      "commit": "bd6b4413dd042e82fa54c8c78a52c6ff862852d1",
+      "kernel_editable": true,
+      "kernel_source_sha256": "ec155dfc6e3183b0beea72b2903e08f144f011c3c73efdb9dadfdd48c9cbe10c",
+      "torch": "2.12.0+cu130",
+      "triton": "3.7.0",
+      "flash_attn": "2.8.3+cu130torch2.12",
+      "cuda": "13.0",
+      "capability": [
+        12,
+        1
+      ]
+    }
+  },
+  "tests": [
+    {
+      "ref": "main",
+      "name": "main-qat",
+      "exit_code": 0,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo-kernel/tests/test_attn_qat_train_routing.py",
+        "fastvideo-kernel/tests/test_attn_qat_train.py",
+        "-k",
+        "not fused",
+        "-q"
+      ],
+      "summary": [
+        "28 passed, 2 skipped, 12 deselected, 2 xfailed in 11.28s"
+      ],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "main",
+      "name": "main-kernel",
+      "exit_code": 0,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo-kernel/tests",
+        "-q"
+      ],
+      "summary": [
+        "416 passed, 85 skipped, 2 xfailed, 140 warnings in 250.98s (0:04:10)"
+      ],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "main",
+      "name": "main-dv-single",
+      "status": "not_present",
+      "file": "fastvideo-kernel/tests/test_attn_qat_sm121_dv.py",
+      "args": [],
+      "summary": [],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "main",
+      "name": "main-vsa",
+      "exit_code": 0,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo-kernel/tests/test_vsa_tile_layout.py",
+        "fastvideo/tests/attention/test_vsa64_fused_layout.py",
+        "-q",
+        "-v"
+      ],
+      "summary": [
+        "================== 11 passed, 2 skipped, 14 warnings in 0.79s =================="
+      ],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "main",
+      "name": "main-transformers",
+      "exit_code": 2,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo/tests/transformers",
+        "-q"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 2.27s"
+      ],
+      "failed_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "observed_case_ids": [],
+      "failure": "Test command failed or collection/setup failed; see local raw log.",
+      "failure_reason": "Model not available locally; Hugging Face download attempted through SOCKS proxy but socksio is not installed."
+    },
+    {
+      "ref": "main",
+      "name": "main-bitwise-2112",
+      "exit_code": 0,
+      "args": [
+        "<SCRIPTS>/bitwise.py",
+        "2112",
+        "<OUTPUT>/main-bitwise-2112.json"
+      ],
+      "summary": [],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "main",
+      "name": "main-bitwise-31200",
+      "exit_code": 0,
+      "args": [
+        "<SCRIPTS>/bitwise.py",
+        "31200",
+        "<OUTPUT>/main-bitwise-31200.json"
+      ],
+      "summary": [],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "split",
+      "name": "split-qat",
+      "exit_code": 0,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo-kernel/tests/test_attn_qat_train_routing.py",
+        "fastvideo-kernel/tests/test_attn_qat_train.py",
+        "-k",
+        "not fused",
+        "-q"
+      ],
+      "summary": [
+        "47 passed, 4 skipped, 12 deselected in 6.73s"
+      ],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "dv",
+      "name": "dv-kernel",
+      "exit_code": 0,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo-kernel/tests",
+        "-q"
+      ],
+      "summary": [
+        "502 passed, 87 skipped, 130 warnings in 176.97s (0:02:56)"
+      ],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "dv",
+      "name": "dv-single",
+      "exit_code": 0,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo-kernel/tests/test_attn_qat_sm121_dv.py",
+        "-q",
+        "-v"
+      ],
+      "summary": [
+        "============================== 42 passed in 6.21s =============================="
+      ],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "dv",
+      "name": "dv-legacy-route",
+      "exit_code": 0,
+      "args": [
+        "<SCRIPTS>/check-route.py"
+      ],
+      "summary": [],
+      "failed_ids": [],
+      "observed_case_ids": [],
+      "route": {
+        "override_zero_forward_consistent": false,
+        "override_one_forward_consistent": true
+      }
+    },
+    {
+      "ref": "dv",
+      "name": "dv-bitwise-2112",
+      "exit_code": 0,
+      "args": [
+        "<SCRIPTS>/bitwise.py",
+        "2112",
+        "<OUTPUT>/dv-bitwise-2112.json"
+      ],
+      "summary": [],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "dv",
+      "name": "dv-bitwise-31200",
+      "exit_code": 0,
+      "args": [
+        "<SCRIPTS>/bitwise.py",
+        "31200",
+        "<OUTPUT>/dv-bitwise-31200.json"
+      ],
+      "summary": [],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "vsa",
+      "name": "vsa-layout",
+      "exit_code": 0,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo-kernel/tests/test_vsa_tile_layout.py",
+        "fastvideo/tests/attention/test_vsa64_fused_layout.py",
+        "-q",
+        "-v"
+      ],
+      "summary": [
+        "======================= 20 passed, 14 warnings in 3.97s ========================"
+      ],
+      "failed_ids": [],
+      "observed_case_ids": []
+    },
+    {
+      "ref": "split",
+      "name": "split-transformers",
+      "exit_code": 2,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo/tests/transformers",
+        "-q"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 0.84s"
+      ],
+      "failed_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "observed_case_ids": [],
+      "failure": "Test command failed or collection/setup failed; see local raw log.",
+      "failure_reason": "Model not available locally; Hugging Face download attempted through SOCKS proxy but socksio is not installed."
+    },
+    {
+      "ref": "dv",
+      "name": "dv-transformers",
+      "exit_code": 2,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo/tests/transformers",
+        "-q"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 1.47s"
+      ],
+      "failed_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "observed_case_ids": [],
+      "failure": "Test command failed or collection/setup failed; see local raw log.",
+      "failure_reason": "Model not available locally; Hugging Face download attempted through SOCKS proxy but socksio is not installed."
+    },
+    {
+      "ref": "vsa",
+      "name": "vsa-transformers",
+      "exit_code": 2,
+      "args": [
+        "-m",
+        "pytest",
+        "fastvideo/tests/transformers",
+        "-q"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 1.46s"
+      ],
+      "failed_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "observed_case_ids": [],
+      "failure": "Test command failed or collection/setup failed; see local raw log.",
+      "failure_reason": "Model not available locally; Hugging Face download attempted through SOCKS proxy but socksio is not installed."
+    }
+  ],
+  "bitwise": [
+    {
+      "tokens": 2112,
+      "main_status": "completed",
+      "dv_status": "completed",
+      "input_hashes_equal": true,
+      "byte_hash_equal": {
+        "O": false,
+        "M": false,
+        "dQ": false,
+        "dK": false,
+        "STE": false,
+        "dV": false
+      },
+      "five_preserved_tensors_status": "failed",
+      "main": {
+        "tokens": 2112,
+        "seed": 11,
+        "heads": 3,
+        "inputs": {
+          "q": {
+            "sha256": "8e2a30c200d28a348aaace7085584276db8a11a6fd47f028c35144cd144669ad",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "k": {
+            "sha256": "adda032cdc792b3e0e2af9689bdc98dddad583986055d030ce5be4c0eb0df36b",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "v": {
+            "sha256": "5e3f3563ee2da4fe312001e309c9bda430d23d1dfb873bde61f4bea558e3618e",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "do": {
+            "sha256": "49fc5e978645209e23e48586a307d33b9ae24405443a23e1140e634cf772060f",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "qat_source_sha256": "ec155dfc6e3183b0beea72b2903e08f144f011c3c73efdb9dadfdd48c9cbe10c",
+        "outputs": {
+          "O": {
+            "sha256": "ec910cfb2a54f130d5e9edb5fdde64216086b8ec764587c564a3e6db0136ada0",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "M": {
+            "sha256": "2f799b3320e269bc0df620d6ee706195bee357cc313c7835b83049ef055f60e8",
+            "dtype": "torch.float32",
+            "shape": [
+              1,
+              3,
+              2112
+            ],
+            "finite": true
+          },
+          "dQ": {
+            "sha256": "f907f243b4143a8137f46e7a787f8f8d2c392c0a289d0f80dfe97e769486b7e9",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "dK": {
+            "sha256": "023765e519db3f6af83672269d419e6c289df968fa2cc6f144b3fac95dc21f32",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "STE": {
+            "sha256": "2cbfed6b6d3a3edd242b68ba8eb6d52bd8817944bfc7829b24d59016e15e293e",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "dV": {
+            "sha256": "f99b3de4bfca598d66d051efc948fd2cfd991f53bb977d6d51030f369b08f5b8",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "status": "completed"
+      },
+      "dv": {
+        "tokens": 2112,
+        "seed": 11,
+        "heads": 3,
+        "inputs": {
+          "q": {
+            "sha256": "8e2a30c200d28a348aaace7085584276db8a11a6fd47f028c35144cd144669ad",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "k": {
+            "sha256": "adda032cdc792b3e0e2af9689bdc98dddad583986055d030ce5be4c0eb0df36b",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "v": {
+            "sha256": "5e3f3563ee2da4fe312001e309c9bda430d23d1dfb873bde61f4bea558e3618e",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "do": {
+            "sha256": "49fc5e978645209e23e48586a307d33b9ae24405443a23e1140e634cf772060f",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "qat_source_sha256": "3c533ec41f1844287653e63080f8fbfb6abe629b58a139057a002667bbcbc678",
+        "outputs": {
+          "O": {
+            "sha256": "c3fe698ae10ffd09e8591606600b07adc39d1f38ec5d78fdfbabc44d8345b695",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "M": {
+            "sha256": "5177b4b87cbadb0d806ac55a988c7b49aa525b5e961b43746011f2c1a521f118",
+            "dtype": "torch.float32",
+            "shape": [
+              1,
+              3,
+              2112
+            ],
+            "finite": true
+          },
+          "dQ": {
+            "sha256": "f2f4e28d8190e92bbdbac6443c5e50d67239c31eefe5ce5bda6fa93343d011e5",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "dK": {
+            "sha256": "576553d8fb9a3bebfd80875a7bebce90e2558011eaa9add3dd4617c679da8257",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "STE": {
+            "sha256": "25162f9bba20d3102601eadbaa8c00d0193843c33c129706fe40ad599dedbaf8",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          },
+          "dV": {
+            "sha256": "0d3985c0f73cfaa006a40f48533501768e53dec85c7a6f7e56c574aeb6f63f32",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              2112,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "tokens": 31200,
+      "main_status": "completed",
+      "dv_status": "completed",
+      "input_hashes_equal": true,
+      "byte_hash_equal": {
+        "O": false,
+        "M": false,
+        "dQ": false,
+        "dK": false,
+        "STE": false,
+        "dV": false
+      },
+      "five_preserved_tensors_status": "failed",
+      "main": {
+        "tokens": 31200,
+        "seed": 11,
+        "heads": 3,
+        "inputs": {
+          "q": {
+            "sha256": "4f45e1f4315f932c953257da209cb4b12ac95f5e5cfe9f4af06d35adcf3777d8",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "k": {
+            "sha256": "dcb2bbcc671b36ba75d22e5d66090c0e48ad0d30d06c45261d2f878f23e71de2",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "v": {
+            "sha256": "086ae7909cbe4170532adf83ba5f0abb2159f3dc288fa10466db13b879783d16",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "do": {
+            "sha256": "e60ad8cecf742d0f11c6d14eb0686791a683472b9ac90727ad08913fdd89727a",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "qat_source_sha256": "ec155dfc6e3183b0beea72b2903e08f144f011c3c73efdb9dadfdd48c9cbe10c",
+        "outputs": {
+          "O": {
+            "sha256": "de3c2235eb699eaa600952b561331de0264e79faa1329575de63cf04bb5f0c59",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "M": {
+            "sha256": "857a5f944f8d0424be5e72232c10af81d95109167cb96bd2718b08bafbad6c9a",
+            "dtype": "torch.float32",
+            "shape": [
+              1,
+              3,
+              31200
+            ],
+            "finite": true
+          },
+          "dQ": {
+            "sha256": "186467fecbc012c25e2753effad688a5808b51e868aa23805fea2d9618927951",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "dK": {
+            "sha256": "f316ae6d28cdfbf05bf0f1532e60e7262e497848c8157577aa663ea0edd6d2ed",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "STE": {
+            "sha256": "b840608db50c374937699f208b54f28d69bdcd6fbfd5948795e699171c9a3c82",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "dV": {
+            "sha256": "8c1db8540e8a533f0bf9e0e3ae2863253aa0e7240550c1f52f73c6c70cbab740",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "status": "completed"
+      },
+      "dv": {
+        "tokens": 31200,
+        "seed": 11,
+        "heads": 3,
+        "inputs": {
+          "q": {
+            "sha256": "4f45e1f4315f932c953257da209cb4b12ac95f5e5cfe9f4af06d35adcf3777d8",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "k": {
+            "sha256": "dcb2bbcc671b36ba75d22e5d66090c0e48ad0d30d06c45261d2f878f23e71de2",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "v": {
+            "sha256": "086ae7909cbe4170532adf83ba5f0abb2159f3dc288fa10466db13b879783d16",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "do": {
+            "sha256": "e60ad8cecf742d0f11c6d14eb0686791a683472b9ac90727ad08913fdd89727a",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "qat_source_sha256": "3c533ec41f1844287653e63080f8fbfb6abe629b58a139057a002667bbcbc678",
+        "outputs": {
+          "O": {
+            "sha256": "fde8d8d44428e10d2f21285b30effa1dce7f23638f6f34dd6ffd5164cfb6b597",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "M": {
+            "sha256": "2b84f0015af06f9f1bc3d67dda7ca3e6b907a5ac5f72559fe37df3acc9c62d7f",
+            "dtype": "torch.float32",
+            "shape": [
+              1,
+              3,
+              31200
+            ],
+            "finite": true
+          },
+          "dQ": {
+            "sha256": "d87aacfeac508ed52384b53cc60536adf06356530d64ac4b16ee9031bf34e72e",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "dK": {
+            "sha256": "ccde6d8a322387348f2e3e54e5d9e0d8dbc761a5ebe7a0d1f5ad16fa0f2d122c",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "STE": {
+            "sha256": "f554765b021bf0e16ae39a551e2a1e27f64aaf6deb1d9b4dd39ed3d0bebc2536",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          },
+          "dV": {
+            "sha256": "f9a2bb7768943327f691159ddb68895b8e35071a288d69463301a1e8416c10a0",
+            "dtype": "torch.bfloat16",
+            "shape": [
+              1,
+              3,
+              31200,
+              128
+            ],
+            "finite": true
+          }
+        },
+        "status": "completed"
+      }
+    }
+  ],
+  "transformer_failure_id_sets_equal": true,
+  "initial_preflight": {
+    "status": "failed_before_tests",
+    "reason": "Temporary GPU lock directory did not exist after reboot. No pytest process was started. Initial preflight results retained separately; lock directory restored before the test batch.",
+    "main_install_first_attempt": "TorchConfig.cmake was not found; build environment was corrected with Torch CMake prefix and the editable build succeeded.",
+    "vsa_import_probe": "The standalone verification script first lacked the worktree on PYTHONPATH; the same non-mutating import probe passed with the worktree on PYTHONPATH."
+  }
+}

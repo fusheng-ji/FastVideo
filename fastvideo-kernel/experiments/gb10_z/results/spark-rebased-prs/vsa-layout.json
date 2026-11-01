@@ -1,0 +1,18 @@
+{
+  "ref": "vsa",
+  "name": "vsa-layout",
+  "exit_code": 0,
+  "args": [
+    "-m",
+    "pytest",
+    "fastvideo-kernel/tests/test_vsa_tile_layout.py",
+    "fastvideo/tests/attention/test_vsa64_fused_layout.py",
+    "-q",
+    "-v"
+  ],
+  "summary": [
+    "======================= 20 passed, 14 warnings in 3.97s ========================"
+  ],
+  "failed_ids": [],
+  "observed_case_ids": []
+}

@@ -1,0 +1,22 @@
+{
+  "ref": "main",
+  "name": "main-transformers",
+  "exit_code": 2,
+  "args": [
+    "-m",
+    "pytest",
+    "fastvideo/tests/transformers",
+    "-q"
+  ],
+  "summary": [
+    "14 warnings, 3 errors in 2.27s"
+  ],
+  "failed_ids": [
+    "ERROR fastvideo/tests/transformers/test_cosmos.py",
+    "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+    "ERROR fastvideo/tests/transformers/test_hyworld.py"
+  ],
+  "observed_case_ids": [],
+  "failure": "Test command failed or collection/setup failed; see local raw log.",
+  "failure_reason": "Model not available locally; Hugging Face download attempted through SOCKS proxy but socksio is not installed."
+}

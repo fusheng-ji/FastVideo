@@ -1,0 +1,16 @@
+{
+  "ref": "dv",
+  "name": "dv-kernel",
+  "exit_code": 0,
+  "args": [
+    "-m",
+    "pytest",
+    "fastvideo-kernel/tests",
+    "-q"
+  ],
+  "summary": [
+    "502 passed, 87 skipped, 130 warnings in 176.97s (0:02:56)"
+  ],
+  "failed_ids": [],
+  "observed_case_ids": []
+}

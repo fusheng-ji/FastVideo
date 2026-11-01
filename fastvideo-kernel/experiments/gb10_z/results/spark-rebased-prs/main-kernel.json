@@ -1,0 +1,16 @@
+{
+  "ref": "main",
+  "name": "main-kernel",
+  "exit_code": 0,
+  "args": [
+    "-m",
+    "pytest",
+    "fastvideo-kernel/tests",
+    "-q"
+  ],
+  "summary": [
+    "416 passed, 85 skipped, 2 xfailed, 140 warnings in 250.98s (0:04:10)"
+  ],
+  "failed_ids": [],
+  "observed_case_ids": []
+}

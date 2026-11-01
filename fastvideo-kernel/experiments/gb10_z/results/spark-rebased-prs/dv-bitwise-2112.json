@@ -1,0 +1,13 @@
+{
+  "ref": "dv",
+  "name": "dv-bitwise-2112",
+  "exit_code": 0,
+  "args": [
+    "<SCRIPTS>/bitwise.py",
+    "2112",
+    "<OUTPUT>/dv-bitwise-2112.json"
+  ],
+  "summary": [],
+  "failed_ids": [],
+  "observed_case_ids": []
+}

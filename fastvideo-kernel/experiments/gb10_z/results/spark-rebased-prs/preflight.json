@@ -1,0 +1,6 @@
+{
+  "status": "failed_before_tests",
+  "reason": "Temporary GPU lock directory did not exist after reboot. No pytest process was started. Initial preflight results retained separately; lock directory restored before the test batch.",
+  "main_install_first_attempt": "TorchConfig.cmake was not found; build environment was corrected with Torch CMake prefix and the editable build succeeded.",
+  "vsa_import_probe": "The standalone verification script first lacked the worktree on PYTHONPATH; the same non-mutating import probe passed with the worktree on PYTHONPATH."
+}

@@ -1,0 +1,19 @@
+{
+  "ref": "main",
+  "name": "main-qat",
+  "exit_code": 0,
+  "args": [
+    "-m",
+    "pytest",
+    "fastvideo-kernel/tests/test_attn_qat_train_routing.py",
+    "fastvideo-kernel/tests/test_attn_qat_train.py",
+    "-k",
+    "not fused",
+    "-q"
+  ],
+  "summary": [
+    "28 passed, 2 skipped, 12 deselected, 2 xfailed in 11.28s"
+  ],
+  "failed_ids": [],
+  "observed_case_ids": []
+}

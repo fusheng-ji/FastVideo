@@ -1,0 +1,50 @@
+{
+  "per_ref": {
+    "main": {
+      "exit_code": 2,
+      "failure_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 2.27s"
+      ]
+    },
+    "split": {
+      "exit_code": 2,
+      "failure_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 0.84s"
+      ]
+    },
+    "dv": {
+      "exit_code": 2,
+      "failure_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 1.47s"
+      ]
+    },
+    "vsa": {
+      "exit_code": 2,
+      "failure_ids": [
+        "ERROR fastvideo/tests/transformers/test_cosmos.py",
+        "ERROR fastvideo/tests/transformers/test_cosmos2_5.py",
+        "ERROR fastvideo/tests/transformers/test_hyworld.py"
+      ],
+      "summary": [
+        "14 warnings, 3 errors in 1.46s"
+      ]
+    }
+  },
+  "failure_id_sets_equal": true,
+  "caveat": "Identical failure IDs alone do not prove identical coverage, particularly when collection fails."
+}
