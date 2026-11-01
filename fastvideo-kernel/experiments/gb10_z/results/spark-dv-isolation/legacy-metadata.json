@@ -1,0 +1,46 @@
+{
+  "mode": "legacy",
+  "import_path": "/home/yiyispark/Desktop/FastVideo-GB10-Rebased-DV/fastvideo-kernel/python/fastvideo_kernel/triton_kernels/attn_qat_train.py",
+  "source_sha256": "3c533ec41f1844287653e63080f8fbfb6abe629b58a139057a002667bbcbc678",
+  "torch": "2.12.0+cu130",
+  "cuda": "13.0",
+  "cases": [
+    {
+      "n": 2112,
+      "seed": 0,
+      "repeat": 0,
+      "input_sha256": "304e98ddef7de5b4eb656745db15b03a5fdd18497fdd5a167105b0ebd567cc6b"
+    },
+    {
+      "n": 2112,
+      "seed": 11,
+      "repeat": 0,
+      "input_sha256": "2f643a3a023675f2ee78398881ae3de79297d2fc5bc4ec275d6cee82ed6ceb45"
+    },
+    {
+      "n": 2112,
+      "seed": 42,
+      "repeat": 0,
+      "input_sha256": "158698901c74c7d3ae74dcefa9303cf75e80346cbc168c38d66533ebc9f5a994"
+    },
+    {
+      "n": 31200,
+      "seed": 0,
+      "repeat": 0,
+      "input_sha256": "57adbe48431fde6b9d34117c6b7940221dded340f1004e311fcd0e7042b1da64"
+    },
+    {
+      "n": 31200,
+      "seed": 11,
+      "repeat": 0,
+      "input_sha256": "2d6a28ca7963304997ab65589ff1644320f04f824cc25a858335c08f64997dae"
+    },
+    {
+      "n": 31200,
+      "seed": 42,
+      "repeat": 0,
+      "input_sha256": "bb51c49121b87276ecb4d311bb69f092ef159bb0637421da18e86d06e01bc301"
+    }
+  ],
+  "status": "completed"
+}

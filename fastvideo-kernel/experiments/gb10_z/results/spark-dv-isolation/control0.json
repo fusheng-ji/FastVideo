@@ -1,0 +1,229 @@
+{
+  "comparison": "control0",
+  "reference": "split",
+  "candidate": "split",
+  "cases": [
+    {
+      "n": 2112,
+      "seed": 0,
+      "tensors": {
+        "O": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "M": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dQ": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dK": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "STE": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dV": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0,
+          "relative_l2_vs_reference": 0.0
+        }
+      }
+    },
+    {
+      "n": 2112,
+      "seed": 11,
+      "tensors": {
+        "O": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "M": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dQ": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dK": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "STE": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dV": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0,
+          "relative_l2_vs_reference": 0.0
+        }
+      }
+    },
+    {
+      "n": 2112,
+      "seed": 42,
+      "tensors": {
+        "O": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "M": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dQ": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dK": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "STE": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dV": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0,
+          "relative_l2_vs_reference": 0.0
+        }
+      }
+    },
+    {
+      "n": 31200,
+      "seed": 0,
+      "tensors": {
+        "O": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "M": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dQ": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dK": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "STE": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dV": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0,
+          "relative_l2_vs_reference": 0.0
+        }
+      }
+    },
+    {
+      "n": 31200,
+      "seed": 11,
+      "tensors": {
+        "O": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "M": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dQ": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dK": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "STE": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dV": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0,
+          "relative_l2_vs_reference": 0.0
+        }
+      }
+    },
+    {
+      "n": 31200,
+      "seed": 42,
+      "tensors": {
+        "O": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "M": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dQ": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dK": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "STE": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0
+        },
+        "dV": {
+          "bitwise_equal": true,
+          "different_elements": 0,
+          "max_abs_difference": 0.0,
+          "relative_l2_vs_reference": 0.0
+        }
+      }
+    }
+  ]
+}
