@@ -1,0 +1,116 @@
+{
+  "domain": "spark-encoder-root-cause",
+  "mode": "gc-disabled",
+  "status": "completed",
+  "commit": "2289b992cce22eff3997921de4a166f395105676",
+  "historical_acceptance_inherited": false,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12"
+  },
+  "capability": [
+    12,
+    1
+  ],
+  "patched": [
+    "negative_prompt.TextEncoderLoader",
+    "negative_prompt._release_encoder_memory",
+    "wan.encode_negative_prompt"
+  ],
+  "negative_embeds_shape": [
+    1,
+    512,
+    4096
+  ],
+  "encoder_class": "UMT5EncoderModel",
+  "tracked_tensors": 194,
+  "tracked_bytes": 22723641344,
+  "checkpoints": [
+    {
+      "name": "after_load",
+      "tracked_tensors": 194,
+      "live_tensors": 194,
+      "encoder_module_live": true,
+      "gc_enabled": false,
+      "allocated_bytes": 28701702656,
+      "reserved_bytes": 33728495616
+    },
+    {
+      "name": "after_forward",
+      "tracked_tensors": 194,
+      "live_tensors": 194,
+      "encoder_module_live": true,
+      "gc_enabled": false,
+      "allocated_bytes": 28737356288,
+      "reserved_bytes": 33728495616
+    },
+    {
+      "name": "after_del_inside_function",
+      "tracked_tensors": 194,
+      "live_tensors": 194,
+      "encoder_module_live": false,
+      "gc_enabled": false,
+      "allocated_bytes": 28739451904,
+      "reserved_bytes": 33728495616
+    },
+    {
+      "name": "after_return",
+      "tracked_tensors": 194,
+      "live_tensors": 194,
+      "encoder_module_live": false,
+      "gc_enabled": false,
+      "allocated_bytes": 28739451904,
+      "reserved_bytes": 33728495616
+    },
+    {
+      "name": "after_gc_collect",
+      "tracked_tensors": 194,
+      "live_tensors": 0,
+      "encoder_module_live": false,
+      "gc_enabled": true,
+      "allocated_bytes": 6015810560,
+      "reserved_bytes": 33728495616
+    },
+    {
+      "name": "after_empty_cache",
+      "tracked_tensors": 194,
+      "live_tensors": 0,
+      "encoder_module_live": false,
+      "gc_enabled": true,
+      "allocated_bytes": 6015810560,
+      "reserved_bytes": 6400507904
+    }
+  ],
+  "gc_collect_return": 49,
+  "referrers": {
+    "after_return": {
+      "start": "encoder_tensor",
+      "tree": [
+        {
+          "type": "dict",
+          "keys": [
+            "weight"
+          ],
+          "referred_by": [
+            {
+              "type": "dict",
+              "keys": [
+                "_parameters"
+              ],
+              "dict_of": "VocabParallelEmbedding",
+              "referred_by": [
+                {
+                  "type": "VocabParallelEmbedding",
+                  "class_module": "fastvideo.layers.vocab_parallel_embedding",
+                  "referred_by": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "cycle": {}
+}
