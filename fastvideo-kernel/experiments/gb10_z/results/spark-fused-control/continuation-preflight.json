@@ -1,0 +1,25 @@
+{
+  "prior_failures": [
+    {
+      "name": "pair-8192-r2-F64",
+      "training_status": "completed",
+      "wrapper_status": "failed",
+      "reason": "vLLM refused restart because its process guard identified the still-running experiment coordinator as a FastVideo process."
+    },
+    {
+      "name": "pair-8192-r2-F0",
+      "training_status": "completed",
+      "wrapper_status": "failed",
+      "reason": "The optional reset-failed command returned an error because the stopped unit was unloaded; vLLM was subsequently started and observed active."
+    }
+  ],
+  "same_case_retry": false,
+  "round2_numerical_comparison": {
+    "status": "passed",
+    "failures": [],
+    "stage": "8192-round-2",
+    "service_protocol_valid": false
+  },
+  "protocol_acceptance": "third 8192 round remains invalid for service restoration; earlier runs also have service restoration exceptions",
+  "continuation": "Only unattempted runs are scheduled with a system-Python coordinator and corrected optional reset handling."
+}

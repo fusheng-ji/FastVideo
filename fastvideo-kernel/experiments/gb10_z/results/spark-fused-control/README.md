@@ -38,3 +38,7 @@ python fastvideo-kernel/experiments/gb10_z/results/spark-fused-control/fused_ent
 ```
 
 Feasibility uses the first fused entry at both lengths. Formal arm order is in summary.json: 8192/4 steps and 31200/2 steps for three rounds, then 8192/200 steps. Fresh process and output per run. Raw weights, videos, tensors, local paths, hostnames and video identifiers are not shipped. All failures retain a sanitized exception. Verify with `sha256sum -c SHA256SUMS`.
+
+## Service restoration and continuation
+
+The initial coordinator was itself misidentified by the vLLM process guard, so vLLM refused to restart after several runs. The 8192 round-2 F64 training completed but its wrapper failed on restoration. A first continuation used a coordinator that avoids that guard; round-2 F0 training completed and vLLM became active, but the wrapper returned failure because optional `reset-failed` was called on an unloaded unit. Neither failed attempt was retried. Their four-step results compare equal numerically, but the third 8192 round is not accepted as a compliant paired run. Earlier service exceptions are recorded per run. A corrected wrapper and coordinator continue only previously unattempted configurations; see continuation-preflight.json.
