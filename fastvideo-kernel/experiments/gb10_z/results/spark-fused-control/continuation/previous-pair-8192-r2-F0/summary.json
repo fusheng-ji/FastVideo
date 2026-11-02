@@ -1,0 +1,51 @@
+{
+  "name": "previous-pair-8192-r2-F0",
+  "status": "completed",
+  "arm": "F0",
+  "tokens": 8192,
+  "requested_updates": 4,
+  "wrapper_status": "failed",
+  "wrapper_failure": "optional reset-failed reported unloaded unit; service was active afterward; no retry",
+  "service_states_before": [
+    "active",
+    "active",
+    "inactive",
+    "inactive"
+  ],
+  "service_states_after": [
+    "active",
+    "active",
+    "inactive",
+    "active"
+  ],
+  "optimizer_class": "AdamW",
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": null,
+      "capturable": false
+    }
+  ],
+  "actual_chunk": 0,
+  "updates": 4,
+  "step_wall_sec": [
+    18.365898973075673,
+    9.975522584049031,
+    9.914398920023814,
+    9.932241554139182
+  ],
+  "training_peak_allocated_bytes": 29543191040,
+  "training_peak_reserved_bytes": 33149681664,
+  "limiting_phase": "optimizer_end",
+  "limiting_step": 1,
+  "optimizer_peak_allocated_bytes": 29543191040,
+  "optimizer_peak_reserved_bytes": 33149681664,
+  "optimizer_wall_sec": [
+    8.120610217098147,
+    0.5611396690364927,
+    0.5613213530741632,
+    0.5582626359537244
+  ],
+  "startup_peak_allocated_bytes": 32969406976,
+  "whole_run_peak_allocated_bytes": 32969406976
+}

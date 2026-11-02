@@ -1,0 +1,2002 @@
+[
+  {
+    "step": 1,
+    "pre_optimizer_allocated": 12508937216,
+    "pre_segment_peak_allocated": 13956269568,
+    "pre_segment_peak_reserved": 15793651712,
+    "status": "completed",
+    "optimizer_wall_sec": 4.395124796079472,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 25025314816
+  },
+  {
+    "step": 2,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19912893697619438,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 3,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19851377606391907,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 4,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19154549785889685,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 5,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19961454812437296,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 6,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20025402284227312,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 7,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1977470361161977,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 8,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1980317400302738,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 9,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19047448108904064,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 10,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19883865513838828,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 11,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20314675685949624,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 12,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19100425485521555,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 13,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19120474997907877,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 14,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1997425090521574,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 15,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.18997667008079588,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 16,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19917881791479886,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 17,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1992640970274806,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 18,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.2001221829559654,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 19,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1999002741649747,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 20,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19876331696286798,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 21,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19056275789625943,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 22,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19883289700374007,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 23,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19421661202795804,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 24,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19909305614419281,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 25,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1909926098305732,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 26,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1979605460073799,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 27,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19910793099552393,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 28,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19790118001401424,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 29,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20072618499398232,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 30,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19072847394272685,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 31,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20280222315341234,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 32,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19136719894595444,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 33,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1984572948422283,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 34,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19818427599966526,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 35,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19070118200033903,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 36,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1987355670426041,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 37,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.4014131440781057,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 38,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19353144499473274,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 39,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20009783608838916,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 40,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19904120406135917,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 41,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20692565897479653,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 42,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19811800005845726,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 43,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1981667538639158,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 44,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1909188290592283,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 45,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1986455039586872,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 46,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1993030388839543,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 47,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19849789910949767,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 48,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19962207088246942,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 49,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1991827990859747,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 50,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19942135293968022,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 51,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20017535891383886,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 52,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19081347505562007,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 53,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19820375507697463,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 54,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20115512097254395,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 55,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1910947160795331,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 56,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19129173806868494,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 57,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19192034704610705,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 58,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.2004848059732467,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 59,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19992645201273263,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 60,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19225467601791024,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 61,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19893380487337708,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 62,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19941665115766227,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 63,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19889934989623725,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 64,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1907356120646,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 65,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19255623291246593,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 66,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19805776001885533,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 67,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.4347711130976677,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 68,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20026325387880206,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 69,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19167750817723572,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 70,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19902831898070872,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 71,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19197702291421592,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 72,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19899992877617478,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 73,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1993296300061047,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 74,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19968445203267038,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 75,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.2002054168842733,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 76,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1921952140983194,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 77,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1981412370223552,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 78,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19887314597144723,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 79,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19312840281054378,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 80,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1913626049645245,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 81,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19920842698775232,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 82,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19004402100108564,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 83,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19088522205129266,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 84,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19801936391741037,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 85,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1992033978458494,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 86,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19127414491958916,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 87,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1995506111998111,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 88,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19813860091380775,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 89,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19993299013003707,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 90,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19866112410090864,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 91,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19412861787714064,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 92,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19500260101631284,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 93,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1999565721489489,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 94,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19800135702826083,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 95,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19093818007968366,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 96,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19924975209869444,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 97,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.32177801500074565,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 98,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19863802287727594,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 99,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1991832358762622,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 100,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19811994303017855,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 101,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19915597303770483,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 102,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19953051093034446,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 103,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19080628105439246,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 104,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1992749418132007,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 105,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19799791905097663,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 106,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19884583493694663,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 107,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19048083620145917,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 108,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19864328810945153,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 109,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1902169119566679,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 110,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19492041715420783,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 111,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1997808979358524,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 112,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1981240150053054,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 113,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19950598012655973,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 114,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19942800188437104,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 115,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1981435848865658,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 116,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19906962709501386,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 117,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19989080517552793,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 118,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19977501779794693,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 119,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19082517898641527,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 120,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19887665496207774,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 121,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19425565609708428,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 122,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20154447201639414,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 123,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19943180703558028,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 124,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1991047861520201,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 125,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19908381416462362,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 126,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1991812428459525,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 127,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.2003118610009551,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 128,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19886489608325064,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 129,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19901203690096736,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 130,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20318885007873178,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 131,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1992702060379088,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 132,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19853724399581552,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 133,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19884913694113493,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 134,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19104526797309518,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 135,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20112051791511476,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 136,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19188289484009147,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 137,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1992440321482718,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 138,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1998153340537101,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 139,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1991823089774698,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 140,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19886811799369752,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 141,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1999234550166875,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 142,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19815290183760226,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 143,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19133247784338892,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 144,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19930845010094345,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 145,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1981235018465668,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 146,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20059012714773417,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 147,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19914339995011687,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 148,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19972617411985993,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 149,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1920922880526632,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 150,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.191992592997849,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 151,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19162625609897077,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 152,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1992138579953462,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 153,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19975592708215117,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 154,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19888643617741764,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 155,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19066931284032762,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 156,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19811134622432292,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 157,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19179593096487224,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 158,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19975527911446989,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 159,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1996619519777596,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 160,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19883966213092208,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 161,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19899700093083084,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 162,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20284014008939266,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 163,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19890449498780072,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 164,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1907415590249002,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 165,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19090610300190747,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 166,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19813337503001094,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 167,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19230701099149883,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 168,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19892001897096634,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 169,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20035430509597063,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 170,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19096294906921685,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 171,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.2025803269352764,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 172,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19136085896752775,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 173,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19888902897946537,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 174,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19090453814715147,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 175,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19899309799075127,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 176,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.2000537971034646,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 177,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19834807212464511,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 178,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19897718518041074,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 179,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20005620690062642,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 180,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19908031402155757,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 181,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19907460710965097,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 182,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19987850589677691,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 183,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19973299000412226,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 184,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1911485029850155,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 185,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.2026011380366981,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 186,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19102683500386775,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 187,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19938144204206765,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 188,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19962857104837894,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 189,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19939255993813276,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 190,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1990489640738815,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 191,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19047824293375015,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 192,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19969619996845722,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 193,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19858218310400844,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 194,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.1991840680129826,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 195,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19925070111639798,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 196,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19205901911482215,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 197,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20132812787778676,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 198,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19829980796203017,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 199,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.20052756392396986,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  },
+  {
+    "step": 200,
+    "pre_optimizer_allocated": 23867625984,
+    "pre_segment_peak_allocated": 26072554496,
+    "pre_segment_peak_reserved": 28686942208,
+    "status": "completed",
+    "optimizer_wall_sec": 0.19871757412329316,
+    "optimizer_peak_allocated": 23867625984,
+    "optimizer_peak_reserved": 28686942208
+  }
+]

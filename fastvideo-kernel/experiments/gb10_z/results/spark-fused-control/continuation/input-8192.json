@@ -1,0 +1,8 @@
+{
+  "source_sha256": "94275e366c8ef81b08f76691ff0396fb5c0daf0ed98d9a9e846707c32b3dad6e",
+  "derived_sha256": "66b6bcc2f7bb28c4e44c041184096bed8eea2b826ebfbe405a201b1228c3e673",
+  "source_row_ordinal": 0,
+  "rows": 1,
+  "arrow_roundtrip_equal": true,
+  "policy": "production dataloader cycles one-row parquet; same row as historical repeated batch"
+}

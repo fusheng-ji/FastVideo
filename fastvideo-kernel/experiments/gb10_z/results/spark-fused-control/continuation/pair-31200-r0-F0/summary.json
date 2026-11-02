@@ -1,0 +1,45 @@
+{
+  "name": "pair-31200-r0-F0",
+  "status": "completed",
+  "arm": "F0",
+  "tokens": 31200,
+  "requested_updates": 2,
+  "service_states_before": [
+    "active",
+    "active",
+    "inactive",
+    "inactive"
+  ],
+  "service_states_after": [
+    "active",
+    "active",
+    "inactive",
+    "active"
+  ],
+  "optimizer_class": "AdamW",
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": null,
+      "capturable": false
+    }
+  ],
+  "actual_chunk": 0,
+  "updates": 2,
+  "step_wall_sec": [
+    73.49647699994966,
+    61.30148874502629
+  ],
+  "training_peak_allocated_bytes": 35299881472,
+  "training_peak_reserved_bytes": 45952794624,
+  "limiting_phase": "backward_end",
+  "limiting_step": 2,
+  "optimizer_peak_allocated_bytes": 31664525824,
+  "optimizer_peak_reserved_bytes": 45952794624,
+  "optimizer_wall_sec": [
+    14.021520853973925,
+    0.5588464301545173
+  ],
+  "startup_peak_allocated_bytes": 32969406976,
+  "whole_run_peak_allocated_bytes": 35299881472
+}

@@ -42,3 +42,15 @@ Feasibility uses the first fused entry at both lengths. Formal arm order is in s
 ## Service restoration and continuation
 
 The initial coordinator was itself misidentified by the vLLM process guard, so vLLM refused to restart after several runs. The 8192 round-2 F64 training completed but its wrapper failed on restoration. A first continuation used a coordinator that avoids that guard; round-2 F0 training completed and vLLM became active, but the wrapper returned failure because optional `reset-failed` was called on an unloaded unit. Neither failed attempt was retried. Their four-step results compare equal numerically, but the third 8192 round is not accepted as a compliant paired run. Earlier service exceptions are recorded per run. A corrected wrapper and coordinator continue only previously unattempted configurations; see continuation-preflight.json.
+
+## Continuation result
+
+Continuation queue status: **completed_with_prior_failure**. Detailed runs are in `continuation/`; aggregated memory by length and arm, all comparisons and the 200-step FU/F0 loss and gradient-norm deviations are in `final-summary.json`. The two original wrapper failures remain failures and were not retried. 8192 three-round service-protocol acceptance remains blocked; the results for those runs are descriptive.
+
+8192 token training peak allocated GiB per round: {'F0': [27.514241, 27.514241, 27.514241], 'F64': [24.280589, 24.280589, 24.280589], 'FU': [24.281959, 24.281959, 24.281959]}.
+
+31200 token training peak allocated GiB per round: {'F0': [32.875576, 32.875576, 32.875576], 'F64': [32.875576, 32.875576, 32.875576], 'FU': [32.880151, 32.880151, 32.880151]}.
+
+200-update FU versus F0: {"loss": {"first_different_step": 2, "max_relative_difference": 0.04826568132660418, "zero_reference_mismatch_steps": []}, "grad_norm": {"first_different_step": 2, "max_relative_difference": 0.6788698491935565, "zero_reference_mismatch_steps": []}}. F0/F64 comparisons: [{"status": "passed", "failures": [], "stage": "8192-round-2", "service_protocol_valid": false}, {"status": "passed", "failures": [], "stage": "31200-round-0", "service_protocol_valid": true}, {"status": "passed", "failures": [], "stage": "31200-round-1", "service_protocol_valid": true}, {"status": "passed", "failures": [], "stage": "31200-round-2", "service_protocol_valid": true}, {"status": "passed", "failures": [], "stage": "long-8192", "service_protocol_valid": true}]. These describe this single repeated sample and do not establish convergence.
+
+Observed FU minus F64 8192 median allocated peak: 0.001370 GiB. The pre-stated 0.2 GiB threshold would place this in the within threshold category, but the 8192 service protocol failure prevents treating that reading as fully accepted.

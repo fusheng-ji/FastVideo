@@ -1,0 +1,45 @@
+{
+  "name": "pair-31200-r2-FU",
+  "status": "completed",
+  "arm": "FU",
+  "tokens": 31200,
+  "requested_updates": 2,
+  "service_states_before": [
+    "active",
+    "active",
+    "inactive",
+    "inactive"
+  ],
+  "service_states_after": [
+    "active",
+    "active",
+    "inactive",
+    "active"
+  ],
+  "optimizer_class": "AdamW",
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": true,
+      "capturable": false
+    }
+  ],
+  "actual_chunk": 0,
+  "updates": 2,
+  "step_wall_sec": [
+    61.849797181086615,
+    60.598587300861254
+  ],
+  "training_peak_allocated_bytes": 35304793088,
+  "training_peak_reserved_bytes": 40154169344,
+  "limiting_phase": "backward_end",
+  "limiting_step": 2,
+  "optimizer_peak_allocated_bytes": 25988960768,
+  "optimizer_peak_reserved_bytes": 40154169344,
+  "optimizer_wall_sec": [
+    2.34466222114861,
+    0.19179650489240885
+  ],
+  "startup_peak_allocated_bytes": 32969406976,
+  "whole_run_peak_allocated_bytes": 35304793088
+}

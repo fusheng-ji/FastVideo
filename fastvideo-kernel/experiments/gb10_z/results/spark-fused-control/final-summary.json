@@ -1,0 +1,214 @@
+{
+  "initial_status": "failed",
+  "continuation_status": "completed_with_prior_failure",
+  "training_memory": {
+    "8192": {
+      "F0": {
+        "runs": 3,
+        "training_peak_allocated_gib": [
+          27.514241,
+          27.514241,
+          27.514241
+        ],
+        "training_peak_reserved_gib": [
+          30.873047,
+          30.873047,
+          30.873047
+        ],
+        "optimizer_peak_allocated_gib": [
+          27.514241,
+          27.514241,
+          27.514241
+        ],
+        "limiting_phase": [
+          "optimizer_end",
+          "optimizer_end",
+          "optimizer_end"
+        ]
+      },
+      "F64": {
+        "runs": 3,
+        "training_peak_allocated_gib": [
+          24.280589,
+          24.280589,
+          24.280589
+        ],
+        "training_peak_reserved_gib": [
+          26.972656,
+          26.972656,
+          26.972656
+        ],
+        "optimizer_peak_allocated_gib": [
+          22.703067,
+          22.703067,
+          22.703067
+        ],
+        "limiting_phase": [
+          "backward_end",
+          "backward_end",
+          "backward_end"
+        ]
+      },
+      "FU": {
+        "runs": 3,
+        "training_peak_allocated_gib": [
+          24.281959,
+          24.281959,
+          24.281959
+        ],
+        "training_peak_reserved_gib": [
+          26.716797,
+          26.716797,
+          26.716797
+        ],
+        "optimizer_peak_allocated_gib": [
+          22.228459,
+          22.228459,
+          22.228459
+        ],
+        "limiting_phase": [
+          "backward_end",
+          "backward_end",
+          "backward_end"
+        ]
+      }
+    },
+    "31200": {
+      "F0": {
+        "runs": 3,
+        "training_peak_allocated_gib": [
+          32.875576,
+          32.875576,
+          32.875576
+        ],
+        "training_peak_reserved_gib": [
+          42.796875,
+          42.796875,
+          42.796875
+        ],
+        "optimizer_peak_allocated_gib": [
+          29.489888,
+          29.489888,
+          29.489888
+        ],
+        "limiting_phase": [
+          "backward_end",
+          "backward_end",
+          "backward_end"
+        ]
+      },
+      "F64": {
+        "runs": 3,
+        "training_peak_allocated_gib": [
+          32.875576,
+          32.875576,
+          32.875576
+        ],
+        "training_peak_reserved_gib": [
+          37.705078,
+          37.705078,
+          37.705078
+        ],
+        "optimizer_peak_allocated_gib": [
+          24.678714,
+          24.678714,
+          24.678714
+        ],
+        "limiting_phase": [
+          "backward_end",
+          "backward_end",
+          "backward_end"
+        ]
+      },
+      "FU": {
+        "runs": 3,
+        "training_peak_allocated_gib": [
+          32.880151,
+          32.880151,
+          32.880151
+        ],
+        "training_peak_reserved_gib": [
+          37.396484,
+          37.396484,
+          37.396484
+        ],
+        "optimizer_peak_allocated_gib": [
+          24.204106,
+          24.204106,
+          24.204106
+        ],
+        "limiting_phase": [
+          "backward_end",
+          "backward_end",
+          "backward_end"
+        ]
+      }
+    }
+  },
+  "initial_comparisons": [
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "8192-round-0"
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "8192-round-1"
+    }
+  ],
+  "continuation_comparisons": [
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "8192-round-2",
+      "service_protocol_valid": false
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "31200-round-0",
+      "service_protocol_valid": true
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "31200-round-1",
+      "service_protocol_valid": true
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "31200-round-2",
+      "service_protocol_valid": true
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "long-8192",
+      "service_protocol_valid": true
+    }
+  ],
+  "fu_versus_f0_200": {
+    "loss": {
+      "first_different_step": 2,
+      "max_relative_difference": 0.04826568132660418,
+      "zero_reference_mismatch_steps": []
+    },
+    "grad_norm": {
+      "first_different_step": 2,
+      "max_relative_difference": 0.6788698491935565,
+      "zero_reference_mismatch_steps": []
+    }
+  },
+  "prior_failures": [],
+  "service_restoration_exceptions": [
+    "pair-8192-r0-F64",
+    "pair-8192-r1-FU",
+    "pair-8192-r1-F0",
+    "pair-8192-r1-F64",
+    "pair-8192-r2-F64"
+  ],
+  "round_8192_protocol_valid": false,
+  "note": "The earlier vLLM guard and wrapper failures are preserved; the affected attempts were not rerun. The third 8192 round and earlier service exceptions limit formal paired acceptance. 31200 and 200-update continuation results are separately reported."
+}

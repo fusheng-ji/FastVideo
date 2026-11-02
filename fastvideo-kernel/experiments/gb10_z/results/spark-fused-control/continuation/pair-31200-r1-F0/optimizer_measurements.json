@@ -1,0 +1,22 @@
+[
+  {
+    "step": 1,
+    "pre_optimizer_allocated": 14635244544,
+    "pre_segment_peak_allocated": 21062557184,
+    "pre_segment_peak_reserved": 26067599360,
+    "status": "completed",
+    "optimizer_wall_sec": 16.185372033156455,
+    "optimizer_peak_allocated": 31664452096,
+    "optimizer_peak_reserved": 32606519296
+  },
+  {
+    "step": 2,
+    "pre_optimizer_allocated": 25988538368,
+    "pre_segment_peak_allocated": 35299881472,
+    "pre_segment_peak_reserved": 45952794624,
+    "status": "completed",
+    "optimizer_wall_sec": 0.5598248669411987,
+    "optimizer_peak_allocated": 31664525824,
+    "optimizer_peak_reserved": 45952794624
+  }
+]
