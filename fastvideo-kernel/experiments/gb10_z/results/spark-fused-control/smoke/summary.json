@@ -1,0 +1,32 @@
+{
+  "name": "smoke",
+  "status": "completed",
+  "arm": null,
+  "tokens": 8192,
+  "requested_updates": 1,
+  "service_states_before": [
+    "active",
+    "active",
+    "inactive",
+    "inactive"
+  ],
+  "service_states_after": [
+    "active",
+    "active",
+    "inactive",
+    "active"
+  ],
+  "optimizer_class": "AdamW",
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": null,
+      "capturable": false
+    }
+  ],
+  "actual_chunk": 0,
+  "updates": 1,
+  "step_wall_sec": [
+    17.589185351040214
+  ]
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "step": 1,
+    "pre_optimizer_allocated": 12508937216,
+    "pre_segment_peak_allocated": 13956269568,
+    "pre_segment_peak_reserved": 15793651712,
+    "status": "completed",
+    "optimizer_wall_sec": 7.945189108140767,
+    "optimizer_peak_allocated": 29543191040,
+    "optimizer_peak_reserved": 31048335360
+  },
+  {
+    "step": 2,
+    "pre_optimizer_allocated": 23867203584,
+    "pre_segment_peak_allocated": 29543191040,
+    "pre_segment_peak_reserved": 32470204416,
+    "status": "completed",
+    "optimizer_wall_sec": 0.5614325730130076,
+    "optimizer_peak_allocated": 29543191040,
+    "optimizer_peak_reserved": 33149681664
+  },
+  {
+    "step": 3,
+    "pre_optimizer_allocated": 23867203584,
+    "pre_segment_peak_allocated": 29543191040,
+    "pre_segment_peak_reserved": 33149681664,
+    "status": "completed",
+    "optimizer_wall_sec": 0.5632118370849639,
+    "optimizer_peak_allocated": 29543191040,
+    "optimizer_peak_reserved": 33149681664
+  },
+  {
+    "step": 4,
+    "pre_optimizer_allocated": 23867203584,
+    "pre_segment_peak_allocated": 29543191040,
+    "pre_segment_peak_reserved": 33149681664,
+    "status": "completed",
+    "optimizer_wall_sec": 0.5578925570007414,
+    "optimizer_peak_allocated": 29543191040,
+    "optimizer_peak_reserved": 33149681664
+  }
+]

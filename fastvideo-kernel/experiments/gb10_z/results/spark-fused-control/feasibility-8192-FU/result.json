@@ -1,0 +1,23 @@
+{
+  "domain": "spark-fused-control",
+  "experiment": "formal-entrypoint-preflight",
+  "status": "completed",
+  "tokens": 8192,
+  "chunk_size": 0,
+  "steps_requested": 1,
+  "kernel_sha256": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407",
+  "harness_sha256": "1d3d10823293b1979a385d3fadd31c6db27088b052180cd5a5fca6877d8e8910",
+  "historical_acceptance_inherited": false,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12"
+  },
+  "external_trackers": [
+    "none"
+  ],
+  "resolved_chunk_size": 0,
+  "resolved_fused": true,
+  "arm": "FU",
+  "updates_completed": 1
+}

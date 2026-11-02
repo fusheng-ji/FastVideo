@@ -1,0 +1,43 @@
+{
+  "name": "feasibility-31200-FU",
+  "status": "completed",
+  "arm": "FU",
+  "tokens": 31200,
+  "requested_updates": 1,
+  "service_states_before": [
+    "active",
+    "active",
+    "inactive",
+    "inactive"
+  ],
+  "service_states_after": [
+    "active",
+    "active",
+    "inactive",
+    "active"
+  ],
+  "optimizer_class": "AdamW",
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": true,
+      "capturable": false
+    }
+  ],
+  "actual_chunk": 0,
+  "updates": 1,
+  "step_wall_sec": [
+    61.64745985297486
+  ],
+  "training_peak_allocated_bytes": 25988887040,
+  "training_peak_reserved_bytes": 26583498752,
+  "limiting_phase": "optimizer_end",
+  "limiting_step": 1,
+  "optimizer_peak_allocated_bytes": 25988887040,
+  "optimizer_peak_reserved_bytes": 26583498752,
+  "optimizer_wall_sec": [
+    2.368679517880082
+  ],
+  "startup_peak_allocated_bytes": 32969406976,
+  "whole_run_peak_allocated_bytes": 32969406976
+}

@@ -1,0 +1,49 @@
+{
+  "name": "pair-8192-r1-F64",
+  "status": "completed",
+  "arm": "F64",
+  "tokens": 8192,
+  "requested_updates": 4,
+  "service_states_before": [
+    "active",
+    "failed",
+    "inactive",
+    "inactive"
+  ],
+  "service_states_after": [
+    "active",
+    "failed",
+    "inactive",
+    "active"
+  ],
+  "optimizer_class": "_ChunkedForeachAdamW",
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": null,
+      "capturable": false
+    }
+  ],
+  "actual_chunk": 64,
+  "updates": 4,
+  "step_wall_sec": [
+    17.13774239597842,
+    9.975824075052515,
+    9.947117004077882,
+    10.12360996613279
+  ],
+  "training_peak_allocated_bytes": 26071083520,
+  "training_peak_reserved_bytes": 28961669120,
+  "limiting_phase": "backward_end",
+  "limiting_step": 2,
+  "optimizer_peak_allocated_bytes": 24377232384,
+  "optimizer_peak_reserved_bytes": 28961669120,
+  "optimizer_wall_sec": [
+    6.399032926186919,
+    0.5530284438282251,
+    0.5623893660958856,
+    0.5561260029207915
+  ],
+  "startup_peak_allocated_bytes": 32969406976,
+  "whole_run_peak_allocated_bytes": 32969406976
+}

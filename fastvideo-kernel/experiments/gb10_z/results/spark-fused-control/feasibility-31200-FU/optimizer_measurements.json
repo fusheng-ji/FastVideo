@@ -1,0 +1,12 @@
+[
+  {
+    "step": 1,
+    "pre_optimizer_allocated": 14635244544,
+    "pre_segment_peak_allocated": 21062557184,
+    "pre_segment_peak_reserved": 26067599360,
+    "status": "completed",
+    "optimizer_wall_sec": 2.368679517880082,
+    "optimizer_peak_allocated": 25988887040,
+    "optimizer_peak_reserved": 26583498752
+  }
+]

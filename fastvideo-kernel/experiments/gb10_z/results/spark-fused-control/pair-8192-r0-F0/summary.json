@@ -1,0 +1,49 @@
+{
+  "name": "pair-8192-r0-F0",
+  "status": "completed",
+  "arm": "F0",
+  "tokens": 8192,
+  "requested_updates": 4,
+  "service_states_before": [
+    "active",
+    "active",
+    "inactive",
+    "inactive"
+  ],
+  "service_states_after": [
+    "active",
+    "active",
+    "inactive",
+    "active"
+  ],
+  "optimizer_class": "AdamW",
+  "optimizer_flags": [
+    {
+      "foreach": null,
+      "fused": null,
+      "capturable": false
+    }
+  ],
+  "actual_chunk": 0,
+  "updates": 4,
+  "step_wall_sec": [
+    18.359841692028567,
+    9.931058338144794,
+    9.923749855021015,
+    9.921924635069445
+  ],
+  "training_peak_allocated_bytes": 29543191040,
+  "training_peak_reserved_bytes": 33149681664,
+  "limiting_phase": "optimizer_end",
+  "limiting_step": 1,
+  "optimizer_peak_allocated_bytes": 29543191040,
+  "optimizer_peak_reserved_bytes": 33149681664,
+  "optimizer_wall_sec": [
+    8.10943628102541,
+    0.5617182480636984,
+    0.5630334061570466,
+    0.5600888440385461
+  ],
+  "startup_peak_allocated_bytes": 32969406976,
+  "whole_run_peak_allocated_bytes": 32969406976
+}

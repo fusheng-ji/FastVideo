@@ -1,0 +1,555 @@
+{
+  "status": "failed",
+  "error": "pair-8192-r2-F64: exit 1; no retry",
+  "fu_available": true,
+  "failures": [
+    {
+      "name": "pair-8192-r2-F64",
+      "arm": "F64",
+      "exit_code": 1,
+      "reason": "attempt failed; no retry"
+    }
+  ],
+  "schedule": {
+    "8192": [
+      [
+        "FU",
+        "F0",
+        "F64"
+      ],
+      [
+        "FU",
+        "F0",
+        "F64"
+      ],
+      [
+        "F64",
+        "F0",
+        "FU"
+      ]
+    ],
+    "31200": [
+      [
+        "F64",
+        "FU",
+        "F0"
+      ],
+      [
+        "FU",
+        "F0",
+        "F64"
+      ],
+      [
+        "FU",
+        "F64",
+        "F0"
+      ]
+    ],
+    "200": [
+      "F0",
+      "FU",
+      "F64"
+    ]
+  },
+  "source_sha256": {
+    "fastvideo-kernel/experiments/gb10_z/results/spark-fused-control/fused_entry_v2.py": "9b98bf8133f8c468306a7ae4ee1661eb4c6f5d00104ae9790b8d5f556d49483c",
+    "fastvideo-kernel/experiments/gb10_z/results/spark-fused-control/fused_memory_v2.py": "1f04313af40e79fda5970b36aa629427830309834d9691d01370a3014d2fcea4",
+    "fastvideo-kernel/experiments/gb10_z/code/chunk_v5_memory.py": "5e7146bb751461de9bfeec1efe4cb39ea80563ecebeb0af31177c59804d0f700",
+    "fastvideo-kernel/experiments/gb10_z/code/chunk_v4_observer.py": "3bc2e37f95701d8221fcb134964a5ca93c88d1f535d67dd87e5c457164bfcb23",
+    "fastvideo-kernel/experiments/gb10_z/code/chunk_v4_compare.py": "b7bbbb2b9cfccb9117d15a385eef7bc4b096cb0d727f0a5c625939f0d03ffb74",
+    "fastvideo/train/utils/negative_prompt.py": "9af2b1bfdeefe8c0574ed07d2a1ff828da515bc7270e6f192528a6ea01719779",
+    "fastvideo/train/utils/optimizer.py": "93ad251dd3a7c57d14a4722cc3da8eecf016243008b9c2009dd89256db926925",
+    "fastvideo/train/utils/config.py": "e75ea277463fba2c5d2c12a24f2a9afd1524953cce01140fae113b602c183af6",
+    "fastvideo-kernel/python/fastvideo_kernel/triton_kernels/attn_qat_train.py": "477cf40132176b4e430295ca830e3e35a9928698b68ba99ba5f52dbe7ae03407"
+  },
+  "comparisons": [
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "8192-round-0"
+    },
+    {
+      "status": "passed",
+      "failures": [],
+      "stage": "8192-round-1"
+    }
+  ],
+  "pairing_audit": [
+    {
+      "name": "8192-round-0",
+      "initial_state_equal": true,
+      "method_rng_equal": true
+    },
+    {
+      "name": "8192-round-1",
+      "initial_state_equal": true,
+      "method_rng_equal": true
+    }
+  ],
+  "pairing_ok": true,
+  "fu_versus_f0": null,
+  "runs": [
+    {
+      "name": "smoke",
+      "status": "completed",
+      "arm": null,
+      "tokens": 8192,
+      "requested_updates": 1,
+      "service_states_before": [
+        "active",
+        "active",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "active",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "AdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": null,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 0,
+      "updates": 1,
+      "step_wall_sec": [
+        17.589185351040214
+      ]
+    },
+    {
+      "name": "feasibility-8192-FU",
+      "status": "completed",
+      "arm": "FU",
+      "tokens": 8192,
+      "requested_updates": 1,
+      "service_states_before": [
+        "active",
+        "active",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "active",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "AdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": true,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 0,
+      "updates": 1,
+      "step_wall_sec": [
+        12.864247299032286
+      ],
+      "training_peak_allocated_bytes": 23867625984,
+      "training_peak_reserved_bytes": 25025314816,
+      "limiting_phase": "optimizer_end",
+      "limiting_step": 1,
+      "optimizer_peak_allocated_bytes": 23867625984,
+      "optimizer_peak_reserved_bytes": 25025314816,
+      "optimizer_wall_sec": [
+        2.635634988779202
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "feasibility-31200-FU",
+      "status": "completed",
+      "arm": "FU",
+      "tokens": 31200,
+      "requested_updates": 1,
+      "service_states_before": [
+        "active",
+        "active",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "active",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "AdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": true,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 0,
+      "updates": 1,
+      "step_wall_sec": [
+        61.64745985297486
+      ],
+      "training_peak_allocated_bytes": 25988887040,
+      "training_peak_reserved_bytes": 26583498752,
+      "limiting_phase": "optimizer_end",
+      "limiting_step": 1,
+      "optimizer_peak_allocated_bytes": 25988887040,
+      "optimizer_peak_reserved_bytes": 26583498752,
+      "optimizer_wall_sec": [
+        2.368679517880082
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "pair-8192-r0-FU",
+      "status": "completed",
+      "arm": "FU",
+      "tokens": 8192,
+      "requested_updates": 4,
+      "service_states_before": [
+        "active",
+        "active",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "active",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "AdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": true,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 0,
+      "updates": 4,
+      "step_wall_sec": [
+        12.968169633997604,
+        9.626185036962852,
+        9.569389441981912,
+        9.56835976196453
+      ],
+      "training_peak_allocated_bytes": 26072554496,
+      "training_peak_reserved_bytes": 28686942208,
+      "limiting_phase": "backward_end",
+      "limiting_step": 2,
+      "optimizer_peak_allocated_bytes": 23867625984,
+      "optimizer_peak_reserved_bytes": 28686942208,
+      "optimizer_wall_sec": [
+        2.7040933480020612,
+        0.19179739616811275,
+        0.19092873693443835,
+        0.19192843907512724
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "pair-8192-r0-F0",
+      "status": "completed",
+      "arm": "F0",
+      "tokens": 8192,
+      "requested_updates": 4,
+      "service_states_before": [
+        "active",
+        "active",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "active",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "AdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": null,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 0,
+      "updates": 4,
+      "step_wall_sec": [
+        18.359841692028567,
+        9.931058338144794,
+        9.923749855021015,
+        9.921924635069445
+      ],
+      "training_peak_allocated_bytes": 29543191040,
+      "training_peak_reserved_bytes": 33149681664,
+      "limiting_phase": "optimizer_end",
+      "limiting_step": 1,
+      "optimizer_peak_allocated_bytes": 29543191040,
+      "optimizer_peak_reserved_bytes": 33149681664,
+      "optimizer_wall_sec": [
+        8.10943628102541,
+        0.5617182480636984,
+        0.5630334061570466,
+        0.5600888440385461
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "pair-8192-r0-F64",
+      "status": "completed",
+      "arm": "F64",
+      "tokens": 8192,
+      "requested_updates": 4,
+      "service_states_before": [
+        "active",
+        "failed",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "failed",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "_ChunkedForeachAdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": null,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 64,
+      "updates": 4,
+      "step_wall_sec": [
+        12.976391923846677,
+        9.985391362104565,
+        9.941114758141339,
+        9.947493113810197
+      ],
+      "training_peak_allocated_bytes": 26071083520,
+      "training_peak_reserved_bytes": 28961669120,
+      "limiting_phase": "backward_end",
+      "limiting_step": 2,
+      "optimizer_peak_allocated_bytes": 24377232384,
+      "optimizer_peak_reserved_bytes": 28961669120,
+      "optimizer_wall_sec": [
+        2.7303176729474217,
+        0.5535130919888616,
+        0.5578833059407771,
+        0.5540510329883546
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "pair-8192-r1-FU",
+      "status": "completed",
+      "arm": "FU",
+      "tokens": 8192,
+      "requested_updates": 4,
+      "service_states_before": [
+        "active",
+        "failed",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "failed",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "AdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": true,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 0,
+      "updates": 4,
+      "step_wall_sec": [
+        12.932567073963583,
+        9.624070429010317,
+        9.592990378849208,
+        9.573705695103854
+      ],
+      "training_peak_allocated_bytes": 26072554496,
+      "training_peak_reserved_bytes": 28686942208,
+      "limiting_phase": "backward_end",
+      "limiting_step": 2,
+      "optimizer_peak_allocated_bytes": 23867625984,
+      "optimizer_peak_reserved_bytes": 28686942208,
+      "optimizer_wall_sec": [
+        2.675650268094614,
+        0.19221772393211722,
+        0.1920836130157113,
+        0.19237187504768372
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "pair-8192-r1-F0",
+      "status": "completed",
+      "arm": "F0",
+      "tokens": 8192,
+      "requested_updates": 4,
+      "service_states_before": [
+        "active",
+        "failed",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "failed",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "AdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": null,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 0,
+      "updates": 4,
+      "step_wall_sec": [
+        18.19598459196277,
+        9.958239112980664,
+        9.925157116027549,
+        9.915277323918417
+      ],
+      "training_peak_allocated_bytes": 29543191040,
+      "training_peak_reserved_bytes": 33149681664,
+      "limiting_phase": "optimizer_end",
+      "limiting_step": 1,
+      "optimizer_peak_allocated_bytes": 29543191040,
+      "optimizer_peak_reserved_bytes": 33149681664,
+      "optimizer_wall_sec": [
+        7.945189108140767,
+        0.5614325730130076,
+        0.5632118370849639,
+        0.5578925570007414
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "pair-8192-r1-F64",
+      "status": "completed",
+      "arm": "F64",
+      "tokens": 8192,
+      "requested_updates": 4,
+      "service_states_before": [
+        "active",
+        "failed",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "failed",
+        "inactive",
+        "active"
+      ],
+      "optimizer_class": "_ChunkedForeachAdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": null,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 64,
+      "updates": 4,
+      "step_wall_sec": [
+        17.13774239597842,
+        9.975824075052515,
+        9.947117004077882,
+        10.12360996613279
+      ],
+      "training_peak_allocated_bytes": 26071083520,
+      "training_peak_reserved_bytes": 28961669120,
+      "limiting_phase": "backward_end",
+      "limiting_step": 2,
+      "optimizer_peak_allocated_bytes": 24377232384,
+      "optimizer_peak_reserved_bytes": 28961669120,
+      "optimizer_wall_sec": [
+        6.399032926186919,
+        0.5530284438282251,
+        0.5623893660958856,
+        0.5561260029207915
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    },
+    {
+      "name": "pair-8192-r2-F64",
+      "status": "completed",
+      "arm": "F64",
+      "tokens": 8192,
+      "requested_updates": 4,
+      "service_states_before": [
+        "active",
+        "failed",
+        "inactive",
+        "inactive"
+      ],
+      "service_states_after": [
+        "active",
+        "failed",
+        "inactive",
+        "active",
+        "vLLM service failed to restore"
+      ],
+      "optimizer_class": "_ChunkedForeachAdamW",
+      "optimizer_flags": [
+        {
+          "foreach": null,
+          "fused": null,
+          "capturable": false
+        }
+      ],
+      "actual_chunk": 64,
+      "updates": 4,
+      "step_wall_sec": [
+        13.211450637085363,
+        9.979257789906114,
+        9.948335950961336,
+        9.952495042933151
+      ],
+      "training_peak_allocated_bytes": 26071083520,
+      "training_peak_reserved_bytes": 28961669120,
+      "limiting_phase": "backward_end",
+      "limiting_step": 2,
+      "optimizer_peak_allocated_bytes": 24377232384,
+      "optimizer_peak_reserved_bytes": 28961669120,
+      "optimizer_wall_sec": [
+        2.73864014307037,
+        0.5575036460068077,
+        0.556301272008568,
+        0.5545542060863227
+      ],
+      "startup_peak_allocated_bytes": 32969406976,
+      "whole_run_peak_allocated_bytes": 32969406976
+    }
+  ]
+}
