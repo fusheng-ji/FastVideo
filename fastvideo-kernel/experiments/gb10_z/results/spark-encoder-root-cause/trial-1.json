@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "trial": 1,
+  "stage": "text_encoder_load",
+  "exception": "AssertionError: tensor model parallel group is not initialized",
+  "checkpoints": [],
+  "automatic_retry": false,
+  "subsequent_trials": "not run: stopped after failure",
+  "gpu_locks_held": true,
+  "environment": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash_attention": "2.8.3",
+    "driver": "580.173.02"
+  }
+}
