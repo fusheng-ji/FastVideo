@@ -1,0 +1,50 @@
+DEBUG ptxas info    : Function properties for _ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi128ELi128ELi128ELi3ELi1ELb0EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb1ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE
+DEBUG     152 bytes stack frame, 244 bytes spill stores, 268 bytes spill loads
+DEBUG ptxas info    : Used 168 registers, used 1 barriers, 152 bytes cumulative stack size
+DEBUG ptxas info    : Compile time = 282.872 ms
+DEBUG ptxas info    : Compiling entry function '_ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi128ELi128ELi128ELi3ELi1ELb1EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb1ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE' for 'sm_121a'
+DEBUG ptxas info    : Function properties for _ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi128ELi128ELi128ELi3ELi1ELb1EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb1ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE
+DEBUG     152 bytes stack frame, 256 bytes spill stores, 276 bytes spill loads
+DEBUG ptxas info    : Used 168 registers, used 1 barriers, 152 bytes cumulative stack size
+DEBUG ptxas info    : Compile time = 285.434 ms
+DEBUG ptxas info    : Compiling entry function '_ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb0EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb0ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE' for 'sm_121a'
+DEBUG ptxas info    : Function properties for _ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb0EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb0ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE
+DEBUG     48 bytes stack frame, 84 bytes spill stores, 116 bytes spill loads
+DEBUG ptxas info    : Used 168 registers, used 1 barriers, 48 bytes cumulative stack size
+DEBUG ptxas info    : Compile time = 179.694 ms
+DEBUG ptxas info    : Compiling entry function '_ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb1EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb0ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE' for 'sm_121a'
+DEBUG ptxas info    : Function properties for _ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb1EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb0ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE
+DEBUG     48 bytes stack frame, 92 bytes spill stores, 116 bytes spill loads
+DEBUG ptxas info    : Used 168 registers, used 1 barriers, 48 bytes cumulative stack size
+DEBUG ptxas info    : Compile time = 178.640 ms
+DEBUG ptxas info    : Compiling entry function '_ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb0EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb1ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE' for 'sm_121a'
+DEBUG ptxas info    : Function properties for _ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb0EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb1ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE
+DEBUG     48 bytes stack frame, 88 bytes spill stores, 112 bytes spill loads
+DEBUG ptxas info    : Used 168 registers, used 1 barriers, 48 bytes cumulative stack size
+DEBUG ptxas info    : Compile time = 221.285 ms
+DEBUG ptxas info    : Compiling entry function '_ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb1EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb1ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE' for 'sm_121a'
+DEBUG ptxas info    : Function properties for _ZN5flash15compute_attn_wsI23Flash_fwd_kernel_traitsILi64ELi128ELi128ELi3ELi1ELb1EN7cutlass11nv_float4_tINS2_12float_e2m1_tEEENS2_10bfloat16_tEELb1ENS_29StaticPersistentTileSchedulerEEEv16Flash_fwd_paramsNS_21CollectiveMainloopFwdIT_XT0_EE6ParamsENS_21CollectiveEpilogueFwdISB_E6ParamsENT1_6ParamsE
+DEBUG     48 bytes stack frame, 92 bytes spill stores, 116 bytes spill loads
+DEBUG ptxas info    : Used 168 registers, used 1 barriers, 48 bytes cumulative stack size
+DEBUG ptxas info    : Compile time = 221.159 ms
+DEBUG <CHECKOUT>/fastvideo-kernel/attn_qat_infer/blackwell/api.cu: In function ‘std::vector<at::Tensor> mha_fwd_impl(at::Tensor&, const at::Tensor&, const at::Tensor&, const at::Tensor&, const at::Tensor&, const at::Tensor&, const at::Tensor&, int, std::optional<at::Tensor>&, float, bool, bool, bool, bool, const SparseKvLists&)’:
+DEBUG <CHECKOUT>/fastvideo-kernel/attn_qat_infer/blackwell/api.cu:296:35: warning: narrowing conversion of ‘(char)(& q)->at::Tensor::<anonymous>.at::TensorBase::get_device()’ from ‘char’ to ‘c10::DeviceIndex’ {aka ‘signed char’} [-Wnarrowing]
+DEBUG   296 |     at::cuda::CUDAGuard device_guard{(char)q.get_device()};
+DEBUG       |                                   ^~~~~~~~~~~~~~~~~~~~
+DEBUG [11/11] Linking CUDA shared module fp4attn_cuda.cpython-312-aarch64-linux-gnu.so
+DEBUG *** Installing project into wheel...
+DEBUG -- Install configuration: "Release"
+DEBUG -- Installing: <BUILD_TMP>/wheel/platlib/fastvideo_kernel/_C/fastvideo_kernel_ops.cpython-312-aarch64-linux-gnu.so
+DEBUG -- Set non-toolchain portion of runtime path of "<BUILD_TMP>/wheel/platlib/fastvideo_kernel/_C/fastvideo_kernel_ops.cpython-312-aarch64-linux-gnu.so" to ""
+DEBUG -- Installing: <BUILD_TMP>/wheel/platlib/fp4attn_cuda.cpython-312-aarch64-linux-gnu.so
+DEBUG -- Set non-toolchain portion of runtime path of "<BUILD_TMP>/wheel/platlib/fp4attn_cuda.cpython-312-aarch64-linux-gnu.so" to ""
+DEBUG -- Installing: <BUILD_TMP>/wheel/platlib/fp4quant_cuda.cpython-312-aarch64-linux-gnu.so
+DEBUG -- Set non-toolchain portion of runtime path of "<BUILD_TMP>/wheel/platlib/fp4quant_cuda.cpython-312-aarch64-linux-gnu.so" to ""
+DEBUG *** Making wheel...
+DEBUG *** Created fastvideo_kernel-0.3.5-cp312-cp312-linux_aarch64.whl
+DEBUG Built `fastvideo-kernel @ file://<CHECKOUT>/fastvideo-kernel` into `fastvideo_kernel-0.3.5-cp312-cp312-linux_aarch64.whl`
+      Built fastvideo-kernel @ file://<CHECKOUT>/fastvideo-kernel
+DEBUG Transient failure while handling response from `https://files.pythonhosted.org/packages/46/e1/cdc1797eadf82d3a9a575a19b33fdc871a97edbec42c00b5b5e914f4aff4/nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_aarch64.whl`; retrying after 1.6s...
+DEBUG No cache entry for: https://files.pythonhosted.org/packages/46/e1/cdc1797eadf82d3a9a575a19b33fdc871a97edbec42c00b5b5e914f4aff4/nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_aarch64.whl
+DEBUG Sending fresh GET request for: https://files.pythonhosted.org/packages/46/e1/cdc1797eadf82d3a9a575a19b33fdc871a97edbec42c00b5b5e914f4aff4/nvidia_cusparselt_cu13-0.8.1-py3-none-manylinux2014_aarch64.whl
+Downloading nvidia-cusparselt-cu13 (210.8MiB)
