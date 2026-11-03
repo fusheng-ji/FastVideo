@@ -16,11 +16,13 @@ import hashlib
 import shutil
 import subprocess
 import threading
+import time
 
 import pytest
 
 CODE = Path(__file__).resolve().parents[1] / 'code'
-SCRIPT_FILES = ('ci_kernel_lane_repro.sh', 'ci_lane_summary.py', 'container_network_probe.py')
+SCRIPT_FILES = ('ci_kernel_lane_repro.sh', 'ci_lane_summary.py', 'container_network_probe.py', 'ci_lane_container.sh',
+                'ci_lane_environment.py')
 WHEEL_NAME = 'flash_attn-2.8.3+cu130torch2.12-cp312-cp312-linux_aarch64.whl'
 WHEEL_BYTES = bytes(range(256)) * 400
 GIT_ENV = {
@@ -52,13 +54,28 @@ case "$1" in
             echo '{"all_ok": true}'; exit 0
         fi
         [[ "$args" == *" --network=host "* ]] || exit 98
+        [[ "$args" == *" bash /repro/ci_lane_container.sh "* ]] || { echo "lane does not run the container script" >&2; exit 96; }
+        [[ "$args" == *" -e UV_CACHE_DIR=/opt/uv/cache "* ]] || exit 95
+        label="$(sed -n 's/.* --label \(fastvideo-ci-repro=[^ ]*\) .*/\1/p' <<<"$args")"
+        [[ -n "$label" ]] || { echo "lane container without the run label" >&2; exit 94; }
         prev=""
         for a in "$@"; do
             if [[ "$prev" == -v ]]; then
-                case "$a" in *:/src) src="${a%:/src}" ;; *:/out) out="${a%:/out}" ;; esac
+                case "$a" in
+                    *:/src) src="${a%:/src}" ;;
+                    *:/out) out="${a%:/out}" ;;
+                    *:/repro:ro) code="${a%:/repro:ro}" ;;
+                    *:/opt/uv/cache) cache="${a%:/opt/uv/cache}" ;;
+                esac
             fi
             prev="$a"
         done
+        [[ -f "$code/ci_lane_container.sh" && -f "$code/ci_lane_environment.py" && -d "$cache" ]] || exit 93
+        if [[ -n "${FAKE_LANE_SLEEP:-}" ]]; then
+            # A long lane: record which container this is, then block until `docker kill` stops it.
+            echo "$label $$" >"$FAKE_STATE/lane.running"
+            exec sleep 300
+        fi
         [[ -f "$src/fastvideo-kernel/include/cutlass/include/cutlass.h" ]] || { echo kernel_build >"$out/failed_stage"; exit 11; }
         extra=""
         if grep -q gb10_only "$src/marker"; then
@@ -67,6 +84,17 @@ case "$1" in
         printf '<testsuites><testsuite><testcase classname="t" name="test_ok"/>%s</testsuite></testsuites>' "$extra" \
             >"$out/junit.xml"
         echo 0 >"$out/lane_exit_code"
+        exit 0 ;;
+    ps)
+        # docker ps -q --filter label=KEY=VALUE: list the running fake container if its label matches.
+        if [[ -f "$FAKE_STATE/lane.running" ]]; then
+            read -r label pid <"$FAKE_STATE/lane.running"
+            [[ "$args" != *"label=$label"* ]] || echo "cid-$pid"
+        fi
+        exit 0 ;;
+    kill)
+        for id in "${@:2}"; do kill "${id#cid-}" 2>/dev/null; done
+        rm -f "$FAKE_STATE/lane.running"
         exit 0 ;;
 esac
 exit 0
@@ -204,7 +232,35 @@ def test_full_run_reports_pr_only_failures(repo):
     assert 'FLASH_ATTN_WHEEL=http://127.0.0.1:' in builds[0] and repo['server'].url not in builds[0]
     lanes = [line for line in docker if line.startswith('run ') and '--gpus all' in line]
     assert len(lanes) == 4
-    assert all('FASTVIDEO_CI_BACKEND=spark4' in line and 'UV_HTTP_RETRIES=10' in line for line in lanes)
+    assert all('FASTVIDEO_CI_BACKEND=spark4' in line and 'UV_HTTP_CONNECT_TIMEOUT=120' in line for line in lanes)
+    # One run label shared by this run's containers; the uv cache lives next to the wheel and is reused.
+    assert len({line.split('--label ')[1].split()[0] for line in lanes}) == 1
+    assert (repo['wheel_dir'] / 'uv-cache').is_dir()
+
+
+def test_interrupt_kills_the_running_lane_container(repo):
+    out = repo['root'] / 'out'
+    args = ['bash', str(repo['script']), '--out', str(out), '--wheel-dir', str(repo['wheel_dir']),
+            '--lock', str(repo['root'] / 'a.lock'), '--lock', str(repo['root'] / 'b.lock'),
+            f"main={repo['base']}", f"pr1934={repo['pr']}"]
+    driver = subprocess.Popen(args, env={**repo['env'], 'FAKE_LANE_SLEEP': '1'}, stdout=subprocess.PIPE,
+                              stderr=subprocess.STDOUT, text=True)
+    running = repo['state'] / 'lane.running'
+    for _ in range(300):
+        if running.exists() or driver.poll() is not None:
+            break
+        time.sleep(0.1)
+    assert running.exists(), driver.communicate(timeout=10)[0]
+    container_pid = int(running.read_text().split()[1])
+    driver.terminate()
+    output, _ = driver.communicate(timeout=20)
+    assert driver.returncode == 130, output
+    assert 'interrupted; stopping this run' in output
+    assert any(line == f'kill cid-{container_pid}' for line in (repo['state'] / 'docker.log').read_text().splitlines())
+    with pytest.raises(ProcessLookupError):
+        os.kill(container_pid, 0)
+    # The second ref never started.
+    assert not (out / 'runs' / 'pr1934' / 'junit.xml').exists()
 
 
 def test_pypi_failure_stops_before_download_and_build(repo):
@@ -277,4 +333,6 @@ def test_dry_run_of_the_real_refs_lists_every_step(tmp_path):
     assert sum('submodule update --init' in line for line in lines) == 8
     runs = [line for line in lines if 'docker run' in line and '--gpus all' in line]
     assert len(runs) == 4 and all('--network=host' in line and 'FASTVIDEO_CI_BACKEND=spark4' in line for line in runs)
+    assert all(line.endswith('bash /repro/ci_lane_container.sh') and ':/repro:ro' in line for line in runs)
     assert (out / 'image-context' / 'Dockerfile.spark-ci').read_text().startswith('# syntax=docker')
+    assert not (tmp_path / 'w').exists()  # a dry run creates no wheel or cache directory

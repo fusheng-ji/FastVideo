@@ -29,7 +29,7 @@ both MTUs are 1500. The script now:
 - checks PyPI (index and file host) from a container with three attempts per URL before downloading or building, since the
   lane setup installs build dependencies from PyPI (`network-pypi.json`, now plain JSON: the image's CUDA banner had been
   mixed into the earlier files);
-- gives `uv` in the lane containers `UV_HTTP_TIMEOUT=300` and `UV_HTTP_RETRIES=10`, and records the `uv` version;
+- gives `uv` in the lane containers `UV_HTTP_TIMEOUT=300`, `UV_HTTP_CONNECT_TIMEOUT=120` and `UV_HTTP_RETRIES=10`, and records the `uv` version;
 - has `--check-only`, which stops after the PyPI check and the wheel download, needs no locks and no GPU work;
 - bounds the image build at 45 minutes with `--progress=plain` output in `image-build.log`, recording
   `failed_stage=image_build` instead of hanging.
@@ -38,6 +38,24 @@ A defect was also fixed before it was hit: a fresh worktree has no kernel header
 cannot see the worktree (its `.git` points to a host path), so `build.sh` would have failed on missing CUTLASS headers for
 every ref. The host now checks out `fastvideo-kernel/include/cutlass` and `include/tk` in each worktree at the pinned commits
 (later worktrees borrow objects from the first) and records them in `source.txt`.
+
+## What changed since attempt 3 (`spark/gb10-ci-kernel-lane` @ `ad0534730`, stopped on request)
+
+Attempt 3 built the image and reached `main`'s kernel build. Its container stage had two defects, both fixed:
+
+- It ran `build.sh` in its default mode, whose final `uv pip install .` resolves the kernel's dependencies and was
+  downloading `nvidia-cusparselt-cu13` (211 MiB) into the image's environment. The container now builds and installs the
+  kernel exactly as `docker/Dockerfile` does for the image itself: `build.sh --wheel-dir`, which builds a wheel and installs
+  it with `--reinstall-package fastvideo-kernel --no-deps`. No other package changes and nothing is downloaded.
+- Its environment check required `fastvideo_kernel` to import from `/src`, which a non-editable install can never satisfy
+  (`wheel.packages` installs it into `site-packages`), so every ref would have stopped at `failed_stage=environment` before
+  pytest. The check now verifies provenance instead: FastVideo is the editable install of `/src`; `fastvideo-kernel` was
+  installed from the wheel built in this container (`direct_url.json`); and every `.py` file of the installed
+  `fastvideo_kernel` and `attn_qat_infer` packages is byte-identical to the checkout.
+
+The container steps now live in `code/ci_lane_container.sh` and `code/ci_lane_environment.py`, mounted read-only into each
+container, so they can be run and tested outside Docker. Each lane container carries a run label; SIGINT or SIGTERM to the
+driver kills that run's containers, and a uv cache next to the wheel is shared by all containers and runs.
 
 ## What the script does
 
@@ -59,24 +77,38 @@ every ref. The host now checks out `fastvideo-kernel/include/cutlass` and `inclu
    | `pr1934` | `628fa0860cd573ca3050a4f38cb221f879b619b7` | fails in CI |
    | `pr1938` | `3e5ba79a13b1a1306262beb5b1bbdfcf33496e86` | fails in CI |
 
-6. For each ref, under both locks, in a fresh container (`--gpus all`, `--network=host`, `FASTVIDEO_CI_BACKEND=spark4` as on
-   the CI runner): installs the checkout (`uv pip install --no-deps -e .`), builds the kernel from that checkout
-   (`fastvideo-kernel/build.sh`, as CI does for PRs that change the kernel), verifies that `fastvideo_kernel` imports from the
-   checkout, then runs the lane script with a 90-minute timeout and JUnit output. Files per ref: `source.txt`, `install.log`,
-   `kernel_build.log`, `environment.json`, `lane.log`, `junit.xml`, `lane_exit_code`, and `failed_stage` if a setup stage
-   failed.
+6. For each ref, under both locks, in a fresh labelled container (`--gpus all`, `--network=host`,
+   `FASTVIDEO_CI_BACKEND=spark4` as on the CI runner) running `code/ci_lane_container.sh`: installs the checkout
+   (`uv pip install --no-deps -e .`), builds the kernel from that checkout and installs it as `docker/Dockerfile` does
+   (`build.sh --wheel-dir`, `--no-deps`), checks provenance (`code/ci_lane_environment.py`), then runs the lane script with a
+   90-minute timeout and JUnit output. Files per ref: `source.txt`, `install.log`, `kernel_build.log`, `environment.json`,
+   `environment.err`, `lane.log`, `junit.xml`, `lane_exit_code`, and `failed_stage` if a setup stage failed (`install`,
+   `kernel_build`, `environment`).
 7. Writes `summary.json` and `summary.md`: per-ref counts (passed, failed, error, skipped, xfailed) and, for each ref, the
    failures that `main` does not have, with the first line of each assertion message.
+
+## Stop attempt 3 first (if it is still running)
+
+Its containers carry no label. Stop the driver script you started (its PID, not a pattern match), then stop its container,
+because killing a docker client does not stop the container:
+
+```bash
+docker ps --filter ancestor=fastvideo-ci-gb10:repro --format '{{.ID}} {{.RunningFor}} {{.Command}}'
+docker kill <ID from the line above>
+```
+
+Confirm that no container from that image is left and that the locks and services are back as the wrapper leaves them. Keep
+the image tag `fastvideo-ci-gb10:repro` and the wheel directory: the next run reuses both.
 
 ## Step 0: preconditions (services can stay up)
 
 1. Check out `validate/ci-kernel-lane-repro` at the commit in the instruction; working tree clean.
-2. Run the CPU checks (do not set `CUDA_VISIBLE_DEVICES=''`); all 14 must pass (the dry-run test skips only if `main` has not
+2. Run the CPU checks (do not set `CUDA_VISIBLE_DEVICES=''`); all 22 must pass (the dry-run test skips only if `main` has not
    been fetched yet; fetch it first so it runs):
 
 ```bash
 git fetch https://github.com/hao-ai-lab/FastVideo.git main
-python -m pytest fastvideo-kernel/experiments/gb10_z/tests/test_ci_lane_summary.py fastvideo-kernel/experiments/gb10_z/tests/test_container_network_probe.py fastvideo-kernel/experiments/gb10_z/tests/test_ci_kernel_lane_repro.py -q --confcutdir=fastvideo-kernel/experiments/gb10_z
+python -m pytest fastvideo-kernel/experiments/gb10_z/tests/test_ci_lane_summary.py fastvideo-kernel/experiments/gb10_z/tests/test_container_network_probe.py fastvideo-kernel/experiments/gb10_z/tests/test_ci_kernel_lane_repro.py fastvideo-kernel/experiments/gb10_z/tests/test_ci_lane_container.py -q --confcutdir=fastvideo-kernel/experiments/gb10_z
 ```
 
 3. Confirm `docker run --rm --gpus all ubuntu:22.04 true` works. If Docker or GPU access is unavailable, stop and report that;
@@ -102,8 +134,10 @@ fastvideo-kernel/experiments/gb10_z/code/ci_kernel_lane_repro.sh --out "$OUT-dry
 
 ## Step 1: run
 
-Stop competing services first and restore them afterwards, as in earlier batches. Use a fresh `OUT`. Expect up to 45 minutes
-for the image build, then four kernel builds and four lane runs; each lane can take up to 90 minutes.
+Stop competing services first and restore them afterwards, as in earlier batches. Use a fresh `OUT`. The image from attempt 3
+is reused (`ci-image.json` should show `sha256:f901f5e1f34ce88ed332b6843a5cb9276643b2accb69416d34c552e050d096b6`), so expect
+four kernel builds and four lane runs; each lane can take up to 90 minutes. To stop the run early, send SIGTERM to the driver
+PID; it kills its own containers (label `fastvideo-ci-repro`) before exiting.
 
 ```bash
 fastvideo-kernel/experiments/gb10_z/code/ci_kernel_lane_repro.sh --out "$OUT" --lock "$LOCK_A" --lock "$LOCK_B"
@@ -121,8 +155,9 @@ Validity first:
 
 - `main` and `pr1948` must have `junit.xml`. If `main` itself shows failures, the reproduction environment differs from the CI
   runner; report `main`'s failures and still report the PR-only failures, labelled as such.
-- `environment.json` must show capability `[12, 1]`; `source.txt` must show the ref's SHA and both submodules with a leading
-  space (checked out at the pinned commit).
+- `environment.json` must show `"checks_passed": true` and capability `[12, 1]`, and the same `versions` for every ref
+  except `fastvideo-kernel` (the setup must not change other packages); `source.txt` must show the ref's SHA and both
+  submodules with a leading space (checked out at the pinned commit).
 
 Then:
 
@@ -133,16 +168,17 @@ Then:
 
 ## Report
 
-Under `fastvideo-kernel/experiments/gb10_z/results/spark-ci-kernel-lane/`: move attempt 2's files (`README.md`,
-`failed_stage`, `network-host.json`, `network-bridge.json`, `network-mtu.txt`) into `attempt-2/` unchanged, keep
-`attempt-1.json`, and add this run's `summary.md`, `summary.json`, `base-image.json`, `ci-image.json`, `network-pypi.json`,
-`wheel.json`, and per ref `source.txt`, `environment.json`, `junit.xml`, `lane_exit_code`, `failed_stage` (if present), and
-the failing tests' traceback excerpts from `lane.log`. Do not commit the wheel, the full logs, the worktrees, local paths or
-hostnames. A `README.md` with the host versions, the exact commands, how many wheel download attempts were needed, and
-failures as failures. Commit to `spark/gb10-ci-kernel-lane` on top of `c49633178`, merging `validate/ci-kernel-lane-repro`
-first so the branch carries the scripts that produced the results, and push. Answer:
+Under `fastvideo-kernel/experiments/gb10_z/results/spark-ci-kernel-lane/`: move attempt 3's checkpoint files (the current
+`README.md`, `ci-image.json`, `network-pypi.json`, `wheel.json`, `main/`, `pr1934/`, `pr1938/`, `pr1948/`) into `attempt-3/`
+unchanged, adding to `attempt-3/README.md` one line saying how it was stopped; keep `attempt-1.json` and `attempt-2/`. Add this
+run's `summary.md`, `summary.json`, `base-image.json`, `ci-image.json`, `network-pypi.json`, `wheel.json`, and per ref
+`source.txt`, `environment.json`, `environment.err` (if not empty), `junit.xml`, `lane_exit_code`, `failed_stage` (if
+present), and the failing tests' traceback excerpts from `lane.log`. Do not commit the wheel, the uv cache, the full logs, the
+worktrees, local paths or hostnames. A `README.md` with the host versions, the exact commands, and failures as failures.
+Commit to `spark/gb10-ci-kernel-lane` on top of `ad0534730`, merging `validate/ci-kernel-lane-repro` first so the branch
+carries the scripts that produced the results, and push. Answer:
 
 1. Did the reproduction match CI on `main` and `pr1948` (both pass)?
 2. Which tests fail on `pr1934` and on `pr1938` but not on `main`, with their assertion messages?
 3. If nothing fails: the base image digest used.
-4. How many attempts did the wheel download need, and did any lane setup (`install`, `kernel_build`) fail on the network?
+4. Did every ref pass its setup stages with `"checks_passed": true`, and if not, which stage failed and why (log tail)?
