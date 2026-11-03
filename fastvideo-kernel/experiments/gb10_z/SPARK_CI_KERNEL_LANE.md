@@ -13,24 +13,31 @@ where these PRs add GB10-only tests. The same tests passed in our earlier Spark 
 CI image (`docker/Dockerfile.spark-ci` on `ghcr.io/hao-ai-lab/fastvideo/fastvideo-dev:py3.12-cuda13.0.0-latest`).
 This run repeats the lane in that image to find the failing tests.
 
-## What changed since the first attempt (`spark/gb10-ci-kernel-lane` @ `735f1e032`)
+## What changed since the earlier attempts (`spark/gb10-ci-kernel-lane` @ `735f1e032`, `c49633178`)
 
-The first attempt stalled in the image build at the FlashAttention wheel download. Containers on Docker's default bridge
-network opened TCP connections to GitHub but timed out in the TLS handshake, while the host itself downloaded fine. The
-script now:
+Attempt 1 stalled in the image build at the Dockerfile's download of the 242 MB FlashAttention wheel from GitHub.
+Attempt 2's network check showed that HTTPS from the Spark is intermittent rather than broken on Docker's bridge network:
+TLS handshakes timed out on both the bridge and the host network, to GitHub and to PyPI, with no consistent pattern, and
+both MTUs are 1500. The script now:
 
-- runs every container, including the image build, on the host network (`--network=host`);
-- checks HTTPS from a container before any build (`code/container_network_probe.py`: the wheel URL from the Dockerfile,
-  PyPI index and file host) on the host network (must pass) and on the bridge network (recorded only), and records the
-  host and `docker0` MTUs in `network-mtu.txt`;
-- has `--check-only`, which stops after that check, needs no locks and no GPU work;
+- downloads the wheel on the host with `curl`, resuming across up to 30 attempts (restarting from byte 0 if the server does
+  not resume), into a cache directory (`--wheel-dir`, default `~/.cache/fastvideo-ci-repro`), and checks it against the size
+  and sha256 GitHub publishes for that release asset (`242333202` bytes,
+  `3274144f92481df3d7deefae087ed5449b06389507de1f97d9b8109e053c6ff3`). A verified copy is reused by later runs;
+- serves the verified wheel on `127.0.0.1` during the image build and passes it as the Dockerfile's `FLASH_ATTN_WHEEL`
+  build argument, so the build needs no GitHub access; the installed file is byte-identical to CI's;
+- checks PyPI (index and file host) from a container with three attempts per URL before downloading or building, since the
+  lane setup installs build dependencies from PyPI (`network-pypi.json`, now plain JSON: the image's CUDA banner had been
+  mixed into the earlier files);
+- gives `uv` in the lane containers `UV_HTTP_TIMEOUT=300` and `UV_HTTP_RETRIES=10`, and records the `uv` version;
+- has `--check-only`, which stops after the PyPI check and the wheel download, needs no locks and no GPU work;
 - bounds the image build at 45 minutes with `--progress=plain` output in `image-build.log`, recording
   `failed_stage=image_build` instead of hanging.
 
-A second defect was found and fixed before it was hit: a fresh worktree has no kernel header submodules, and inside the
-container git cannot see the worktree (its `.git` points to a host path), so `build.sh` would have failed on missing CUTLASS
-headers for every ref. The host now checks out `fastvideo-kernel/include/cutlass` and `include/tk` in each worktree at the
-pinned commits (later worktrees borrow objects from the first) and records them in `source.txt`.
+A defect was also fixed before it was hit: a fresh worktree has no kernel header submodules, and inside the container git
+cannot see the worktree (its `.git` points to a host path), so `build.sh` would have failed on missing CUTLASS headers for
+every ref. The host now checks out `fastvideo-kernel/include/cutlass` and `include/tk` in each worktree at the pinned commits
+(later worktrees borrow objects from the first) and records them in `source.txt`.
 
 ## What the script does
 
@@ -38,10 +45,11 @@ pinned commits (later worktrees borrow objects from the first) and records them 
 
 1. Checks Docker and that the host GPU is a GB10.
 2. Fetches `main` and `pull/1934|1938|1948/head` from `https://github.com/hao-ai-lab/FastVideo.git` and checks each SHA exists.
-3. Pulls the base image if absent, records its digest (`base-image.json`), records MTUs, runs the network check
-   (`network-host.json`, `network-bridge.json`). A failed host-network check stops with `failed_stage=network`, exit 5.
-4. Builds `fastvideo-ci-gb10:repro` from `main`'s `docker/Dockerfile.spark-ci` unless that tag exists (`image-build.log`,
-   `ci-image.json`). A failed or timed-out build stops with `failed_stage=image_build`, exit 6.
+3. Pulls the base image if absent and records its digest (`base-image.json`). Checks PyPI from a container
+   (`network-pypi.json`); failure stops with `failed_stage=network`, exit 5. Downloads and verifies the wheel
+   (`wheel-download.log`, `wheel.json`); failure stops with `failed_stage=wheel`, exit 7.
+4. Builds `fastvideo-ci-gb10:repro` from `main`'s `docker/Dockerfile.spark-ci` unless that tag exists, with the wheel served
+   locally (`image-build.log`, `ci-image.json`). A failed or timed-out build stops with `failed_stage=image_build`, exit 6.
 5. Creates one detached worktree per ref at the exact SHA, checks out the two header submodules on the host:
 
    | name | SHA | role |
@@ -63,7 +71,7 @@ pinned commits (later worktrees borrow objects from the first) and records them 
 ## Step 0: preconditions (services can stay up)
 
 1. Check out `validate/ci-kernel-lane-repro` at the commit in the instruction; working tree clean.
-2. Run the CPU checks (do not set `CUDA_VISIBLE_DEVICES=''`); all 10 must pass (the dry-run test skips only if `main` has not
+2. Run the CPU checks (do not set `CUDA_VISIBLE_DEVICES=''`); all 14 must pass (the dry-run test skips only if `main` has not
    been fetched yet; fetch it first so it runs):
 
 ```bash
@@ -73,14 +81,19 @@ python -m pytest fastvideo-kernel/experiments/gb10_z/tests/test_ci_lane_summary.
 
 3. Confirm `docker run --rm --gpus all ubuntu:22.04 true` works. If Docker or GPU access is unavailable, stop and report that;
    do not fall back to running outside a container, because the point is the CI image.
-4. Network check, with a fresh directory:
+4. PyPI check and wheel download, with a fresh directory (the download can take a while on an intermittent connection):
 
 ```bash
 fastvideo-kernel/experiments/gb10_z/code/ci_kernel_lane_repro.sh --out "$OUT-check" --check-only
 ```
 
-   It must end with `check-only: network check passed`. If it exits 5, stop and report `network-host.json`,
-   `network-bridge.json` and `network-mtu.txt`; do not change Docker or network settings.
+   It must end with `check-only: PyPI check passed and wheel verified`. Do not change Docker or network settings.
+   - Exit 5 (PyPI unreachable after 3 attempts per URL): stop and report `network-pypi.json`.
+   - Exit 7 (wheel still incomplete after 30 attempts, or complete with the wrong digest, which the script deletes):
+     report the message and `wheel-download.log` (last 30 lines, after `tr '\r' '\n'`). You may run the same
+     `--check-only` command once more with a fresh `--out`; an incomplete download resumes. If it still fails, stop: the
+     user can copy the wheel into the wheel directory from another machine, and the script verifies it.
+   - The wheel stays in the wheel directory, so Step 1 does not download it again.
 5. Dry run, and read the printed commands:
 
 ```bash
@@ -97,9 +110,10 @@ fastvideo-kernel/experiments/gb10_z/code/ci_kernel_lane_repro.sh --out "$OUT" --
 ```
 
 The script does not stop when one ref's lane fails; a failed setup stage for one ref is recorded in its `failed_stage`.
-Do not retry and do not change anything between refs. If the script exits 5 or 6, stop and report `failed_stage` and the
-last 50 lines of `image-build.log` (exit 6) or the network files (exit 5). If no output appears for more than 60 minutes
-during a lane, record the last `lane.log` lines before stopping.
+Do not retry and do not change anything between refs. If the script exits 5, 6 or 7, stop and report `failed_stage` and
+`network-pypi.json` (exit 5), the last 50 lines of `image-build.log` (exit 6) or of `wheel-download.log` (exit 7). If a ref
+fails at `install` or `kernel_build`, include the last 50 lines of that log: a PyPI timeout there is a network failure, not
+a result. If no output appears for more than 60 minutes during a lane, record the last `lane.log` lines before stopping.
 
 ## Step 2: read the result (stated before the run)
 
@@ -119,16 +133,16 @@ Then:
 
 ## Report
 
-Under `fastvideo-kernel/experiments/gb10_z/results/spark-ci-kernel-lane/`, replacing the first attempt's files and keeping
-`attempt.json` renamed to `attempt-1.json`: `summary.md`, `summary.json`, `base-image.json`, `ci-image.json`,
-`network-host.json`, `network-bridge.json`, `network-mtu.txt`, and per ref `source.txt`, `environment.json`, `junit.xml`,
-`lane_exit_code`, `failed_stage` (if present), and the failing tests' traceback excerpts from `lane.log`. Do not commit the
-full logs, the worktrees, local paths or hostnames (remove them from `network-mtu.txt` if present; interface names may stay).
-A `README.md` with the host versions, the exact commands, and failures as failures. Commit to `spark/gb10-ci-kernel-lane` on
-top of `735f1e032`, merging `validate/ci-kernel-lane-repro` first so the branch carries the scripts that produced the results,
-and push. Answer:
+Under `fastvideo-kernel/experiments/gb10_z/results/spark-ci-kernel-lane/`: move attempt 2's files (`README.md`,
+`failed_stage`, `network-host.json`, `network-bridge.json`, `network-mtu.txt`) into `attempt-2/` unchanged, keep
+`attempt-1.json`, and add this run's `summary.md`, `summary.json`, `base-image.json`, `ci-image.json`, `network-pypi.json`,
+`wheel.json`, and per ref `source.txt`, `environment.json`, `junit.xml`, `lane_exit_code`, `failed_stage` (if present), and
+the failing tests' traceback excerpts from `lane.log`. Do not commit the wheel, the full logs, the worktrees, local paths or
+hostnames. A `README.md` with the host versions, the exact commands, how many wheel download attempts were needed, and
+failures as failures. Commit to `spark/gb10-ci-kernel-lane` on top of `c49633178`, merging `validate/ci-kernel-lane-repro`
+first so the branch carries the scripts that produced the results, and push. Answer:
 
 1. Did the reproduction match CI on `main` and `pr1948` (both pass)?
 2. Which tests fail on `pr1934` and on `pr1938` but not on `main`, with their assertion messages?
 3. If nothing fails: the base image digest used.
-4. Did the bridge-network check fail while the host-network check passed, and what are the two MTUs?
+4. How many attempts did the wheel download need, and did any lane setup (`install`, `kernel_build`) fail on the network?
