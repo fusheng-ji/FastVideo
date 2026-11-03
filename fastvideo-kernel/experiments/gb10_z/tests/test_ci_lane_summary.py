@@ -1,15 +1,11 @@
 """CPU checks for the kernel-lane reproduction summary."""
 
 from pathlib import Path
-import subprocess
 import sys
-
-import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'code'))
 from ci_lane_summary import summarize, to_markdown
 
-CODE = Path(__file__).resolve().parents[1] / 'code'
 JUNIT = '''<?xml version="1.0" encoding="utf-8"?>
 <testsuites><testsuite name="pytest">
 <testcase classname="tests.test_k" name="test_ok"/>
@@ -48,19 +44,3 @@ def test_a_run_without_results_is_not_compared(tmp_path):
     summary = summarize(tmp_path, 'main')
     assert 'not_comparable' in summary['comparison_to_baseline']['pr1938']
     assert 'kernel_build' in to_markdown(summary)
-
-
-def test_repro_script_dry_run_lists_every_step(tmp_path):
-    main_sha = 'de873eae2dab2d1c72c33d465663f4d77c4f819b'
-    if subprocess.run(['git', '-C', str(CODE), 'cat-file', '-e', f'{main_sha}^{{commit}}']).returncode:
-        pytest.skip('main commit not fetched yet; the script fetches it before reading its Dockerfile')
-    out = tmp_path / 'out'
-    result = subprocess.run(['bash', str(CODE / 'ci_kernel_lane_repro.sh'), '--out', str(out), '--lock',
-                             str(tmp_path / 'a'), '--lock', str(tmp_path / 'b'), '--dry-run'],
-                            capture_output=True, text=True, check=True)
-    lines = [line for line in result.stdout.splitlines() if line.startswith('DRY-RUN:')]
-    assert 'fetch https://github.com/hao-ai-lab/FastVideo.git main' in lines[0]
-    assert any('docker build' in line for line in lines)
-    runs = [line for line in lines if 'docker run' in line]
-    assert len(runs) == 4 and all('FASTVIDEO_CI_BACKEND=spark4' in line for line in runs)
-    assert (out / 'image-context' / 'Dockerfile.spark-ci').read_text().startswith('# syntax=docker')

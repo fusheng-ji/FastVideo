@@ -3,8 +3,13 @@
 # (`docker/Dockerfile.spark-ci`), once per git ref, and summarize which tests fail where.
 #
 # Usage:
+#   ci_kernel_lane_repro.sh --out DIR --check-only [--dry-run]
 #   ci_kernel_lane_repro.sh --out DIR --lock LOCK_A --lock LOCK_B [--image TAG] [--dry-run] [NAME=SHA ...]
+# --check-only stops after the network check (no GPU work, no locks needed).
 # Without NAME=SHA arguments the four refs below are run in this order.
+#
+# Every container uses the host network: on the Spark, containers on the default bridge network could open TCP
+# connections to GitHub but timed out in the TLS handshake, which stalled the image build.
 set -euo pipefail
 
 DEFAULT_REFS=(
@@ -13,10 +18,13 @@ DEFAULT_REFS=(
     "pr1934=628fa0860cd573ca3050a4f38cb221f879b619b7"
     "pr1938=3e5ba79a13b1a1306262beb5b1bbdfcf33496e86"
 )
+BASE_IMAGE="ghcr.io/hao-ai-lab/fastvideo/fastvideo-dev:py3.12-cuda13.0.0-latest"
+SUBMODULES=(fastvideo-kernel/include/cutlass fastvideo-kernel/include/tk)
 IMAGE="fastvideo-ci-gb10:repro"
 OUT=""
 LOCKS=()
 DRY_RUN=0
+CHECK_ONLY=0
 REFS=()
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -24,27 +32,42 @@ while [[ $# -gt 0 ]]; do
         --lock) LOCKS+=("$2"); shift 2 ;;
         --image) IMAGE="$2"; shift 2 ;;
         --dry-run) DRY_RUN=1; shift ;;
+        --check-only) CHECK_ONLY=1; shift ;;
         *=*) REFS+=("$1"); shift ;;
         *) echo "unknown argument: $1" >&2; exit 2 ;;
     esac
 done
 [[ ${#REFS[@]} -gt 0 ]] || REFS=("${DEFAULT_REFS[@]}")
 [[ -n "$OUT" ]] || { echo "--out is required" >&2; exit 2; }
-[[ ${#LOCKS[@]} -eq 2 && "${LOCKS[0]}" != "${LOCKS[1]}" ]] || { echo "two distinct --lock paths are required" >&2; exit 2; }
+if (( ! CHECK_ONLY )); then
+    [[ ${#LOCKS[@]} -eq 2 && "${LOCKS[0]}" != "${LOCKS[1]}" ]] || { echo "two distinct --lock paths are required" >&2; exit 2; }
+fi
 [[ ! -e "$OUT" ]] || { echo "$OUT exists; use a fresh output directory" >&2; exit 2; }
 
 CODE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO="$(git -C "$CODE" rev-parse --show-toplevel)"
-MAIN_SHA="${DEFAULT_REFS[0]#main=}"
+REMOTE="${CI_REPRO_REMOTE:-https://github.com/hao-ai-lab/FastVideo.git}"
+MAIN_SHA=""
+for ref in "${REFS[@]}"; do [[ "${ref%%=*}" != main ]] || MAIN_SHA="${ref#*=}"; done
+[[ -n "$MAIN_SHA" ]] || { echo "a main=SHA ref is required (the baseline and the Dockerfile source)" >&2; exit 2; }
 
 run() {
     if (( DRY_RUN )); then printf 'DRY-RUN:'; printf ' %q' "$@"; printf '\n'; else "$@"; fi
+}
+# run_to FILE CMD...: stdout to FILE.  run_log FILE CMD...: stdout and stderr to FILE.
+run_to() {
+    local file="$1"; shift
+    if (( DRY_RUN )); then printf 'DRY-RUN:'; printf ' %q' "$@"; printf ' > %q\n' "$file"; else "$@" >"$file"; fi
+}
+run_log() {
+    local file="$1"; shift
+    if (( DRY_RUN )); then printf 'DRY-RUN:'; printf ' %q' "$@"; printf ' &> %q\n' "$file"; else "$@" >"$file" 2>&1; fi
 }
 
 mkdir -p "$OUT"
 OUT="$(cd "$OUT" && pwd)"
 exec > >(tee -a "$OUT/driver.log") 2>&1
-echo "repro start $(date -u +%FT%TZ) image=$IMAGE refs=${REFS[*]}"
+echo "repro start $(date -u +%FT%TZ) image=$IMAGE refs=${REFS[*]} check_only=$CHECK_ONLY"
 
 # 1. Preconditions: Docker with GPU access on a GB10.
 if (( ! DRY_RUN )); then
@@ -54,36 +77,91 @@ if (( ! DRY_RUN )); then
     [[ "$gpu" == *GB10* ]] || { echo "expected a GB10 host, got: $gpu" >&2; exit 3; }
 fi
 
-# 2. Sources from hao-ai-lab/FastVideo by URL, so no particular remote name is needed.
-run git -C "$REPO" fetch https://github.com/hao-ai-lab/FastVideo.git main pull/1934/head pull/1938/head pull/1948/head
+# 2. Sources from hao-ai-lab/FastVideo by URL, so no particular remote name is needed (CI_REPRO_REMOTE is for tests).
+run git -C "$REPO" fetch "$REMOTE" main pull/1934/head pull/1938/head pull/1948/head
 for ref in "${REFS[@]}"; do
     sha="${ref#*=}"
     (( DRY_RUN )) || git -C "$REPO" cat-file -e "$sha^{commit}" || { echo "commit $sha not fetched" >&2; exit 4; }
 done
+mkdir -p "$OUT/image-context"
+git -C "$REPO" show "$MAIN_SHA:docker/Dockerfile.spark-ci" >"$OUT/image-context/Dockerfile.spark-ci"
+WHEEL_URL="$(sed -n 's/^ARG FLASH_ATTN_WHEEL=//p' "$OUT/image-context/Dockerfile.spark-ci")"
+[[ -n "$WHEEL_URL" ]] || { echo "no FLASH_ATTN_WHEEL in Dockerfile.spark-ci" >&2; exit 4; }
 
-# 3. The CI image: Dockerfile.spark-ci from main on top of the published CUDA 13 dev image.
-if (( DRY_RUN )) || ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
-    mkdir -p "$OUT/image-context"
-    git -C "$REPO" show "$MAIN_SHA:docker/Dockerfile.spark-ci" >"$OUT/image-context/Dockerfile.spark-ci"
-    run docker pull ghcr.io/hao-ai-lab/fastvideo/fastvideo-dev:py3.12-cuda13.0.0-latest
-    run docker build -f "$OUT/image-context/Dockerfile.spark-ci" -t "$IMAGE" "$OUT/image-context"
+# 3. Base image and network check. The host-network check must pass; the bridge check is recorded for comparison.
+if (( DRY_RUN )) || ! docker image inspect "$BASE_IMAGE" >/dev/null 2>&1; then
+    run docker pull "$BASE_IMAGE"
 fi
 if (( ! DRY_RUN )); then
-    docker image inspect ghcr.io/hao-ai-lab/fastvideo/fastvideo-dev:py3.12-cuda13.0.0-latest \
+    docker image inspect "$BASE_IMAGE" \
         --format '{"base_repo_digests": {{json .RepoDigests}}, "base_created": {{json .Created}}}' >"$OUT/base-image.json"
+    route_dev="$(ip -o route get 1.1.1.1 2>/dev/null | sed -n 's/.* dev \([^ ]*\).*/\1/p' || true)"
+    {
+        echo "default_route_dev=${route_dev:-unknown} mtu=$(cat "/sys/class/net/${route_dev:-none}/mtu" 2>/dev/null || echo unknown)"
+        echo "docker0 mtu=$(cat /sys/class/net/docker0/mtu 2>/dev/null || echo unknown)"
+        echo "docker default-bridge mtu option=$(docker network inspect bridge \
+            --format '{{index .Options "com.docker.network.driver.mtu"}}' 2>/dev/null || echo unknown)"
+    } >"$OUT/network-mtu.txt"
+fi
+probe_cmd=(-v "$CODE:/probe:ro" "$BASE_IMAGE" /opt/venv/bin/python /probe/container_network_probe.py --wheel-url "$WHEEL_URL")
+run_to "$OUT/network-bridge.json" docker run --rm --network=bridge "${probe_cmd[@]}" --timeout 30 \
+    || echo "bridge-network check failed (recorded only; every container below uses the host network)"
+if ! run_to "$OUT/network-host.json" docker run --rm --network=host "${probe_cmd[@]}" --timeout 60; then
+    echo network >"$OUT/failed_stage"
+    echo "host-network check failed; see $OUT/network-host.json" >&2
+    exit 5
+fi
+if (( CHECK_ONLY )); then
+    echo "check-only: network check passed; stopping before the image build"
+    exit 0
+fi
+
+# 4. The CI image: Dockerfile.spark-ci from main on top of the base image, with a bound on a stalled build.
+if (( DRY_RUN )) || ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
+    if ! run_log "$OUT/image-build.log" timeout 45m docker build --network=host --progress=plain \
+            -f "$OUT/image-context/Dockerfile.spark-ci" -t "$IMAGE" "$OUT/image-context"; then
+        echo image_build >"$OUT/failed_stage"
+        tail -50 "$OUT/image-build.log" >&2
+        exit 6
+    fi
+fi
+if (( ! DRY_RUN )); then
     docker image inspect "$IMAGE" --format '{"image_id": {{json .Id}}, "created": {{json .Created}}}' >"$OUT/ci-image.json"
 fi
 
-# 4. One detached worktree per ref, at the exact SHA.
+# 5. One detached worktree per ref at the exact SHA, with the kernel's header submodules checked out on the host:
+# inside the container the worktree's .git points to a host path, so build.sh finds no git checkout and uses the
+# headers already present (the same pinned commits CI's checkout gets). Later worktrees borrow objects from the first.
+first=""
 for ref in "${REFS[@]}"; do
     name="${ref%%=*}"; sha="${ref#*=}"
-    run git -C "$REPO" worktree add --detach "$OUT/src/$name" "$sha"
+    src="$OUT/src/$name"
+    mkdir -p "$OUT/runs/$name"
+    run git -C "$REPO" worktree add --detach "$src" "$sha"
+    for sm in "${SUBMODULES[@]}"; do
+        donor=""
+        if [[ -n "$first" ]]; then
+            donor="$OUT/src/$first/$sm"
+        elif [[ "$(git -C "$REPO/$sm" rev-parse --show-toplevel 2>/dev/null)" == "$REPO/$sm" ]]; then
+            donor="$REPO/$sm"
+        fi
+        reference=()
+        if [[ -n "$donor" ]]; then
+            (( DRY_RUN )) || donor="$(git -C "$donor" rev-parse --absolute-git-dir)"
+            reference=(--reference "$donor")
+        fi
+        run git -C "$src" submodule update --init --recursive "${reference[@]}" -- "$sm"
+    done
     if (( ! DRY_RUN )); then
-        [[ "$(git -C "$OUT/src/$name" rev-parse HEAD)" == "$sha" ]] || { echo "$name is not at $sha" >&2; exit 4; }
+        [[ "$(git -C "$src" rev-parse HEAD)" == "$sha" ]] || { echo "$name is not at $sha" >&2; exit 4; }
+        status="$(git -C "$src" submodule status -- "${SUBMODULES[@]}")"
+        ! grep -q '^[-+U]' <<<"$status" || { echo "$name submodules not at their pinned commits: $status" >&2; exit 4; }
+        { echo "head $sha"; echo "$status"; } >"$OUT/runs/$name/source.txt"
     fi
+    first="${first:-$name}"
 done
 
-# 5. The lane, per ref, in a fresh container: install the checkout, build its kernel from source, run the lane script.
+# 6. The lane, per ref, in a fresh container: install the checkout, build its kernel from source, run the lane script.
 INNER='
 set -uo pipefail
 source /opt/venv/bin/activate
@@ -92,7 +170,7 @@ trap "chown -R $HOST_UID:$HOST_GID /src /out" EXIT
 uv pip install --no-deps -e . >/out/install.log 2>&1 || { echo install >/out/failed_stage; exit 10; }
 (cd fastvideo-kernel && ./build.sh) >/out/kernel_build.log 2>&1 || { echo kernel_build >/out/failed_stage; exit 11; }
 python - >/out/environment.json <<"PY" || { echo environment >/out/failed_stage; exit 12; }
-import importlib.metadata as md, json, subprocess, torch, triton, fastvideo_kernel
+import importlib.metadata as md, json, torch, triton, fastvideo_kernel
 from fastvideo_kernel.triton_kernels import attn_qat_train
 assert fastvideo_kernel.__file__.startswith("/src/"), fastvideo_kernel.__file__
 assert attn_qat_train.__file__.startswith("/src/"), attn_qat_train.__file__
@@ -104,7 +182,6 @@ for name in ("torch", "triton", "flash-attn", "flashinfer-python", "fastvideo-ke
         versions[name] = None
 print(json.dumps({"versions": versions, "capability": list(torch.cuda.get_device_capability()),
                   "device": torch.cuda.get_device_name(), "cuda": torch.version.cuda,
-                  "head": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
                   "kernel_imported_from_checkout": True}, indent=2))
 PY
 timeout 90m bash .buildkite/scripts/lanes/kernel_tests.sh >/out/lane.log 2>&1
@@ -114,10 +191,9 @@ exit 0
 '
 for ref in "${REFS[@]}"; do
     name="${ref%%=*}"
-    mkdir -p "$OUT/runs/$name"
     echo "run $name start $(date -u +%FT%TZ)"
     run flock --exclusive "${LOCKS[0]}" flock --exclusive "${LOCKS[1]}" \
-        docker run --rm --gpus all --ipc=host --ulimit memlock=-1 --shm-size=16g \
+        docker run --rm --gpus all --network=host --ipc=host --ulimit memlock=-1 --shm-size=16g \
         -e HOST_UID="$(id -u)" -e HOST_GID="$(id -g)" \
         -e FASTVIDEO_CI_BACKEND=spark4 -e MASTER_PORT=29650 \
         -e PYTEST_ADDOPTS="-p no:cacheprovider --junitxml=/out/junit.xml" \
@@ -126,6 +202,6 @@ for ref in "${REFS[@]}"; do
     echo "run $name end $(date -u +%FT%TZ)"
 done
 
-# 6. Summary: per-ref counts and the failures that do not occur on main.
+# 7. Summary: per-ref counts and the failures that do not occur on main.
 run python3 "$CODE/ci_lane_summary.py" "$OUT/runs" --baseline main --output "$OUT/summary"
 echo "repro end $(date -u +%FT%TZ)"
