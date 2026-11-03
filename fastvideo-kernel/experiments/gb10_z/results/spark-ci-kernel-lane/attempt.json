@@ -1,0 +1,12 @@
+{
+  "status": "interrupted",
+  "stage": "ci_image_build_flash_attention_install",
+  "termination": "terminated after more than 20 minutes without build output",
+  "build_error": "failed to solve: Canceled: context canceled",
+  "independent_container_http_diagnostic": "TLS handshake timed out",
+  "docker_gpu_preflight": "passed",
+  "cpu_tests": {"passed": 3, "failed": 0},
+  "lanes_started": false,
+  "services_restored": true,
+  "automatic_retry": false
+}
