@@ -1,0 +1,3 @@
+default_route_dev=enP7s7 mtu=1500
+docker0 mtu=1500
+docker default-bridge mtu option=1500

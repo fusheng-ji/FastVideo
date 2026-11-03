@@ -1,5 +1,1 @@
-{
-  "image": "ghcr.io/hao-ai-lab/fastvideo/fastvideo-dev:py3.12-cuda13.0.0-latest",
-  "repo_digest": "sha256:caf466e02a916e4f29238a69399674a60dbe3f63c430e66cb3b46e75e1489df5",
-  "source": "docker pull and inspect"
-}
+{"base_repo_digests": ["ghcr.io/hao-ai-lab/fastvideo/fastvideo-dev@sha256:caf466e02a916e4f29238a69399674a60dbe3f63c430e66cb3b46e75e1489df5"], "base_created": "2026-10-30T02:44:08.434235104Z"}
