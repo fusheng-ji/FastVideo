@@ -80,6 +80,20 @@ OUT="$(cd "$OUT" && pwd)"
 exec > >(tee -a "$OUT/driver.log") 2>&1
 echo "repro start $(date -u +%FT%TZ) image=$IMAGE refs=${REFS[*]} check_only=$CHECK_ONLY"
 
+# Every lane container carries this label. On exit, including SIGINT/SIGTERM, the driver kills its own containers
+# (killing a docker client does not stop its container) and the wheel server. After SIGKILL, stop them by hand:
+#   docker ps --filter label=fastvideo-ci-repro
+RUN_TOKEN="$$-$(date +%s)"
+server_pid=""
+cleanup() {
+    [[ -z "$server_pid" ]] || kill "$server_pid" 2>/dev/null || true
+    if (( ! DRY_RUN )); then
+        docker ps -q --filter "label=fastvideo-ci-repro=$RUN_TOKEN" 2>/dev/null | xargs -r docker kill >/dev/null 2>&1 || true
+    fi
+}
+trap cleanup EXIT
+trap 'echo "interrupted; stopping this run" >&2; exit 130' INT TERM
+
 # 1. Preconditions: Docker with GPU access on a GB10.
 if (( ! DRY_RUN )); then
     docker info >/dev/null
@@ -176,7 +190,6 @@ if (( DRY_RUN )) || ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
     if (( ! DRY_RUN )); then
         python3 -m http.server --bind 127.0.0.1 --directory "$WHEEL_DIR" "$port" >"$OUT/wheel-server.log" 2>&1 &
         server_pid=$!
-        trap 'kill "$server_pid" 2>/dev/null || true' EXIT
         for _ in $(seq 1 50); do
             curl -sf -r 0-0 -o /dev/null "http://127.0.0.1:$port/$WHEEL_NAME" && break
             sleep 0.2
@@ -191,7 +204,7 @@ if (( DRY_RUN )) || ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
     fi
     if (( ! DRY_RUN )); then
         kill "$server_pid" 2>/dev/null || true
-        trap - EXIT
+        server_pid=""
     fi
 fi
 if (( ! DRY_RUN )); then
@@ -230,45 +243,30 @@ for ref in "${REFS[@]}"; do
     first="${first:-$name}"
 done
 
-# 6. The lane, per ref, in a fresh container: install the checkout, build its kernel from source, run the lane script.
-INNER='
-set -uo pipefail
-source /opt/venv/bin/activate
-export PATH=/root/.local/bin:$PATH
-trap "chown -R $HOST_UID:$HOST_GID /src /out" EXIT
-uv pip install --no-deps -e . >/out/install.log 2>&1 || { echo install >/out/failed_stage; exit 10; }
-(cd fastvideo-kernel && ./build.sh) >/out/kernel_build.log 2>&1 || { echo kernel_build >/out/failed_stage; exit 11; }
-python - >/out/environment.json <<"PY" || { echo environment >/out/failed_stage; exit 12; }
-import importlib.metadata as md, json, subprocess, torch, triton, fastvideo_kernel
-from fastvideo_kernel.triton_kernels import attn_qat_train
-assert fastvideo_kernel.__file__.startswith("/src/"), fastvideo_kernel.__file__
-assert attn_qat_train.__file__.startswith("/src/"), attn_qat_train.__file__
-versions = {}
-for name in ("torch", "triton", "flash-attn", "flashinfer-python", "fastvideo-kernel"):
-    try:
-        versions[name] = md.version(name)
-    except md.PackageNotFoundError:
-        versions[name] = None
-print(json.dumps({"versions": versions, "capability": list(torch.cuda.get_device_capability()),
-                  "device": torch.cuda.get_device_name(), "cuda": torch.version.cuda,
-                  "uv": subprocess.run(["uv", "--version"], capture_output=True, text=True).stdout.strip(),
-                  "kernel_imported_from_checkout": True}, indent=2))
-PY
-timeout 90m bash .buildkite/scripts/lanes/kernel_tests.sh >/out/lane.log 2>&1
-status=$?
-echo $status >/out/lane_exit_code
-exit 0
-'
+# 6. The lane, per ref, in a fresh container running ci_lane_container.sh (mounted read-only from this directory):
+# install the checkout, build and install its kernel as docker/Dockerfile does, verify provenance, run the lane script.
+# The uv cache is shared across containers and runs so a download that succeeded once is not repeated.
+UV_CACHE="$WHEEL_DIR/uv-cache"
+(( DRY_RUN )) || mkdir -p "$UV_CACHE"
 for ref in "${REFS[@]}"; do
     name="${ref%%=*}"
     echo "run $name start $(date -u +%FT%TZ)"
-    run flock --exclusive "${LOCKS[0]}" flock --exclusive "${LOCKS[1]}" \
-        docker run --rm --gpus all --network=host --ipc=host --ulimit memlock=-1 --shm-size=16g \
-        -e HOST_UID="$(id -u)" -e HOST_GID="$(id -g)" \
-        -e FASTVIDEO_CI_BACKEND=spark4 -e MASTER_PORT=29650 -e UV_HTTP_TIMEOUT=300 -e UV_HTTP_RETRIES=10 \
-        -e PYTEST_ADDOPTS="-p no:cacheprovider --junitxml=/out/junit.xml" \
-        -v "$OUT/src/$name:/src" -v "$OUT/runs/$name:/out" -w /src \
-        "$IMAGE" bash -c "$INNER" || echo "container for $name exited $?"
+    lane=(flock --exclusive "${LOCKS[0]}" flock --exclusive "${LOCKS[1]}"
+        docker run --rm --gpus all --network=host --ipc=host --ulimit memlock=-1 --shm-size=16g
+        --label "fastvideo-ci-repro=$RUN_TOKEN"
+        -e HOST_UID="$(id -u)" -e HOST_GID="$(id -g)"
+        -e FASTVIDEO_CI_BACKEND=spark4 -e MASTER_PORT=29650
+        -e UV_CACHE_DIR=/opt/uv/cache -e UV_HTTP_TIMEOUT=300 -e UV_HTTP_CONNECT_TIMEOUT=120 -e UV_HTTP_RETRIES=10
+        -e PYTEST_ADDOPTS="-p no:cacheprovider --junitxml=/out/junit.xml"
+        -v "$OUT/src/$name:/src" -v "$OUT/runs/$name:/out" -v "$CODE:/repro:ro" -v "$UV_CACHE:/opt/uv/cache"
+        -w /src "$IMAGE" bash /repro/ci_lane_container.sh)
+    if (( DRY_RUN )); then
+        run "${lane[@]}"
+    else
+        # In the background, so SIGINT/SIGTERM reach the trap now rather than after the lane finishes.
+        "${lane[@]}" &
+        wait $! || echo "container for $name exited $?"
+    fi
     echo "run $name end $(date -u +%FT%TZ)"
 done
 
