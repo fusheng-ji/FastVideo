@@ -6,7 +6,7 @@
         "ok": true,
         "status": 206,
         "error": null,
-        "seconds": 39.65
+        "seconds": 7.02
       }
     ],
     "https://files.pythonhosted.org/": [
@@ -14,7 +14,7 @@
         "ok": true,
         "status": 404,
         "error": null,
-        "seconds": 3.16
+        "seconds": 3.62
       }
     ]
   }

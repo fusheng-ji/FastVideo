@@ -1,0 +1,21 @@
+{
+  "all_ok": true,
+  "results": {
+    "https://pypi.org/simple/setuptools/": [
+      {
+        "ok": true,
+        "status": 206,
+        "error": null,
+        "seconds": 39.65
+      }
+    ],
+    "https://files.pythonhosted.org/": [
+      {
+        "ok": true,
+        "status": 404,
+        "error": null,
+        "seconds": 3.16
+      }
+    ]
+  }
+}

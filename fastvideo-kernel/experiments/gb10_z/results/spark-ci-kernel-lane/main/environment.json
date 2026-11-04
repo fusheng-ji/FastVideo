@@ -1,0 +1,35 @@
+{
+  "fastvideo_origin": "CHECKOUT/fastvideo/__init__.py",
+  "kernel_install_url": "file://KERNEL_WHEEL_DIR/fastvideo_kernel-0.3.5-cp312-cp312-linux_aarch64.whl",
+  "kernel_trees": {
+    "fastvideo_kernel": {
+      "installed": "VENV/lib/python3.12/site-packages/fastvideo_kernel",
+      "files": 25,
+      "missing": [],
+      "differ": []
+    },
+    "attn_qat_infer": {
+      "installed": "VENV/lib/python3.12/site-packages/attn_qat_infer",
+      "files": 8,
+      "missing": [],
+      "differ": []
+    }
+  },
+  "versions": {
+    "torch": "2.12.0+cu130",
+    "triton": "3.7.0",
+    "flash-attn": "2.8.3+cu130torch2.12",
+    "flashinfer-python": "0.7.2.post1",
+    "fastvideo-kernel": "0.3.5",
+    "nvidia-cusparselt-cu13": "0.8.1"
+  },
+  "uv": "uv 0.13.6 (aarch64-unknown-linux-gnu)",
+  "capability": [
+    12,
+    1
+  ],
+  "device": "NVIDIA GB10",
+  "cuda": "13.0",
+  "checks_passed": true,
+  "problems": []
+}

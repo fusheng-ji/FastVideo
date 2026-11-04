@@ -1,0 +1,78 @@
+{
+  "baseline": "main",
+  "runs": {
+    "main": {
+      "name": "main",
+      "failed_stage": null,
+      "lane_exit_code": 0,
+      "junit": true,
+      "counts": {
+        "passed": 416,
+        "failed": 0,
+        "error": 0,
+        "skipped": 85,
+        "xfailed": 2
+      },
+      "failures": {}
+    },
+    "pr1934": {
+      "name": "pr1934",
+      "failed_stage": null,
+      "lane_exit_code": 0,
+      "junit": true,
+      "counts": {
+        "passed": 435,
+        "failed": 0,
+        "error": 0,
+        "skipped": 87,
+        "xfailed": 0
+      },
+      "failures": {}
+    },
+    "pr1938": {
+      "name": "pr1938",
+      "failed_stage": null,
+      "lane_exit_code": 0,
+      "junit": true,
+      "counts": {
+        "passed": 502,
+        "failed": 0,
+        "error": 0,
+        "skipped": 87,
+        "xfailed": 0
+      },
+      "failures": {}
+    },
+    "pr1948": {
+      "name": "pr1948",
+      "failed_stage": null,
+      "lane_exit_code": 0,
+      "junit": true,
+      "counts": {
+        "passed": 416,
+        "failed": 0,
+        "error": 0,
+        "skipped": 85,
+        "xfailed": 2
+      },
+      "failures": {}
+    }
+  },
+  "comparison_to_baseline": {
+    "pr1934": {
+      "only_here": [],
+      "only_in_baseline": [],
+      "shared": []
+    },
+    "pr1938": {
+      "only_here": [],
+      "only_in_baseline": [],
+      "shared": []
+    },
+    "pr1948": {
+      "only_here": [],
+      "only_in_baseline": [],
+      "shared": []
+    }
+  }
+}
